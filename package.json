@@ -1,0 +1,27 @@
+{
+  "name": "wishlist",
+  "version": "1.0.0",
+  "description": "Wishlist",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "start:dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alisalisa12/Wishlist.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alisalisa12/Wishlist/issues"
+  },
+  "homepage": "https://github.com/Alisalisa12/Wishlist#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.19.0",
+    "nodemon": "^3.1.10"
+  }
+}
