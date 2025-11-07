@@ -1,16 +1,22 @@
-import arrowImg from "../../../public/images/Vector.png";
 import styles from "./EmptyWishlist.module.scss";
+import arrowImg from "../../images/Vector.png";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 
 export const EmptyWishlist: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <section className={styles.wrapper}>
       <h1>Здесь пока пусто(</h1>
       <h1>Самое время начать!</h1>
-      {/* <div className={styles.arrow}>↓</div> */}
-      {/* <div><img src="assets/Vector.svg" alt="стрелка" /></div> */}
       <img src={arrowImg} alt="arrow" className={styles.arrow} />
-      <button className={styles.addButton}>Новый вишлист +</button>
+      <button
+        className={styles.addButton}
+        onClick={() => navigate("/create")}
+      >
+        Новый вишлист +
+      </button>
     </section>
   );
 };

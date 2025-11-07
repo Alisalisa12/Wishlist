@@ -12,8 +12,8 @@
   justify-content: center; 
   align-items: flex-start; 
   padding-left: 8%; 
-//   background: radial-gradient(circle at top left, #4b2bc1, #2a1973);
-  background-image: url("/public/images/background.png");
+  background: radial-gradient(circle at top left, #4b2bc1, #2a1973);
+  background-image: url("/images/background.png");
   background-size: cover;
 }
 
@@ -68,12 +68,6 @@ h1 {
   }
   .arrow {
     width:100px;
-  }
-  .wrapper{
-    background-image: url("/assets/bg.png");
-    background-size: cover;
-//   background: radial-gradient(circle at top left, #4b2bc1, #2a1973);
-
   }
 }
 

@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: radial-gradient(circle at top left, #4b2bc1, #2a1973);
+  background-image: url("/images/background.png");
+  background-size: cover;
+}
+
+h1{
+  font-size: 65px;
+  margin-bottom: 2rem;
+}
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 40%;
+    height: 60%;
+    background-color: #C6C2F3;
+    border-radius: 20px;
+    padding:3rem 5rem;
+  }
+
+  input,
+  select {
+    padding: 0.6rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    width: 100%;
+    background-color: #5F5A99;
+    color: #fff;
+
+  }
+
+  select{
+    margin-bottom: 6rem;
+    text-align-last: center; /* для IE/Edge/Chrome */
+    -moz-text-align-last: center; /* для Firefox */
+  }
+input::placeholder {
+  text-align: center;
+  color: #fff;
+  
+}
+
+option{
+  background-color: #fff;
+  color: #5F5A99;
+  border: 1px solid #5F5A99;
+  text-align: center;
+}
