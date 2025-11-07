@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.Header {
+    background-color: #110E3C;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px 50px;
+}
+
+.logo {
+    height: 50px;
+}
+
+.searchBlock {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.userBlock {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}

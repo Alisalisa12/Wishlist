@@ -1,0 +1,93 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.HowWorks {
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 90px;
+}
+
+.mainTitle {
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 36px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    margin-bottom: 30px;
+}
+
+.imagesBlock {
+    display: flex;
+    justify-content: center;
+    gap: 55px;
+}
+
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 1;
+}
+
+.stepImage1, .stepImage2, .stepImage3 {
+    width: 240px;
+    height: 250px;
+    border-radius: 20px;
+}
+
+.arrowWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 250px;
+    width: 20px;
+}
+
+.stepImage img {
+    height: 100%;
+}
+
+.union {
+    width: 25px;
+}
+
+.stepText {
+    margin-top: 20px;
+}
+
+.stepTitle {
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 26px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    margin-top: 50px;
+}
+
+.title {
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 30px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    margin-top: 20px;
+}
+
+.text {
+    white-space: pre-line;
+    font-weight: 300;
+    font-style: Light;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    margin-top: 10px;
+}

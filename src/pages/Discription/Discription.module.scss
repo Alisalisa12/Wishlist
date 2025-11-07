@@ -1,0 +1,72 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.Discription {
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: hidden;
+    position: relative;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 90px;
+    gap: 40px;
+    flex: 1;
+}
+
+.firstBlock {
+    display: flex;
+    flex-direction: column;
+}
+
+.secondBlock {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-weight: 500;
+    font-size: 34px;
+    font-style: Medium;
+    line-height: 100%;
+    margin-bottom: 30px;
+    max-width: 900px;
+}
+
+.text {
+    // white-space: pre-line;
+    font-weight: 500;
+    font-size: 28px;
+    font-style: Regular;
+    line-height: 110%;
+    margin-bottom: 20px;
+    max-width: 900px;
+}
+
+.wantButton, .sendButton {
+    align-self: flex-start;
+    border-radius: 60px;
+    background-color: #6961BE;
+    color: #ffffff;
+    font-size: 24px;
+    border: none;
+    padding: 15px 0px;
+    width: 200px;
+}
+
+.giftLogo {
+    position: absolute;
+    height: 350px;
+    margin-top: 40px;
+    right: -80px;
+    transform: rotate(15deg);
+}

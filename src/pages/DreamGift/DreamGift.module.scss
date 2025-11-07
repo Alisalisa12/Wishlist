@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+.DreamGift {
+    min-height: 100vh;
+    // background: radial-gradient(circle at 90% 80%, rgba(76, 66, 199, 0.7) 0%, #110E3C 80%);
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    // margin-left: 90px;
+    margin-top: 120px;
+    position: relative;
+    
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    margin-left: -85px;
+}
+
+.text {
+    white-space: pre-line;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 100%;
+    font-style: Regular;
+}
+
+.createBlock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.createButton {
+    border-radius: 60px;
+    background-color: #6961BE;
+    color: #ffffff;
+    font-size: 28px;
+    border: none;
+    padding: 15px 50px;
+    justify-content: center;
+    width: auto;
+}
+
+.giftLogo {
+    position: absolute;
+    right: -90px;
+    bottom: -30px;
+    height: 350px;
+    transform: scaleX(-1) rotate(-15deg);
+}
