@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.Home {
+    color: #ffffff;
+    width: 100%;
+    background: radial-gradient(circle at 90% 80%, rgba(76, 66, 199, 0.7) 0%, #110E3C 80%);
+    background-attachment: fixed;
+    font-family: 'Ubuntu', sans-serif;
+    background-size: 110% 110%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
+// .HomeWrapper {
+//     min-height: 100vh;
+//     color: #ffffff;
+//     width: 100%;
+//     font-family: 'Ubuntu', sans-serif;
+//     overflow-x: hidden;
+//     overflow-y: auto;
+//     background-image: url("../../assets/backgroundHome.jpg");
+//     background-repeat: no-repeat;
+//     background-size: cover;
+//     background-position: center;
+//     background-attachment: scroll;
+//     overflow-x: hidden;
+// }
+
+
+
+
