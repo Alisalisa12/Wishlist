@@ -2,6 +2,7 @@ import styles from "./EmptyWishlist.module.scss";
 import arrowImg from "../../images/Vector.png";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "../../components/UI/buttons/Button";
 
 
 export const EmptyWishlist: React.FC = () => {
@@ -11,12 +12,7 @@ export const EmptyWishlist: React.FC = () => {
       <h1>Здесь пока пусто(</h1>
       <h1>Самое время начать!</h1>
       <img src={arrowImg} alt="arrow" className={styles.arrow} />
-      <button
-        className={styles.addButton}
-        onClick={() => navigate("/create")}
-      >
-        Новый вишлист +
-      </button>
+      <Button type="submit" className={styles.addButton} onClick={() => navigate("/create")}>Новый вишлист +</Button>
     </section>
   );
 };

@@ -9,7 +9,7 @@
   background-size: cover;
 }
 
-h1{
+.title{
   font-size: 65px;
   margin-bottom: 2rem;
 }
@@ -53,4 +53,59 @@ option{
   color: #5F5A99;
   border: 1px solid #5F5A99;
   text-align: center;
+}
+
+@media (min-width: 2000px) {
+  .title {
+    font-size: 75px;
+  }
+  form {
+    height: 40%;
+  }
+  input,
+  select {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 1400px) {
+  form{
+    width: 50%;
+  }
+  .title {
+    font-size: 50px;
+  }
+  form {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .title {
+    font-size: 40px;
+  }
+  form {
+    padding: 2rem;
+    width: 60%;
+    height: 60%;
+  }
+  select{
+    margin-bottom: 5rem;
+  }
+}
+
+@media (max-width: 680px) {
+  form{
+    width: 80%;
+  }
+  .title{
+    font-size: 30px;
+    text-align: center;
+  }
+}
+
+@media ((max-height: 600px)) {
+  select{
+    margin-bottom: 0;
+  }
 }
