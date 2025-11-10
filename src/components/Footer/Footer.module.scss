@@ -10,16 +10,33 @@
 
 .container {
     display: flex;
-    flex-direction: row;
-    gap: 60px;
+    
+    @media screen and (max-width: 767px) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    @media screen and (min-width: 768px) {
+        gap: 60px;
+        flex-direction: row;
+        text-align: left; 
+    }
 }
 
 .describe {
     display: flex;
     flex-direction: column;
-    margin: 20px 0px 20px 85px;
-    min-width: 0px;
-    max-width: 150px;
+    
+    @media screen and (max-width: 767px) {
+        align-items: center;
+        margin-top: 10px;
+    }
+    @media screen and (min-width: 768px) { 
+        margin: 20px 0px 20px 90px;
+        min-width: 0px;
+        max-width: 150px;
+    }
 }
 
 .logo {
@@ -29,10 +46,8 @@
 
 .text {
     font-weight: 400;
-    font-style: Regular;
     font-size: 14px;
     line-height: 140%;
-    letter-spacing: 0%;
     color: #8D8D8D;
     white-space: normal;
     word-wrap: break-word;
