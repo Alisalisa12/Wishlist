@@ -1,4 +1,5 @@
 import style from "./HowWorks.module.scss";
+import { IoIosArrowForward } from "react-icons/io";
 
 
 export default function HowWorks() {
@@ -17,7 +18,7 @@ export default function HowWorks() {
                     </div>
 
                     <div className={style.arrowWrapper}>
-                        <img src="/images/union.png" className={style.union} alt="arrow" />
+                        <IoIosArrowForward className={style.arrow} />
                     </div>
 
                     <div className={style.step}>
@@ -30,7 +31,7 @@ export default function HowWorks() {
                     </div>
 
                     <div className={style.arrowWrapper}>
-                        <img src="/images/union.png" className={style.union} alt="arrow" />
+                        <IoIosArrowForward className={style.arrow} />
                     </div>
 
                     <div className={style.step}>

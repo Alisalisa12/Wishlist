@@ -13,21 +13,61 @@
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    padding: 10px 50px;
+
+    @media screen and (min-width: 768px) {
+        font-size: 16px;
+        justify-content: space-evenly;
+    }
+    @media screen and (min-width: 1024px) {
+        padding: 10px 60px;
+        font-size: 18px;
+    }
+    @media screen and (min-width: 1440px) {
+        font-size: 20px;
+    }
 }
 
 .logo {
     height: 50px;
+
+    @media screen and (max-width: 767px) {
+        margin: 5px 20px;
+    }
+    @media screen and (min-width: 768px) {
+        margin: 0px;
+    }
 }
 
-.searchBlock {
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
-}
-
+.linkHeader,
+.searchBlock,
 .userBlock {
     display: flex;
     flex-direction: row;
     gap: 5px;
 }
+
+@media screen and (max-width: 767px) {
+    .container {
+        justify-content: space-between;
+
+        .linkHeader,
+        .searchBlock,
+        .userBlock {
+            display: none;
+        }
+    }
+}
+
+
+.menu {
+    display: none;
+    color: #ffffff;
+
+    @media screen and (max-width: 767px) {
+        display: inline;
+        font-size: 36px;
+        cursor: pointer;
+        margin: 0px 10px;
+    }
+}
+
