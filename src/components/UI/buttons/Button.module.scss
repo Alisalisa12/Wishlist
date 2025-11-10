@@ -1,4 +1,8 @@
 .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   border: none;
   color: white;
   font-size: 20px;
@@ -7,8 +11,11 @@
   border-radius: 30px;
   cursor: pointer;
   transition: background 0.3s ease;
-}
 
+}
+.button svg {
+  display: block;
+}
 .primary {
   background-color: #1f103a;
   color: #fff;
@@ -31,10 +38,18 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
-
-@media (max-width: 800px) {
+@media (max-width: 980px) {
+  .button{
+    font-size: 20px;
+    padding: 1rem;
+    border-radius: 20px;
+  }
+}
+@media (max-width: 850px) {
   .button{
     font-size: 15px;
     padding: 1rem;
+    border-radius: 10px;
   }
 }
+

@@ -9,6 +9,8 @@ interface ButtonProps {
   variant?: "primary" | "secondary";
   className?: string;
   disabled?: boolean;
+  icon?: React.ReactNode;
+  iconPosition?: "left" | "right"; 
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -18,6 +20,8 @@ const Button: React.FC<ButtonProps> = ({
   variant = "primary",
   className,
   disabled = false,
+  icon,
+  iconPosition = "left",
 }) => {
   return (
     <button
@@ -26,7 +30,13 @@ const Button: React.FC<ButtonProps> = ({
       disabled={disabled}
       className={clsx(styles.button, styles[variant], className)}
     >
-      {children}
+      {icon && iconPosition === "left" && (
+        <span className={styles.icon}>{icon}</span>
+      )}
+      <span>{children}</span>
+      {icon && iconPosition === "right" && (
+        <span className={styles.icon}>{icon}</span>
+      )}
     </button>
   );
 };

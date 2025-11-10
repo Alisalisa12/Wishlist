@@ -4,6 +4,7 @@ import { EmptyWishlist } from "./pages/EmptyWishlist/EmptyWishlist";
 import React from "react";
 import {BrowserRouter, Routes, Route } from "react-router-dom";
 import CreateWishlist from "./pages/CreateWishlists/CreateWishlists";
+import WishlistView from "./pages/WishlistView/WishlistView";
 
 export const App: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ export const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<EmptyWishlist />} />
             <Route path="/create" element={<CreateWishlist />} />
+             <Route path="/wishlist" element={<WishlistView />} />
           </Routes>
         </BrowserRouter>
       </main>
