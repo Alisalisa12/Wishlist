@@ -16,6 +16,7 @@
   text-align: center;
   color: #fff;
   box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  margin: 5rem 0;
 }
 
 .header {
@@ -24,12 +25,12 @@
 }
 
 .title {
-  font-size: 50px;
+  font-size: 45px;
   font-weight: 700;
 }
 
 .date {
-  font-size: 40px;
+  font-size: 30px;
 }
 .category {
   margin-top: 1rem;
@@ -44,26 +45,30 @@
 }
 .item {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   margin: 0.5rem 0;
 }
 
 .info {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  // flex-direction: column;
+  align-items: center;
+  gap: 100%;
+  color: #ffffff;
+  font-size: 24px;
+
 }
 
 .link {
-  color: #fbc9ff;
+  color: #110E3C;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 20px;
 }
 
 .imagePlaceholder {
-  width: 70px;
-  height: 70px;
+  width: 80%;
+  max-width: 300px;
   background: #ccc;
   border-radius: 8px;
 }
@@ -73,19 +78,18 @@
   margin-top: 1.5rem;
 }
 
-@media (max-width:600px) {
-  .title {
-  font-size: 30px;
+@media (max-width:1050px) {
+  .info {
+  flex-direction: column;
+  gap: 4x;
+  font-size: 20px;
+
 }
 
-  .date {
-    font-size: 20px;
-  }
-  .title_price {
-    font-size: 14px;
-  }
+.link{
+  font-size: 16px
 }
-
+}
 
 @media (max-width:800px) {
   .title {
@@ -99,3 +103,22 @@
     font-size: 20px;
   }
 }
+
+@media (max-width:600px) {
+  .title {
+  font-size: 30px;
+}
+
+  .date {
+    font-size: 20px;
+  }
+  .title_price {
+    font-size: 14px;
+  }
+.imagePlaceholder {
+  margin-left: 10%;
+}
+
+}
+
+

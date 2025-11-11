@@ -16,9 +16,9 @@ const WishlistItem: React.FC<WishlistItemProps> = ({ name, link, image }) => {
           Ссылка
         </a>
       </div>
-      <div className={styles.imagePlaceholder}>
+      <div >
         {image ? (
-          <img src={image} alt={name} />
+          <img className={styles.imagePlaceholder} src={image} alt={name} />
         ) : (
           <div className={styles.empty}></div>
         )}
