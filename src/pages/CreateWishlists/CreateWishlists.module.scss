@@ -17,7 +17,7 @@
   form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
     width: 40%;
     height: 60%;
     background-color: #C6C2F3;
@@ -38,7 +38,7 @@
   }
 
   select{
-    margin-bottom: 6rem;
+    // margin-bottom: 6rem;
     text-align-last: center; /* для IE/Edge/Chrome */
     -moz-text-align-last: center; /* для Firefox */
   }
@@ -53,6 +53,21 @@ option{
   color: #5F5A99;
   border: 1px solid #5F5A99;
   text-align: center;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.error {
+  color: #ff4d4f;
+  font-size: 14px;
+  margin-top: 0px;
+}
+
+.button{
+  margin-top: 5rem;
 }
 
 @media (min-width: 2000px) {
@@ -78,6 +93,9 @@ option{
   form {
     padding: 2rem;
   }
+    .button{
+    margin-top: 4rem;
+  }
 }
 
 @media (max-width: 800px) {
@@ -89,23 +107,18 @@ option{
     width: 60%;
     height: 60%;
   }
-  select{
-    margin-bottom: 5rem;
+  .button{
+    margin-top: 0rem;
   }
 }
 
 @media (max-width: 680px) {
   form{
-    width: 80%;
+    width: 90%;
+    height: 50%;
   }
   .title{
     font-size: 30px;
     text-align: center;
-  }
-}
-
-@media ((max-height: 600px)) {
-  select{
-    margin-bottom: 0;
   }
 }
