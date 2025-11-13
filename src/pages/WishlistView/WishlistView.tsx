@@ -2,6 +2,7 @@ import AddWishModal from "../../components/AddWishModal/AddWishModal";
 import PriceCategory from "../../components/createWishlists/PriceCategory";
 import WishlistActions from "../../components/createWishlists/WishlistActions";
 import WishlistHeader from "../../components/createWishlists/WishlistHeader";
+import Button from "../../components/UI/buttons/Button";
 import styles from "./WishlistView.module.scss";
 import React, { useEffect, useState } from "react";
 
@@ -20,6 +21,7 @@ const WishlistView = () => {
   } | null>(null);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteMode, setIsDeleteMode] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem("currentWishlist");
@@ -42,6 +44,16 @@ const WishlistView = () => {
     setIsModalOpen(false);
   };
 
+  const handleDeleteWish = (id: number) => {
+    if (!wishlist) return;
+    const updated = {
+      ...wishlist,
+      items: wishlist.items.filter((i) => i.id !== id),
+    };
+    setWishlist(updated);
+    localStorage.setItem("currentWishlist", JSON.stringify(updated));
+  };
+
   if (!wishlist) return <p className={styles.empty}>Вишлист не найден</p>;
 
   return (
@@ -54,25 +66,31 @@ const WishlistView = () => {
         />
 
         <div className={styles.categories}>
-          <PriceCategory
-            title="До 1.000р."
-            items={wishlist.items.filter((i) => i.price === "До 1.000р.")}
-          />
-          <PriceCategory
-            title="1.000 - 3.000"
-            items={wishlist.items.filter((i) => i.price === "1.000 - 3.000")}
-          />
-          <PriceCategory
-            title="3.000 - 10.000"
-            items={wishlist.items.filter((i) => i.price === "3.000 - 10.000")}
-          />
-          <PriceCategory
-            title="10.000+"
-            items={wishlist.items.filter((i) => i.price === "10.000+")}
-          />
+          {["До 1.000р.", "1.000 - 3.000", "3.000 - 10.000", "10.000+"].map(
+            (price) => (
+              <PriceCategory
+                key={price}
+                title={price}
+                items={wishlist.items.filter((i) => i.price === price)}
+                isDeleteMode={isDeleteMode}
+                onDeleteWish={handleDeleteWish}
+              />
+            )
+          )}
         </div>
 
-        <WishlistActions onAddWish={() => setIsModalOpen(true)} />
+        {isDeleteMode ? (
+          <Button
+            onClick={() => setIsDeleteMode(false)}
+          >
+            Вернуться
+          </Button>
+        ) : (
+          <WishlistActions
+            onAddWish={() => setIsModalOpen(true)}
+            onDeleteMode={() => setIsDeleteMode(true)}
+          />
+        )}
       </div>
 
       {isModalOpen && (
