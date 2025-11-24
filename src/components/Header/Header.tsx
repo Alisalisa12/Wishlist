@@ -27,7 +27,7 @@ export const Header: FC = () => {
                 </div>
                 <div className={style.userBlock}>
                     <FaRegCircleUser className={style.userLogo} />
-                    <p className={style.userText}>Вход/Регистрация</p>
+                    <div className={style.logIn} onClick={() => handleNavigation('/login')}>Вход/Регистрация</div>
                 </div>
                 <TbMenuDeep className={style.menu}/>
             </div>
