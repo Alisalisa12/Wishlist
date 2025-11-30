@@ -17,8 +17,8 @@ const app = express();
 
 app.use(express.json());
 
-try {
-  app.post("/auth/register", registerValidation, async (req, res) => {
+app.post("/auth/register", registerValidation, async (req, res) => {
+  try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json(errors.array());
@@ -53,14 +53,13 @@ try {
       ...userData,
       token,
     });
-  }); 
-} catch (err) { 
-  console.log(err);
-  res.status(500).json({
-    message: "Не удалось зарегистрироваться!",
-  });
-}
-
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message: "Не удалось зарегистрироваться!",
+    });
+  }
+});
 app.listen(7777, (err) => {
   if (err) {
     return console.log("err");
