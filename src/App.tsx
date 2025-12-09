@@ -5,6 +5,7 @@ import Registration from './pages/Registration/Registration';
 import Login from './pages/Login/Login';
 import Privacy from './pages/Privacy/Privacy';
 import Terms from './pages/Terms/Terms'
+import Friends from './pages/Friends/Friends';
 
 
 const App: React.FC = () => {
@@ -17,6 +18,7 @@ const App: React.FC = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/terms" element={<Terms />} />
+                <Route path="/friends" element={<Friends />} />
             </Routes>
         </Router>
     );
