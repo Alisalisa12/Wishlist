@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../components/UI/buttons/Button";
 
 
-export const EmptyWishlist: React.FC = () => {
+const EmptyWishlist: React.FC = () => {
   const navigate = useNavigate();
   return (
     <section className={styles.wrapper}>
@@ -16,3 +16,5 @@ export const EmptyWishlist: React.FC = () => {
     </section>
   );
 };
+
+export default EmptyWishlist;
