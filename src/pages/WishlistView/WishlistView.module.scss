@@ -1,0 +1,153 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url("../../images/background.png");
+  background-size: cover;
+}
+
+.card {
+  background: #9891DF;
+  border-radius: 20px;
+  padding: 2rem;
+  width: 80%;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  margin: 5rem 0;
+}
+
+.header {
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.title {
+  font-size: 45px;
+  font-weight: 700;
+}
+
+.date {
+  font-size: 30px;
+}
+.category {
+  margin-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.5);
+  padding-top: 1rem;
+  text-align: left;
+}
+
+.title_price {
+  font-size: 24px;
+  margin-bottom: 0.5rem;
+}
+.item {
+  display:grid;
+  grid-template-columns: 2fr 1fr 1fr 0.5fr;
+  align-items: center;
+  overflow-wrap:anywhere;
+  margin: 1rem 0;
+}
+
+.info {
+  margin-left: 20%;
+  padding-right: 10%;
+  color: #110e3c;
+  font-size: 24px;
+  text-wrap: balance;
+}
+
+.link {
+  color: #110e3c;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.imagePlaceholder {
+  width: 70%;
+  max-height: 50%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1.5rem;
+}
+
+.deleteBtn{
+  background-color: #BA5A5A;
+  border-radius: 20px;
+  padding: 25%;
+
+  
+}
+.deleteBtn:hover{
+  background-color: #b52e2e;
+}
+
+
+@media (max-width:1050px) {
+  .info {
+  flex-direction: column;
+  gap: 4px;
+  font-size: 20px;
+
+}
+
+.link{
+  font-size: 16px
+}
+}
+
+@media (max-width:800px) {
+  .title {
+  font-size: 30px;
+}
+
+  .date {
+    font-size: 20px;
+  }
+  .title_price {
+    font-size: 20px;
+  }
+}
+
+@media (max-width:600px) {
+  .title {
+  font-size: 30px;
+}
+
+  .date {
+    font-size: 20px;
+  }
+  .title_price {
+    font-size: 14px;
+  }
+.item {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 2fr;
+  }
+
+.imagePlaceholder {
+  margin-top: 10px;
+  width: 100px;
+  max-height: 100px;
+}
+ .info {
+    margin-left: 0;
+    grid-column: span 2;
+  }
+
+.deleteBtn {
+    padding: 0.5rem 45%;
+  }
+  .deleteBtnDiv{
+    grid-column: span 2;
+
+  }
+}
+
+

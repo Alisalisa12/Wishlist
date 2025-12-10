@@ -6,6 +6,8 @@
 .Footer {
     background-color: #110E3C;
     width: 100%;
+    color: #fff;
+    font-family: "Ubuntu", sans-serif;
 }
 
 .container {
@@ -17,8 +19,8 @@
 .describe {
     display: flex;
     flex-direction: column;
-    margin: 20px 0px 20px 85px;
-    min-width: 0px;
+    margin: 20px 0 20px 85px;
+    min-width: 0;
     max-width: 150px;
 }
 
@@ -29,10 +31,10 @@
 
 .text {
     font-weight: 400;
-    font-style: Regular;
+    font-style: normal;
     font-size: 14px;
     line-height: 140%;
-    letter-spacing: 0%;
+    letter-spacing: 0;
     color: #8D8D8D;
     white-space: normal;
     word-wrap: break-word;
@@ -42,17 +44,17 @@
 .navigate {
     display: flex;
     flex-direction: column;
-    margin: 20px 0px 10px;
+    margin: 20px 0 10px;
     gap: 7px;
 }
 
 .linkHeader {
-    font-family: Rubik;
+    font-family: Rubik, sans-serif;
     font-weight: 500;
-    font-style: Medium;
+    font-style: normal;
     font-size: 16px;
     line-height: 100%;
-    letter-spacing: 0%;
+    letter-spacing: 0;
 }
 
 
