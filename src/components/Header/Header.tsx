@@ -17,7 +17,7 @@ export const Header: FC = () => {
             <div className={style.container}>
                 <img src="/images/logo.png" className={style.logo} alt='logo'/>
                 <div className={style.linkHeader} onClick={() => handleNavigation('/')}>Друзья</div>
-                <div className={style.linkHeader} onClick={() => handleNavigation('/')}>Мои вишлисты</div>
+                <div className={style.linkHeader} onClick={() => handleNavigation('/emptywishlist')}>Мои вишлисты</div>
                 <div className={style.linkHeader} onClick={() => handleNavigation('/')}>Мои брони</div>
                 <div className={style.linkHeader} onClick={() => handleNavigation('/')}>Идеи подарков</div>
                 <div className={style.searchBlock}>
