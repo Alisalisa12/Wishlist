@@ -18,9 +18,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "types": ["lucide-react"]
   },
   "include": [
-    "src"
+    "src",
+    "node_modules/@types/node/globals.d.ts"
   ]
 }
