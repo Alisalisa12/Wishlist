@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.Terms {
+    background: radial-gradient(circle at 90% 80%, rgba(76, 66, 199, 0.7) 0%, #110E3C 80%);
+    width: 100%;
+    color: #ffffff;
+    font-family: 'Ubuntu', sans-serif;
+    min-height: 100vh;
+    font-size: 40px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text {
+    margin-top: 40px;
+}
