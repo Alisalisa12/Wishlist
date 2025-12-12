@@ -136,17 +136,17 @@
     grid-template-rows: 1fr 2fr;
   }
 
-.imagePlaceholder {
-  margin-top: 10px;
-  width: 100px;
-  max-height: 100px;
-}
- .info {
+  .imagePlaceholder {
+    margin-top: 10px;
+    width: 100px;
+    max-height: 100px;
+  }
+  .info {
     margin-left: 0;
     grid-column: span 2;
   }
 
-.deleteBtn {
+  .deleteBtn {
     padding: 0.5rem 45%;
   }
   .deleteBtnDiv{
