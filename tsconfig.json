@@ -22,6 +22,7 @@
     "types": ["lucide-react"]
   },
   "include": [
-    "src"
+    "src",
+    "node_modules/@types/node/globals.d.ts"
   ]
 }

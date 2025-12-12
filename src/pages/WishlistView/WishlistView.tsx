@@ -7,28 +7,27 @@ import styles from "./WishlistView.module.scss";
 import React, { useEffect, useState } from "react";
 import {Footer} from "../../components/Footer/Footer";
 import {Header} from "../../components/Header/Header";
+import {
+  getCurrentWishlist,
+  updateWishlist,
+  Wishlist,
+} from "../../services/wishlistStorage";
 
 const WishlistView = () => {
-  const [wishlist, setWishlist] = useState<{
-    title: string;
-    date: string;
-    access: string;
-    items: {
-      id: number;
-      name: string;
-      link: string;
-      image: string;
-      price: string;
-    }[];
-  } | null>(null);
+  const [wishlist, setWishlist] = useState<Wishlist | null>(null);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteMode, setIsDeleteMode] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem("currentWishlist");
-    if (stored) setWishlist(JSON.parse(stored));
+    const stored = getCurrentWishlist();
+    if (stored) setWishlist(stored);
   }, []);
+
+  const persistWishlist = (updatedWishlist: Wishlist) => {
+    setWishlist(updatedWishlist);
+    updateWishlist(updatedWishlist);
+  };
 
   const handleAddWish = (wish: {
     name: string;
@@ -41,8 +40,7 @@ const WishlistView = () => {
       ...wishlist,
       items: [...wishlist.items, { id: Date.now(), ...wish }],
     };
-    setWishlist(updated);
-    localStorage.setItem("currentWishlist", JSON.stringify(updated));
+    persistWishlist(updated);
     setIsModalOpen(false);
   };
 
@@ -52,8 +50,7 @@ const WishlistView = () => {
       ...wishlist,
       items: wishlist.items.filter((i) => i.id !== id),
     };
-    setWishlist(updated);
-    localStorage.setItem("currentWishlist", JSON.stringify(updated));
+    persistWishlist(updated);
   };
 
   if (!wishlist) return <p className={styles.empty}>Вишлист не найден</p>;

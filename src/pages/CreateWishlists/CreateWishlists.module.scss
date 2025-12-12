@@ -15,31 +15,35 @@
   margin-bottom: 2rem;
 }
 
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    width: 40%;
-    height: 60%;
-    background-color: #C6C2F3;
-    border-radius: 20px;
-    padding:3rem 5rem;
-  }
 
-  input,
-  select {
-    padding: 0.6rem;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    width: 100%;
-    background-color: #5F5A99;
-    color: #fff;
+.form,
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 40%;
+  height: 50%;
+  background-color: #C6C2F3;
+  border-radius: 20px;
+  padding: 3rem 5rem;
+}
 
-  }
+.form input,
+.form select,
+form input,
+form select {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  background-color: #5F5A99;
+  color: #fff;
+}
 
   select{
-    width: 103.5%;
     text-align-last: center; /* для IE/Edge/Chrome */
     -moz-text-align-last: center; /* для Firefox */
   }
@@ -75,6 +79,7 @@ option{
   .title {
     font-size: 75px;
   }
+  .form,
   form {
     height: 40%;
   }
@@ -85,32 +90,31 @@ option{
 }
 
 @media (max-width: 1400px) {
+  .form,
   form{
     width: 50%;
   }
   .title {
     font-size: 50px;
   }
+  .form,
   form {
     padding: 2rem;
   }
-    .button{
-    margin-top: 4rem;
-  }
+
 }
 
 @media (max-width: 800px) {
   .title {
     font-size: 40px;
   }
+  .form,
   form {
     padding: 2rem;
     width: 60%;
     height: 60%;
   }
-  .button{
-    margin-top: 0;
-  }
+
 }
 
 @media (max-width: 680px) {

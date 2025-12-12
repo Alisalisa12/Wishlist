@@ -2,12 +2,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  // gap: 8px;
   border: none;
   color: white;
   font-size: 20px;
   padding: 1rem 2rem;
-  // margin-left: 7rem;
   border-radius: 30px;
   cursor: pointer;
   transition: background 0.3s ease;
@@ -42,14 +40,14 @@
   .button{
     font-size: 20px;
     padding: 1rem;
-    border-radius: 20px;
+    border-radius: 25px;
   }
 }
 @media (max-width: 850px) {
   .button{
     font-size: 15px;
     padding: 1rem;
-    border-radius: 10px;
+    border-radius: 20px;
   }
 }
 

@@ -28,7 +28,7 @@ const Button: React.FC<ButtonProps> = ({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={clsx(styles.button, styles[variant], className)}
+      className={clsx(className, styles.button, styles[variant] )}
     >
       {icon && iconPosition === "left" && (
         <span className={styles.icon}>{icon}</span>

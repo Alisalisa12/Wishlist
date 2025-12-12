@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {Footer} from "../../components/Footer/Footer";
 import {Header} from "../../components/Header/Header";
+import { createWishlist } from "../../services/wishlistStorage";
 
 const CreateWishlist = () => {
   const [title, setTitle] = useState("");
@@ -33,13 +34,14 @@ const CreateWishlist = () => {
     if (Object.keys(newErrors).length > 0) return;
 
     const newWishlist = {
+      id: Date.now(),
       title,
-      date: date?.toLocaleDateString("ru-RU"),
+      date: date ? date.toLocaleDateString("ru-RU") : "",
       access,
       items: [],
     };
-
-    localStorage.setItem("currentWishlist", JSON.stringify(newWishlist));
+    // сохраняем вишлист через слой абстракции над хранилищем
+    createWishlist(newWishlist);
     navigate("/wishlist");
   };
 
