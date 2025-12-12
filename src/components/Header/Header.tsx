@@ -21,10 +21,6 @@ export const Header: FC = () => {
                 <div className={style.linkHeader} onClick={() => handleNavigation('/emptywishlist')}>Мои вишлисты</div>
                 <div className={style.linkHeader} onClick={() => handleNavigation('/')}>Мои брони</div>
                 <div className={style.linkHeader} onClick={() => handleNavigation('/')}>Идеи подарков</div>
-                <div className={style.searchBlock}>
-                    <CiSearch className={style.searchLogo} />
-                    <p className={style.searchText}>Поиск</p>
-                </div>
                 <div className={style.userBlock}>
                     <FaRegCircleUser className={style.userLogo} />
                     <div className={style.logIn} onClick={() => handleNavigation('/login')}>Вход/Регистрация</div>

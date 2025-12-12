@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import style from "./Footer.module.scss";
 
 
@@ -15,8 +15,14 @@ export const Footer: FC = () => {
             <div className={style.container}>
                 <div className={style.describe}>
                     <img src="/images/logo.png" className={style.logo} alt='logo'/>
-                    <p className={style.text}>Политика конфиденциальности</p>
-                    <p className={style.text}>Условия пользования</p>
+                    <Link to="/privacy" className={style.inlineLink}>
+                        Политика конфиденциальности
+                    </Link>
+                    <Link to="/terms" className={style.inlineLink}>
+                        Условия пользования
+                    </Link>
+                    {/* <p className={style.text}>Политика конфиденциальности</p>
+                    <p className={style.text}>Условия пользования</p> */}
                 </div>
                 <div className={style.navigate}>
                     <div className={style.linkHeader} onClick={() => handleNavigation('/login')}>Вход/Регистрация</div>

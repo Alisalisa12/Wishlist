@@ -36,12 +36,14 @@
         margin: 5px 20px;
     }
     @media screen and (min-width: 768px) {
-        margin: 0px;
+        margin: 5px 10px;
+    }
+    @media screen and (min-width: 1024px) {
+        margin-left: -10px;;
     }
 }
 
 .linkHeader,
-.searchBlock,
 .userBlock {
     display: flex;
     flex-direction: row;
@@ -54,7 +56,6 @@
         justify-content: space-between;
 
         .linkHeader,
-        .searchBlock,
         .userBlock {
             display: none;
         }
