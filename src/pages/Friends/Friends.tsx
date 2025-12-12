@@ -48,7 +48,27 @@ export default function Friends() {
     ]);
 
     const allUsers: FriendProps[] = [
-        ...friends,
+        {
+        id: 1,
+        avatar: "images/friendAvatar.jpg",
+        name: "Вероника",
+        nickname: "@teriasha",
+        profileLink: "/profile/teriasha",
+        },
+        {
+        id: 2,
+        avatar: "images/friendAvatar.jpg",
+        name: "Карина",
+        nickname: "@tralalero",
+        profileLink: "/profile/tralalero",
+        },
+        {
+        id: 3,
+        avatar: "images/friendAvatar.jpg",
+        name: "Ира",
+        nickname: "@tralala",
+        profileLink: "/profile/tralala",
+        },
         {
         id: 4,
         avatar: "images/friendAvatar.jpg",

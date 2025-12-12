@@ -27,11 +27,21 @@ html, body, #root {
 
 .container {
     padding: 20px;
-    max-width: 700px;
-    margin: 40px 0 90px 70px;
-    width: 100%;
     display: flex;
     flex-direction: column;
+    
+    @media screen and (max-width: 499px) {
+        margin-bottom: 120px;  
+    }
+    @media screen and (min-width: 500px) {
+        margin: 40px 50px 120px 0px;  
+    }
+    @media screen and (min-width: 768px) {
+        margin: 40px 100px 90px 10px;  
+    }
+    @media screen and (min-width: 1024px) {
+        margin: 40px 250px 90px 80px;
+    }
 }
 
 .search {
@@ -69,7 +79,13 @@ html, body, #root {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    padding: 40px;
+    
+    @media screen and (max-width: 767px) {
+        padding: 10px;
+    }
+    @media screen and (min-width: 768px) {
+        padding: 40px;
+    }
 }
 
 .friendItem {
@@ -81,36 +97,58 @@ html, body, #root {
 }
 
 .friendAvatar {
-    // width: 50px;
-    // height: 50px;
     border-radius: 50%;
     object-fit: cover;
 }
 
 .friendInfo {
     flex: 1;
-    margin-left: 12px;
+    
+    @media screen and (max-width: 499px) {
+        margin-left: 6px;
+    }
+    @media screen and (min-width: 500px) {
+        margin-left: 12px;
+    }
 }
 
 .friendName {
     color: #ffffff;
     font-weight: 600;
     font-size: 16px;
+
+    @media screen and (max-width: 499px) {
+        font-size: 14px;
+    }
+    @media screen and (min-width: 500px) {
+        font-size: 16px;
+    }
 }
 
 .friendNickname {
     color: #110E3C;
-    font-size: 14px;
+    
+    @media screen and (max-width: 499px) {
+        font-size: 12px;
+    }
+    @media screen and (min-width: 500px) {
+        font-size: 14px;
+    }
 }
 
 .profileLink {
     color: #110E3C;
     text-decoration: none;
-    font-size: 14px;
     padding: 6px 12px;
     border-radius: 4px;
     font-weight: 600;
-    
+
+    @media screen and (max-width: 499px) {
+        font-size: 12px;
+    }
+    @media screen and (min-width: 500px) {
+        font-size: 14px;
+    }
 }
 
 .buttons {
@@ -128,12 +166,18 @@ html, body, #root {
     border: none;
     border-radius: 60px;
     cursor: pointer;
-    font-size: 16px;
     font-weight: 600;
     text-align: center;
     color: #ffffff;
     background-color: #110E3C;
     width: 50%;
+
+    @media screen and (max-width: 499px) {
+        font-size: 12px;
+    }
+    @media screen and (min-width: 500px) {
+        font-size: 16px;
+    }
 }
 
 .addIcon {
@@ -141,19 +185,31 @@ html, body, #root {
     border: none;
     border-radius: 60px;
     cursor: pointer;
-    font-size: 14px;
     font-weight: 600;
     text-align: center;
     color: #ffffff;
     background-color: #110E3C;
+
+    @media screen and (max-width: 499px) {
+        font-size: 12px;
+    }
+    @media screen and (min-width: 500px) {
+        font-size: 14px;
+    }
 }
 
 .deleteIcon {
     padding: 10px;
-    font-size: 30px;
     color: #ffffff;
     background-color: #BA5A5A;
     cursor: pointer;
     border: none;
     border-radius: 5px;
+
+    @media screen and (max-width: 499px) {
+        font-size: 22px;
+    }
+    @media screen and (min-width: 500px) {
+        font-size: 30px;
+    }
 }
