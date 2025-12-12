@@ -7,67 +7,26 @@ import styles from "./WishlistView.module.scss";
 import React, { useEffect, useState } from "react";
 import {Footer} from "../../components/Footer/Footer";
 import {Header} from "../../components/Header/Header";
+import {
+  getCurrentWishlist,
+  updateWishlist,
+  Wishlist,
+} from "../../services/wishlistStorage";
 
 const WishlistView = () => {
-  const [wishlist, setWishlist] = useState<{
-    id?: number; // id может отсутствовать у старых данных в localStorage
-    title: string;
-    date: string;
-    access: string;
-    items: {
-      id: number;
-      name: string;
-      link: string;
-      image: string;
-      price: string;
-    }[];
-  } | null>(null);
+  const [wishlist, setWishlist] = useState<Wishlist | null>(null);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteMode, setIsDeleteMode] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem("currentWishlist");
-    if (stored) setWishlist(JSON.parse(stored));
+    const stored = getCurrentWishlist();
+    if (stored) setWishlist(stored);
   }, []);
 
-  const persistWishlist = (updatedWishlist: {
-    id?: number;
-    title: string;
-    date: string;
-    access: string;
-    items: {
-      id: number;
-      name: string;
-      link: string;
-      image: string;
-      price: string;
-    }[];
-  }) => {
+  const persistWishlist = (updatedWishlist: Wishlist) => {
     setWishlist(updatedWishlist);
-    localStorage.setItem("currentWishlist", JSON.stringify(updatedWishlist));
-
-    try {
-      const storedList = localStorage.getItem("wishlists");
-      if (!storedList) return;
-
-      const parsed = JSON.parse(storedList);
-      if (!Array.isArray(parsed)) return;
-
-      // если у вишлиста нет id (старые данные), просто ничего не делаем с общим списком
-      if (updatedWishlist.id == null) return;
-
-      const exists = parsed.some((w: any) => w && w.id === updatedWishlist.id);
-      const updatedList = exists
-        ? parsed.map((w: any) =>
-            w && w.id === updatedWishlist.id ? updatedWishlist : w
-          )
-        : [...parsed, updatedWishlist];
-
-      localStorage.setItem("wishlists", JSON.stringify(updatedList));
-    } catch (e) {
-      console.error("Failed to update wishlists in localStorage", e);
-    }
+    updateWishlist(updatedWishlist);
   };
 
   const handleAddWish = (wish: {

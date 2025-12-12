@@ -5,35 +5,23 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../components/UI/buttons/Button";
 import { Header } from "../../components/Header/Header";
 import { Footer } from "../../components/Footer/Footer";
-
-type WishlistItem = {
-  id: number;
-  title: string;
-  date: string;
-  access: string;
-  items: any[];
-};
+import {
+  getAllWishlists,
+  saveCurrentWishlist,
+  Wishlist,
+} from "../../services/wishlistStorage";
 
 const EmptyWishlist: React.FC = () => {
   const navigate = useNavigate();
-  const [wishlists, setWishlists] = useState<WishlistItem[]>([]);
+  const [wishlists, setWishlists] = useState<Wishlist[]>([]);
 
   useEffect(() => {
-    const stored = localStorage.getItem("wishlists");
-    if (!stored) return;
-
-    try {
-      const parsed = JSON.parse(stored);
-      if (Array.isArray(parsed)) {
-        setWishlists(parsed);
-      }
-    } catch (e) {
-      console.error("Failed to parse wishlists from localStorage", e);
-    }
+    const all = getAllWishlists();
+    setWishlists(all);
   }, []);
 
-  const handleOpenWishlist = (wishlist: WishlistItem) => {
-    localStorage.setItem("currentWishlist", JSON.stringify(wishlist));
+  const handleOpenWishlist = (wishlist: Wishlist) => {
+    saveCurrentWishlist(wishlist);
     navigate("/wishlist");
   };
 

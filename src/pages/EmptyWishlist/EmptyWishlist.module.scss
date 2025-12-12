@@ -1,12 +1,11 @@
 .wrapper {
   position: relative;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  overflow: hidden;
   align-items: flex-start;
-  padding-left: 8%;
+  color: #fff;
+  padding: 10% 0 10% 8%;
   background-color: radial-gradient(circle at top left, #4b2bc1, #2a1973);
   background-image: url("../../images/background.png");
   background-size: cover;

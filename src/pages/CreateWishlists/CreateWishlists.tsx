@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {Footer} from "../../components/Footer/Footer";
 import {Header} from "../../components/Header/Header";
+import { createWishlist } from "../../services/wishlistStorage";
 
 const CreateWishlist = () => {
   const [title, setTitle] = useState("");
@@ -39,18 +40,8 @@ const CreateWishlist = () => {
       access,
       items: [],
     };
-
-    // добавляем вишлист в общий список в localStorage
-    const storedWishlists = localStorage.getItem("wishlists");
-    const wishlists = storedWishlists ? JSON.parse(storedWishlists) : [];
-    const updatedWishlists = Array.isArray(wishlists)
-      ? [...wishlists, newWishlist]
-      : [newWishlist];
-
-    localStorage.setItem("wishlists", JSON.stringify(updatedWishlists));
-
-    // по-прежнему сохраняем текущий вишлист для страницы просмотра
-    localStorage.setItem("currentWishlist", JSON.stringify(newWishlist));
+    // сохраняем вишлист через слой абстракции над хранилищем
+    createWishlist(newWishlist);
     navigate("/wishlist");
   };
 
