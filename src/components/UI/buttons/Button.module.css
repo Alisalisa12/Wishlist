@@ -1,0 +1,56 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  color: white;
+  font-size: 20px;
+  padding: 1rem 2rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.button svg {
+  display: block;
+}
+
+.primary {
+  background-color: #1f103a;
+  color: #fff;
+}
+
+.primary:hover {
+  background-color: #4b2bc1;
+}
+
+.secondary {
+  background-color: #f3f3f3;
+  color: #333;
+}
+
+.secondary:hover {
+  background-color: #e1e1e1;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 980px) {
+  .button {
+    font-size: 20px;
+    padding: 1rem;
+    border-radius: 25px;
+  }
+}
+@media (max-width: 850px) {
+  .button {
+    font-size: 15px;
+    padding: 1rem;
+    border-radius: 20px;
+  }
+}
+
+/*# sourceMappingURL=Button.module.css.map */

@@ -1,0 +1,126 @@
+@charset "UTF-8";
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: radial-gradient(circle at top left, #4b2bc1, #2a1973);
+  background-image: url("../../images/background.png");
+  background-size: cover;
+}
+
+.title {
+  color: #fff;
+  font-size: 65px;
+  margin-bottom: 2rem;
+}
+
+.form,
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 40%;
+  height: 50%;
+  background-color: #C6C2F3;
+  border-radius: 20px;
+  padding: 3rem 5rem;
+}
+
+.form input,
+.form select,
+form input,
+form select {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  background-color: #5F5A99;
+  color: #fff;
+}
+
+select {
+  text-align-last: center; /* для IE/Edge/Chrome */
+  -moz-text-align-last: center; /* для Firefox */
+}
+
+input::placeholder {
+  text-align: center;
+  color: #fff;
+}
+
+option {
+  background-color: #fff;
+  color: #5F5A99;
+  border: 1px solid #5F5A99;
+  text-align: center;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.error {
+  color: #ff4d4f;
+  font-size: 14px;
+  margin-top: 0;
+}
+
+.button {
+  margin-top: 5rem;
+}
+
+@media (min-width: 2000px) {
+  .title {
+    font-size: 75px;
+  }
+  .form,
+  form {
+    height: 40%;
+  }
+  input,
+  select {
+    font-size: 26px;
+  }
+}
+@media (max-width: 1400px) {
+  .form,
+  form {
+    width: 50%;
+  }
+  .title {
+    font-size: 50px;
+  }
+  .form,
+  form {
+    padding: 2rem;
+  }
+}
+@media (max-width: 800px) {
+  .title {
+    font-size: 40px;
+  }
+  .form,
+  form {
+    padding: 2rem;
+    width: 60%;
+    height: 60%;
+  }
+}
+@media (max-width: 680px) {
+  form {
+    width: 75%;
+    height: 50%;
+  }
+  .title {
+    font-size: 30px;
+    text-align: center;
+  }
+}
+
+/*# sourceMappingURL=CreateWishlists.module.css.map */

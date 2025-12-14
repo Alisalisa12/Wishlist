@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.Input {
+  width: 100%;
+}
+
+.inputLabel {
+  background-color: rgba(49, 49, 49, 0.8980392157);
+  opacity: 0.9;
+  border-radius: 10px;
+  color: #757575;
+  padding: 10px 0px 10px 15px;
+  width: 100%;
+}
+.inputLabel:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #313131 inset !important;
+  -webkit-text-fill-color: white !important;
+}
+
+.inputLabel:focus {
+  outline: none;
+}
+
+/*# sourceMappingURL=Input.module.css.map */

@@ -1,0 +1,158 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .Discription {
+    min-height: 70vh;
+  }
+}
+@media screen and (min-width: 768px) {
+  .Discription {
+    min-height: 100vh;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  overflow: hidden;
+  position: relative;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  flex: 1;
+}
+@media screen and (max-width: 768px) {
+  .main {
+    margin: 0px 20px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .main {
+    margin: 0px 90px;
+  }
+}
+
+.firstBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+.secondBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-weight: 500;
+  font-style: Medium;
+  line-height: 100%;
+  margin-bottom: 30px;
+}
+@media screen and (max-width: 767px) {
+  .title {
+    font-size: 22px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .title {
+    font-size: 28px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .title {
+    max-width: 900px;
+    font-size: 34px;
+  }
+}
+
+.text {
+  font-weight: 500;
+  font-style: Regular;
+  line-height: 110%;
+}
+@media screen and (min-width: 320px) {
+  .text {
+    font-size: 18px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .text {
+    margin-bottom: 20px;
+    max-width: 900px;
+    font-size: 28px;
+  }
+}
+
+.wantButton, .sendButton {
+  align-self: flex-start;
+  border-radius: 60px;
+  background-color: #6961BE;
+  color: #ffffff;
+  border: none;
+}
+@media screen and (max-width: 319px) {
+  .wantButton, .sendButton {
+    width: 150px;
+    padding: 10px 0px;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+}
+@media screen and (min-width: 320px) {
+  .wantButton, .sendButton {
+    width: 150px;
+    padding: 10px 0px;
+    font-size: 18px;
+    margin-top: 20px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .wantButton, .sendButton {
+    padding: 15px 0px;
+    font-size: 24px;
+    width: 200px;
+    margin-top: 0px;
+  }
+}
+
+.giftLogo {
+  position: absolute;
+  transform: rotate(15deg);
+}
+@media screen and (min-width: 320px) {
+  .giftLogo {
+    margin-top: 150px;
+    height: 150px;
+    right: -70px;
+  }
+}
+@media screen and (min-width: 500px) {
+  .giftLogo {
+    margin-top: 120px;
+    height: 170px;
+    right: -50px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .giftLogo {
+    margin-top: 90px;
+    height: 200px;
+    right: -50px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .giftLogo {
+    margin-top: 40px;
+    right: -80px;
+    height: 350px;
+  }
+}
+
+/*# sourceMappingURL=Discription.module.css.map */

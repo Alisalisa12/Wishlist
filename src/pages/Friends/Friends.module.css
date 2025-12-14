@@ -1,0 +1,145 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+.Friends {
+  min-height: 100vh;
+  width: 100%;
+  font-family: "Ubuntu", sans-serif;
+  color: #ffffff;
+  background-image: url("../../assets/bg.jpg");
+  background-size: cover;
+  background-position: top;
+}
+
+.container {
+  padding: 20px;
+  max-width: 700px;
+  margin: 40px 0 90px 70px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.search {
+  margin-bottom: 20px;
+}
+
+.searchInput {
+  background-color: #665CB3;
+  width: 100%;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  color: #ffffff;
+  caret-color: #ffffff;
+  border: none;
+  outline: none;
+}
+.searchInput:-webkit-autofill, .searchInput:-webkit-autofill:hover, .searchInput:-webkit-autofill:focus, .searchInput:-webkit-autofill:active {
+  -webkit-text-fill-color: #ffffff !important;
+  -webkit-box-shadow: 0 0 0 1000px #665CB3 inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+.searchInput::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.friendsList {
+  background-color: #9891DF;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 40px;
+}
+
+.friendItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.friendAvatar {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.friendInfo {
+  flex: 1;
+  margin-left: 12px;
+}
+
+.friendName {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.friendNickname {
+  color: #110E3C;
+  font-size: 14px;
+}
+
+.profileLink {
+  color: #110E3C;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.buttons {
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.addButton,
+.deleteButton,
+.returnButton {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 60px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  color: #ffffff;
+  background-color: #110E3C;
+  width: 50%;
+}
+
+.addIcon {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 60px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  color: #ffffff;
+  background-color: #110E3C;
+}
+
+.deleteIcon {
+  padding: 10px;
+  font-size: 30px;
+  color: #ffffff;
+  background-color: #BA5A5A;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+/*# sourceMappingURL=Friends.module.css.map */

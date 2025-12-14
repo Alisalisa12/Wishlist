@@ -1,0 +1,104 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.Login {
+  width: 100%;
+  min-height: 100vh;
+  background: radial-gradient(circle at 50% 60%, #9B8FFF 0%, #4C42C7 40%, #110E3C 80%, #0D0A2A 100%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.logo {
+  width: 130px;
+  height: 60px;
+  margin: 30px 0px 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0.9;
+  max-width: 400px;
+  gap: 10px;
+  border-radius: 20px;
+}
+@media screen and (max-width: 413px) {
+  .form {
+    padding: 10px 20px;
+  }
+}
+@media screen and (min-width: 414px) {
+  .form {
+    padding: 20px 40px;
+  }
+}
+
+.title {
+  color: #ffffff;
+  font-weight: 400;
+  line-height: 100%;
+  text-align: center;
+  padding: 10px 20px;
+}
+@media screen and (max-width: 413px) {
+  .title {
+    font-size: 18px;
+  }
+}
+@media screen and (min-width: 414px) {
+  .title {
+    font-size: 22px;
+  }
+}
+
+.buttonLogin {
+  background-color: #522660;
+  color: #ffffff;
+  border-radius: 60px;
+  font-weight: 500;
+  line-height: 100%;
+  padding: 10px;
+  margin: 10px 60px;
+}
+@media screen and (max-width: 413px) {
+  .buttonLogin {
+    font-size: 16px;
+  }
+}
+@media screen and (min-width: 414px) {
+  .buttonLogin {
+    font-size: 20px;
+  }
+}
+
+.text {
+  color: #522660;
+  font-weight: 500;
+  line-height: 100%;
+  margin-top: 20px;
+  cursor: pointer;
+}
+@media screen and (max-width: 413px) {
+  .text {
+    font-size: 20px;
+  }
+}
+@media screen and (min-width: 414px) {
+  .text {
+    font-size: 24px;
+  }
+}
+
+/*# sourceMappingURL=Login.module.css.map */
