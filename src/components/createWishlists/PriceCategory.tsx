@@ -9,7 +9,7 @@ interface PriceCategoryProps {
   onDeleteWish: (id: number) => void;
 }
 
-const PriceCategory: React.FC<PriceCategoryProps> = ({
+const PriceCategory: React.FC<PriceCategoryProps> = React.memo(({
   title,
   items,
   isDeleteMode,
@@ -32,6 +32,8 @@ const PriceCategory: React.FC<PriceCategoryProps> = ({
       )}
     </div>
   );
-};
+});
+
+PriceCategory.displayName = 'PriceCategory';
 
 export default PriceCategory;

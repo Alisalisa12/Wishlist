@@ -8,7 +8,7 @@
     width: 100%;
     color: #fff;
     font-family: "Ubuntu", sans-serif;
-    position: relative; // для позиционирования мобильного меню
+    position: relative;
 }
 
 .container {
@@ -77,29 +77,29 @@
 .searchBlock {
     display: flex;
     align-items: center;
-    position: relative; // для позиционирования иконки внутри инпута
+    position: relative;
     gap: 0;
     cursor: default;
 }
 
 .searchLogo {
     position: absolute;
-    left: 12px;
+    left: -20px;
     top: 50%;
     transform: translateY(-50%);
     color: #BDBDBD;
-    font-size: 18px;
-    pointer-events: none; // чтобы клик не перехватывался иконкой
+    font-size: 20px;
+    pointer-events: none;
 }
 
 .searchInput {
-    background: #2C2C2C; // серый фон поля
+    background: #2C2C2C;
     border: 1px solid transparent;
     border-radius: 10px;
     outline: none;
     color: #FFFFFF;
     width: 220px;
-    padding: 8px 12px 8px 40px; // отступ слева под иконку
+    padding: 8px 12px 8px 40px;
     font-family: inherit;
     font-size: inherit;
     line-height: 1.2;
@@ -136,7 +136,7 @@
 
     .mobileMenu .searchBlock {
         width: 100%;
-        padding: 0; // отступы задаются в .mobileSearch
+        padding: 0;
         box-sizing: border-box;
     }
 

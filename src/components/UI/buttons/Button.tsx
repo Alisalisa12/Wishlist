@@ -13,7 +13,7 @@ interface ButtonProps {
   iconPosition?: "left" | "right"; 
 }
 
-const Button: React.FC<ButtonProps> = ({
+const Button: React.FC<ButtonProps> = React.memo(({
   children,
   onClick,
   type = "button",
@@ -39,6 +39,8 @@ const Button: React.FC<ButtonProps> = ({
       )}
     </button>
   );
-};
+});
+
+Button.displayName = 'Button';
 
 export default Button;

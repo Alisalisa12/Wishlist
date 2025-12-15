@@ -11,7 +11,7 @@ interface WishlistItemProps {
   onDelete?: () => void;
 }
 
-const WishlistItem: React.FC<WishlistItemProps> = ({
+const WishlistItem: React.FC<WishlistItemProps> = React.memo(({
   name,
   link,
   image,
@@ -37,14 +37,16 @@ const WishlistItem: React.FC<WishlistItemProps> = ({
       </div>
       <div className={styles.deleteBtnDiv}>
         {isDeleteMode && (
-            <Button 
-            icon={<Trash2/>} 
-            onClick={onDelete} 
+            <Button
+            icon={<Trash2/>}
+            onClick={onDelete}
             className={styles.deleteBtn}> </Button>
         )}
       </div>
     </div>
   );
-};
+});
+
+WishlistItem.displayName = 'WishlistItem';
 
 export default WishlistItem;

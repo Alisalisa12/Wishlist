@@ -4,9 +4,9 @@ import style from './Registration.module.scss';
 import { Input } from '../../components/Input/Input';
 
 
-const NAME_REGEX = /^[a-zA-Zа-яА-ЯёЁ\s\-']{1,64}$/;
+const NAME_REGEX = /^[a-zA-ZА-яёЁ\s\-']{1,64}$/;
 const EMAIL_REGEX = /^[^\s@]{1,64}@[^\s@]{1,64}\.[^\s@]{2,10}$/;
-const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,64}$/;
+const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,64}$/;
 
 export default function Registration() {
 

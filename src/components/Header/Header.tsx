@@ -6,7 +6,7 @@ import { FaRegCircleUser } from "react-icons/fa6";
 import { TbMenuDeep } from "react-icons/tb";
 
 
-export const Header: FC = () => {
+export const Header: FC = React.memo(() => {
 
     const navigate = useNavigate();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -74,4 +74,6 @@ export const Header: FC = () => {
             )}
         </div>
     )
-}
+});
+
+Header.displayName = 'Header';

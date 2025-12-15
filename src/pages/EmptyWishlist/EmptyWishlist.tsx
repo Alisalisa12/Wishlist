@@ -1,5 +1,5 @@
 import styles from "./EmptyWishlist.module.scss";
-import arrowImg from "../../images/Vector.png";
+import arrowImg from "../../assets/Vector.png";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/UI/buttons/Button";
