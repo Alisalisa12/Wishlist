@@ -10,6 +10,7 @@ const EmptyWishlist = React.lazy(() => import('./pages/EmptyWishlist/EmptyWishli
 const CreateWishlist = React.lazy(() => import('./pages/CreateWishlists/CreateWishlists'));
 const WishlistView = React.lazy(() => import('./pages/WishlistView/WishlistView'));
 const GiftIdeas = React.lazy(() => import('./pages/GiftIdeas/GiftIdeas'));
+const GiftIdeaDetail = React.lazy(() => import('./pages/GiftIdeaDetail/GiftIdeaDetail'));
 
 // Компонент загрузки
 const LoadingFallback = () => (
@@ -41,6 +42,7 @@ const App: React.FC = () => {
                     <Route path="/create" element={<CreateWishlist />} />
                     <Route path="/wishlist" element={<WishlistView />} />
                     <Route path="/ideas" element={<GiftIdeas />} />
+                    <Route path="/ideas/:id" element={<GiftIdeaDetail />} />
                 </Routes>
             </Suspense>
         </Router>

@@ -23,7 +23,7 @@ export const Footer: FC = () => {
                     <div className={style.linkHeader} onClick={() => handleNavigation('/friends')}>Друзья</div>
                     <div className={style.linkHeader} onClick={() => handleNavigation('/emptywishlist')}>Мои вишлисты</div>
                     <div className={style.linkHeader} onClick={() => handleNavigation('/')}>Мои брони</div>
-                    <div className={style.linkHeader} onClick={() => handleNavigation('/')}>Идеи подарков</div>
+                    <div className={style.linkHeader} onClick={() => handleNavigation('/ideas')}>Идеи подарков</div>
                 </div>
             </div>
         </div>
