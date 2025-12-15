@@ -8,6 +8,7 @@
     width: 100%;
     color: #fff;
     font-family: "Ubuntu", sans-serif;
+    position: relative; // для позиционирования мобильного меню
 }
 
 .container {
@@ -36,7 +37,7 @@
         margin: 5px 20px;
     }
     @media screen and (min-width: 768px) {
-        margin: 0px;
+        margin: 0;
     }
 }
 
@@ -70,7 +71,94 @@
         display: inline;
         font-size: 36px;
         cursor: pointer;
-        margin: 0px 10px;
+        margin: 0 10px;
+    }
+}
+.searchBlock {
+    display: flex;
+    align-items: center;
+    position: relative; // для позиционирования иконки внутри инпута
+    gap: 0;
+    cursor: default;
+}
+
+.searchLogo {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #BDBDBD;
+    font-size: 18px;
+    pointer-events: none; // чтобы клик не перехватывался иконкой
+}
+
+.searchInput {
+    background: #2C2C2C; // серый фон поля
+    border: 1px solid transparent;
+    border-radius: 10px;
+    outline: none;
+    color: #FFFFFF;
+    width: 220px;
+    padding: 8px 12px 8px 40px; // отступ слева под иконку
+    font-family: inherit;
+    font-size: inherit;
+    line-height: 1.2;
+
+    &::placeholder {
+        color: #BDBDBD;
+    }
+
+    &:focus {
+        border-color: rgba(255, 255, 255, 0.25);
+    }
+}
+.mobileMenu {
+    display: none;
+}
+
+@media screen and (max-width: 767px) {
+    .mobileMenu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #110E3C;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+        display: flex;
+        flex-direction: column;
+        z-index: 1000;
+    }
+
+
+    .mobileSearch {
+        padding: 10px 12px 6px;
+    }
+
+    .mobileMenu .searchBlock {
+        width: 100%;
+        padding: 0; // отступы задаются в .mobileSearch
+        box-sizing: border-box;
+    }
+
+    .mobileMenu .searchInput {
+        width: 100%;
+    }
+
+    .mobileMenuItem {
+        padding: 14px 20px;
+        color: #ffffff;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        &:active,
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.06);
+        }
     }
 }
 
