@@ -1,31 +1,46 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Home from './pages/Home/Home';
-import Registration from './pages/Registration/Registration';
-import Login from './pages/Login/Login';
-import Privacy from './pages/Privacy/Privacy';
-import Terms from './pages/Terms/Terms'
-import Friends from './pages/Friends/Friends';
-import EmptyWishlist  from "./pages/EmptyWishlist/EmptyWishlist";
-import CreateWishlist from "./pages/CreateWishlists/CreateWishlists";
-import WishlistView from "./pages/WishlistView/WishlistView";
+const Home = React.lazy(() => import('./pages/Home/Home'));
+const Registration = React.lazy(() => import('./pages/Registration/Registration'));
+const Login = React.lazy(() => import('./pages/Login/Login'));
+const Privacy = React.lazy(() => import('./pages/Privacy/Privacy'));
+const Terms = React.lazy(() => import('./pages/Terms/Terms'));
+const Friends = React.lazy(() => import('./pages/Friends/Friends'));
+const EmptyWishlist = React.lazy(() => import('./pages/EmptyWishlist/EmptyWishlist'));
+const CreateWishlist = React.lazy(() => import('./pages/CreateWishlists/CreateWishlists'));
+const WishlistView = React.lazy(() => import('./pages/WishlistView/WishlistView'));
 
+// Компонент загрузки
+const LoadingFallback = () => (
+    <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        fontSize: '18px',
+        color: '#666'
+    }}>
+        Загрузка...
+    </div>
+);
 
 const App: React.FC = () => {
     return (
         <Router>
-            <Routes>
-                <Route path="/" element={<Navigate to="/home" />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/registration" element={<Registration />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/privacy" element={<Privacy />} />
-                <Route path="/terms" element={<Terms />} />
-                <Route path="/friends" element={<Friends />} />
-                <Route path="/emptywishlist" element={<EmptyWishlist />} />
-                <Route path="/create" element={<CreateWishlist />} />
-                <Route path="/wishlist" element={<WishlistView />} />
-            </Routes>
+            <Suspense fallback={<LoadingFallback />}>
+                <Routes>
+                    <Route path="/" element={<Navigate to="/home" />} />
+                    <Route path="/home" element={<Home />} />
+                    <Route path="/registration" element={<Registration />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/privacy" element={<Privacy />} />
+                    <Route path="/terms" element={<Terms />} />
+                    <Route path="/friends" element={<Friends />} />
+                    <Route path="/emptywishlist" element={<EmptyWishlist />} />
+                    <Route path="/create" element={<CreateWishlist />} />
+                    <Route path="/wishlist" element={<WishlistView />} />
+                </Routes>
+            </Suspense>
         </Router>
     );
 };
