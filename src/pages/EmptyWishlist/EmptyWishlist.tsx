@@ -3,6 +3,7 @@ import arrowImg from "../../assets/Vector.png";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/UI/buttons/Button";
+import WishlistCards from "../../components/WishlistCards/WishlistCards";
 import { Header } from "../../components/Header/Header";
 import { Footer } from "../../components/Footer/Footer";
 import {
@@ -42,26 +43,7 @@ const EmptyWishlist: React.FC = () => {
             <img src={arrowImg} alt="arrow" className={styles.arrow} />
           </>
         ) : (
-          <div className={styles.listContainer}>
-            <ul className={styles.list}>
-              {wishlists.map((w) => (
-                <li key={w.id} className={styles.listItem}>
-                  <div className={styles.listItemHeader}>{w.title}</div>
-                  <div className={styles.listItemMeta}>
-                    {w.date && <span className={styles.date}>{w.date}</span>}
-                    <Button
-                      type="button"
-                      className={styles.openButton}
-                      onClick={() => handleOpenWishlist(w)}
-                    >
-                      Перейти
-                    </Button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-
-          </div>
+          <WishlistCards wishlists={wishlists} onOpen={handleOpenWishlist} />
         )}
 
         <Button

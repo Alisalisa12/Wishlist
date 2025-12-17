@@ -17,7 +17,7 @@
     justify-content: space-evenly;
     align-items: center;
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 800px) {
         font-size: 16px;
         justify-content: space-evenly;
     }
@@ -33,7 +33,7 @@
 .logo {
     height: 50px;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 800px) {
         margin: 5px 20px;
     }
     @media screen and (min-width: 768px) {
@@ -50,7 +50,7 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 800px) {
     .container {
         justify-content: space-between;
 
@@ -67,7 +67,7 @@
     display: none;
     color: #ffffff;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 800px) {
         display: inline;
         font-size: 36px;
         cursor: pointer;
@@ -91,6 +91,8 @@
     font-size: 20px;
     pointer-events: none;
 }
+
+
 
 .searchInput {
     background: #2C2C2C;
@@ -116,7 +118,7 @@
     display: none;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 800px) {
     .mobileMenu {
         position: absolute;
         top: 100%;
@@ -129,6 +131,9 @@
         z-index: 1000;
     }
 
+    .searchLogo{
+      left: 12px;
+    }
 
     .mobileSearch {
         padding: 10px 12px 6px;
