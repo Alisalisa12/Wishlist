@@ -6,6 +6,14 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+      lowercase: true,
+      match: /^[a-z0-9_]+$/,
+    },
     email: {
       type: String,
       required: true,
@@ -15,7 +23,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    avatarUrl: String,
+    avatarUrl: {
+      type: String,
+      default: 'https://ru.pinterest.com/pin/500462577364400915/'
+    }
   },
   {
     timestamps: true,
