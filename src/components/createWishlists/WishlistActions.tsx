@@ -1,4 +1,4 @@
-import styles from "../../pages/WishlistView/WishlistView.module.scss";
+import styles from "../WishlistContent/WishlistContent.module.scss";
 import Button from "../UI/buttons/Button";
 import { Share2, Plus, Trash2 } from "lucide-react";
 import React from "react";

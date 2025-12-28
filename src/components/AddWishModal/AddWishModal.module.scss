@@ -24,6 +24,17 @@
   padding: 8px;
   border-radius: 6px;
   border: 1px solid #ccc;
+  background-color: #5F5A99;
+  color: #FFFFFF;
+  text-align: center;
+  text-align-last: center;
+  -moz-text-align-last: center;
+}
+
+
+.modal input::placeholder {
+  color: #FFFFFF;
+  opacity: 1;
 }
 
 .actions {

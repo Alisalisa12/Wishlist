@@ -1,5 +1,5 @@
-import styles from "../../pages/WishlistView/WishlistView.module.scss";
-import WishlistItem from "./WishlistItem";
+import styles from "./PriceCategoty.module.scss";
+import WishlistItem from "../WishlistItem/WishlistItem";
 import React from "react";
 
 interface PriceCategoryProps {
@@ -7,6 +7,10 @@ interface PriceCategoryProps {
   items: { id: number; name: string; link: string; image: string }[];
   isDeleteMode: boolean;
   onDeleteWish: (id: number) => void;
+  // Для публичного просмотра у друга
+  showReserve?: boolean;
+  onReserveWish?: (id: number) => void;
+  reservedIds?: number[];
 }
 
 const PriceCategory: React.FC<PriceCategoryProps> = React.memo(({
@@ -14,6 +18,9 @@ const PriceCategory: React.FC<PriceCategoryProps> = React.memo(({
   items,
   isDeleteMode,
   onDeleteWish,
+  showReserve,
+  onReserveWish,
+  reservedIds,
 }) => {
   return (
     <div className={styles.category}>
@@ -25,6 +32,9 @@ const PriceCategory: React.FC<PriceCategoryProps> = React.memo(({
             {...item}
             isDeleteMode={isDeleteMode}
             onDelete={() => onDeleteWish(item.id)}
+            showReserve={showReserve}
+            onReserve={() => onReserveWish && onReserveWish(item.id)}
+            reserved={reservedIds?.includes(item.id)}
           />
         ))
       ) : (

@@ -1,7 +1,7 @@
-import styles from "../../pages/WishlistView/WishlistView.module.scss";
-import { Trash2 } from "lucide-react";
+import styles from "./WishlistItem.module.scss";
+import { Trash2, Check } from "lucide-react";
 import React from "react";
-import Button from "../UI/buttons/Button";
+import Button from "../../UI/buttons/Button";
 
 interface WishlistItemProps {
   name: string;
@@ -9,6 +9,10 @@ interface WishlistItemProps {
   image: string;
   isDeleteMode?: boolean;
   onDelete?: () => void;
+  // Публичный режим просмотра: кнопка "Забронировать"
+  showReserve?: boolean;
+  onReserve?: () => void;
+  reserved?: boolean;
 }
 
 const WishlistItem: React.FC<WishlistItemProps> = React.memo(({
@@ -17,6 +21,9 @@ const WishlistItem: React.FC<WishlistItemProps> = React.memo(({
   image,
   isDeleteMode,
   onDelete,
+  showReserve,
+  onReserve,
+  reserved,
 }) => {
   return (
     <div className={styles.item}>
@@ -37,10 +44,22 @@ const WishlistItem: React.FC<WishlistItemProps> = React.memo(({
       </div>
       <div className={styles.deleteBtnDiv}>
         {isDeleteMode && (
-            <Button
-            icon={<Trash2/>}
+          <Button
+            icon={<Trash2 />}
             onClick={onDelete}
-            className={styles.deleteBtn}> </Button>
+            className={styles.deleteBtn}
+          >
+          </Button>
+        )}
+
+        {!isDeleteMode && showReserve && (
+          <Button
+            onClick={onReserve}
+            disabled={reserved}
+            className={styles.reserveBtn}
+          >
+            {reserved ? <Check /> : "Выбрать"}
+          </Button>
         )}
       </div>
     </div>
