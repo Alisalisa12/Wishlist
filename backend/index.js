@@ -4,13 +4,17 @@ import {
   registerValidation,
   loginValidation,
   wishlistCreateValidation,
+  wishCreateValidation,
 } from "./validations.js";
 
 import * as UserController from "./controllers/UserController.js";
 import * as WishlistController from "./controllers/WishlistController.js";
+import * as WishController from "./controllers/WishController.js";
+
 import Wishlist from "./models/Wishlist.js";
 import checkAuth from "./utils/checkAuth.js";
 import cors from "cors";
+
 
 mongoose
   .connect(
@@ -39,6 +43,18 @@ app.get("/wishlists", WishlistController.getAll);
 app.get("/wishlists/:id", WishlistController.getOne);
 app.delete("/wishlists/:id", checkAuth, WishlistController.remove);
 app.patch("/wishlists/:id", checkAuth, WishlistController.update);
+
+app.post(
+  "/wishlists/:wishlistId/wishes",
+  checkAuth,
+  wishCreateValidation,
+  WishController.create
+);
+app.get("/wishlists/:wishlistId/wishes", WishController.getAll);
+
+app.get("/wishes/:id", WishController.getOne);
+app.delete("/wishes/:id", checkAuth, WishController.remove);
+app.patch("/wishes/:id", checkAuth, WishController.update);
 
 app.listen(7777, (err) => {
   if (err) {

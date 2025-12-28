@@ -5,6 +5,7 @@ const WishlistSchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
+      trim: true,
     },
     eventDate: {
       type: Date,

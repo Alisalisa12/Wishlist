@@ -19,3 +19,16 @@ export const wishlistCreateValidation = [
   body('visibility', 'Неверное значение доступа').isIn(['public', 'friends', 'private', 'link']), 
 
 ];
+
+export const wishCreateValidation = [
+  body('title', 'Введите название').isLength({ min: 3 }),
+  body('priceCategory', 'Укажите ценовую категорию').isIn([
+    "до 1000",
+    "1000-3000",
+    "3000-10000",
+    "10000+",
+  ]),
+  body("wishlistId", "Некорректный wishlistId").isMongoId(),
+  body("link").optional().isURL(),
+  body("image").optional().isString(),
+];
