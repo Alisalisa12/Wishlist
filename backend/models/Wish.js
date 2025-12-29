@@ -25,6 +25,16 @@ const WishSchema = new mongoose.Schema(
       ref: "Wishlist",
       required: true,
     },
+    reserved: {
+      type: Boolean,
+      default: false,
+    },
+
+    reservedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      default: null,
+    },
   },
   {
     timestamps: true,

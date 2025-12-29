@@ -52,9 +52,6 @@ export const getOne = async (req, res) => {
   }
 };
 
-/**
- * Удалить желание
- */
 export const remove = async (req, res) => {
   try {
     const wish = await WishModel.findByIdAndDelete(req.params.id);
@@ -74,9 +71,6 @@ export const remove = async (req, res) => {
   }
 };
 
-/**
- * Обновить желание
- */
 export const update = async (req, res) => {
   try {
     const updated = await WishModel.updateOne(
@@ -101,5 +95,71 @@ export const update = async (req, res) => {
     res.status(500).json({
       message: "Не удалось обновить желание",
     });
+  }
+};
+
+export const reserve = async (req, res) => {
+  try {
+    const wish = await WishModel.findById(req.params.id).populate("wishlist");
+
+    if (!wish) {
+      return res.status(404).json({ message: "Желание не найдено" });
+    }
+
+    if (wish.wishlist.user.toString() === req.userId) {
+      return res.status(403).json({ message: "Нельзя бронировать своё желание" });
+    }
+
+    if (wish.reserved) {
+      return res.status(400).json({ message: "Желание уже забронировано" });
+    }
+
+    wish.reserved = true;
+    wish.reservedBy = req.userId;
+    await wish.save();
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Не удалось забронировать желание" });
+  }
+};
+
+export const unreserve = async (req, res) => {
+  try {
+    const wish = await WishModel.findById(req.params.id);
+
+    if (!wish) {
+      return res.status(404).json({ message: "Желание не найдено" });
+    }
+
+    if (!wish.reserved || wish.reservedBy.toString() !== req.userId) {
+      return res.status(403).json({ message: "Нет прав снять бронь" });
+    }
+
+    wish.reserved = false;
+    wish.reservedBy = null;
+
+
+    await wish.save();
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Не удалось снять бронь" });
+  }
+};
+
+export const getMyReservations = async (req, res) => {
+  try {
+    const wishes = await WishModel.find({
+      reservedBy: req.userId,
+    })
+      .populate("wishlist")
+      .populate("reservedBy");
+
+    res.json(wishes);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Не удалось получить брони" });
   }
 };

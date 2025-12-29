@@ -29,32 +29,50 @@ app.use(cors({ origin: "http://localhost:3000" }));
 
 app.use(express.json());
 
+//Авторизация
 app.post("/auth/login", UserController.login);
+//Регистрация
 app.post("/auth/register", registerValidation, UserController.register);
+//Получение данных о текущем пользователе
 app.get("/auth/me", checkAuth, UserController.getMe);
 
+//Создание вишлиста
 app.post(
   "/wishlists",
   checkAuth,
   wishlistCreateValidation,
   WishlistController.create
 );
+//Получение списка всех вишлистов
 app.get("/wishlists", WishlistController.getAll);
+// Получение одного вишлиста
 app.get("/wishlists/:id", WishlistController.getOne);
+// Удаление вишлиста
 app.delete("/wishlists/:id", checkAuth, WishlistController.remove);
+// Обновление вишлиста
 app.patch("/wishlists/:id", checkAuth, WishlistController.update);
 
+// Создание желания в конкретном вишлисте
 app.post(
   "/wishlists/:wishlistId/wishes",
   checkAuth,
   wishCreateValidation,
   WishController.create
 );
+// Получение всех желаний конкретного вишлиста
 app.get("/wishlists/:wishlistId/wishes", WishController.getAll);
-
+// Получение информации об одном желании
 app.get("/wishes/:id", WishController.getOne);
+// Удаление желания
 app.delete("/wishes/:id", checkAuth, WishController.remove);
+// Обновление желания
 app.patch("/wishes/:id", checkAuth, WishController.update);
+// Забронировать желание
+app.post("/wishes/:id/reserve", checkAuth, WishController.reserve);
+// Снять бронь
+app.delete("/wishes/:id/reserve", checkAuth, WishController.unreserve);
+// Получить мои брони
+app.get("/me/reservations", checkAuth, WishController.getMyReservations);
 
 app.listen(7777, (err) => {
   if (err) {
