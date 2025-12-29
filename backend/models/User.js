@@ -1,19 +1,18 @@
 import mongoose from 'mongoose';
+import WishlistModel from './Wishlist.js';
+import WishModel from './Wish.js';
 
 const UserSchema = new mongoose.Schema(
   {
     fullName: {
       type: String,
       required: true,
-      trim: true,
     },
     username: {
       type: String,
       required: true,
       unique: true,
-      trim: true,
       lowercase: true,
-      match: /^[a-z0-9_]+$/,
     },
     email: {
       type: String,
@@ -33,5 +32,18 @@ const UserSchema = new mongoose.Schema(
     timestamps: true,
   },
 );
+
+UserSchema.pre('deleteOne', { document: true, query: false }, async function (next) {
+  const userId = this._id;
+
+  const wishlists = await WishlistModel.find({ user: userId });
+  for (const wishlist of wishlists) {
+    await WishModel.deleteMany({ wishlist: wishlist._id });
+  }
+
+  await WishlistModel.deleteMany({ user: userId });
+
+  next();
+});
 
 export default mongoose.model('User', UserSchema);

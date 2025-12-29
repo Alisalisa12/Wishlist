@@ -1,8 +1,16 @@
 import WishlistModel from "../models/Wishlist.js";
 import Wishlist from "../models/Wishlist.js";
+import UserModel from "../models/User.js";
 
 export const create = async (req, res) => {
   try {
+    const user = await UserModel.findById(req.userId);
+    if (!user) {
+      return res
+        .status(400)
+        .json({ message: "Пользователь не найден или не авторизован" });
+    }
+
     const doc = new WishlistModel({
       title: req.body.title,
       eventDate: req.body.eventDate,
@@ -60,7 +68,7 @@ export const remove = async (req, res) => {
 
     if (!doc) {
       return res.status(404).json({
-        message: 'Вишлист не найден',
+        message: "Вишлист не найден",
       });
     }
 
@@ -70,7 +78,7 @@ export const remove = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({
-      message: 'Не удалось удалить вишлист',
+      message: "Не удалось удалить вишлист",
     });
   }
 };

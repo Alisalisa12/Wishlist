@@ -35,6 +35,10 @@ app.post("/auth/login", UserController.login);
 app.post("/auth/register", registerValidation, UserController.register);
 //Получение данных о текущем пользователе
 app.get("/auth/me", checkAuth, UserController.getMe);
+// Обновление профиля
+app.patch("/auth/me", checkAuth, UserController.update);
+// Удаление аккаунта
+app.delete("/auth/me", checkAuth, UserController.removeAccount);
 
 //Создание вишлиста
 app.post(

@@ -97,7 +97,7 @@ export const getMe = async (req, res) => {
 
     if (!user) {
       return res.status(404).json({
-        message: 'Пользователь не найден',
+        message: "Пользователь не найден",
       });
     }
 
@@ -107,7 +107,62 @@ export const getMe = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      message: 'Нет доступа',
+      message: "Нет доступа",
+    });
+  }
+};
+
+export const update = async (req, res) => {
+  try {
+    const result = await UserModel.updateOne(
+      { _id: req.userId }, 
+      {
+        fullName: req.body.fullName,
+        username: req.body.username,
+        avatarUrl: req.body.avatarUrl,
+      }
+    );
+
+    // если пользователь не найден
+    if (result.matchedCount === 0) {
+      return res.status(404).json({
+        message: "Пользователь не найден",
+      });
+    }
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+
+    if (err.code === 11000) {
+      return res.status(400).json({
+        message: "Имя пользователя уже занято",
+      });
+    }
+
+    res.status(500).json({
+      message: "Не удалось обновить данные пользователя",
+    });
+  }
+};
+export const removeAccount = async (req, res) => {
+  try {
+    const user = await UserModel.findByIdAndDelete(req.userId);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "Пользователь не найден",
+      });
+    }
+    await user.deleteOne();
+    res.json({
+      success: true,
+      message: "Аккаунт удалён",
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      message: "Не удалось удалить аккаунт",
     });
   }
 };

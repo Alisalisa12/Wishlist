@@ -1,28 +1,36 @@
-import {body} from 'express-validator'
+import { body } from "express-validator";
 
 export const registerValidation = [
-    body('fullName', 'Укажите имя').isLength({min: 3}),
-    body('email', 'Неверный формат почты').isEmail(),
-    body('username', 'Укажите логин').isLength({min: 3}),
-    body('password', 'Пароль должен быть минимум 5 символов').isLength({min: 5}),
-    // body('avatarUrl', 'Неверная ссылка').optional().isURL(),
+  body("fullName", "Укажите имя").isLength({ min: 3 }),
+  body("email", "Неверный формат почты").isEmail(),
+  body("username", "Укажите логин").isLength({ min: 3 }),
+  body("password", "Пароль должен быть минимум 5 символов").isLength({
+    min: 5,
+  }),
+  // body('avatarUrl', 'Неверная ссылка на аватарку').optional().isURL(),
 ];
 
 export const loginValidation = [
-    body('email', 'Неверный формат почты').isEmail(),
-    body('password', 'Пароль должен быть минимум 5 символов').isLength({min: 5}),
+  body("email", "Неверный формат почты").isEmail(),
+  body("password", "Пароль должен быть минимум 5 символов").isLength({
+    min: 5,
+  }),
 ];
 
 export const wishlistCreateValidation = [
-  body('title', 'Введите название').isLength({ min: 3 }).isString(),
-  body('eventDate', 'Укажите корректную дату события').optional().isISO8601(),
-  body('visibility', 'Неверное значение доступа').isIn(['public', 'friends', 'private', 'link']), 
-
+  body("title", "Введите название").isLength({ min: 3 }).isString(),
+  body("eventDate", "Укажите корректную дату события").optional().isISO8601(),
+  body("visibility", "Неверное значение доступа").isIn([
+    "public",
+    "friends",
+    "private",
+    "link",
+  ]),
 ];
 
 export const wishCreateValidation = [
-  body('title', 'Введите название').isLength({ min: 3 }),
-  body('priceCategory', 'Укажите ценовую категорию').isIn([
+  body("title", "Введите название").isLength({ min: 3 }),
+  body("priceCategory", "Укажите ценовую категорию").isIn([
     "до 1000",
     "1000-3000",
     "3000-10000",
@@ -30,5 +38,23 @@ export const wishCreateValidation = [
   ]),
   body("wishlistId", "Некорректный wishlistId").isMongoId(),
   body("link").optional().isURL(),
-  body("image").optional().isString(),
+  body('image', 'Неверная ссылка на изображение').optional().isURL(),
+];
+
+export const userUpdateValidation = [
+  body("fullName")
+    .optional()
+    .trim()
+    .isLength({ min: 3 })
+    .withMessage("Имя должно быть минимум 3 символа"),
+
+  body("username")
+    .optional()
+    .trim()
+    .isLength({ min: 3 })
+    .withMessage("Логин должен быть минимум 3 символа"),
+
+  body("avatarUrl", "Неверная ссылка на аватарку")
+    .optional()
+    .isURL(),
 ];

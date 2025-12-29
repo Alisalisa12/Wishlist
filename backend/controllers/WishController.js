@@ -1,14 +1,21 @@
 import WishModel from "../models/Wish.js";
-
+import WishlistModel from "../models/Wishlist.js";
+import UserModel from "../models/User.js";
 
 export const create = async (req, res) => {
   try {
+    const { wishlistId } = req.params;
+
+    const wishlist = await WishlistModel.findById(wishlistId);
+    if (!wishlist) {
+      return res.status(404).json({ message: "Вишлист не найден" });
+    }
     const doc = new WishModel({
       title: req.body.title,
       link: req.body.link || null,
       image: req.body.image,
       priceCategory: req.body.priceCategory,
-      wishlist: req.params.wishlistId, 
+      wishlist: req.params.wishlistId,
     });
 
     const wish = await doc.save();
@@ -107,7 +114,9 @@ export const reserve = async (req, res) => {
     }
 
     if (wish.wishlist.user.toString() === req.userId) {
-      return res.status(403).json({ message: "Нельзя бронировать своё желание" });
+      return res
+        .status(403)
+        .json({ message: "Нельзя бронировать своё желание" });
     }
 
     if (wish.reserved) {
@@ -138,7 +147,6 @@ export const unreserve = async (req, res) => {
 
     wish.reserved = false;
     wish.reservedBy = null;
-
 
     await wish.save();
 
