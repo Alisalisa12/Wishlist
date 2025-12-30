@@ -1,6 +1,7 @@
 import WishlistModel from "../models/Wishlist.js";
 import Wishlist from "../models/Wishlist.js";
 import UserModel from "../models/User.js";
+import { v4 as uuidv4 } from "uuid";
 
 export const create = async (req, res) => {
   try {
@@ -10,12 +11,13 @@ export const create = async (req, res) => {
         .status(400)
         .json({ message: "Пользователь не найден или не авторизован" });
     }
-
+    const linkToken = req.body.visibility === "link" ? uuidv4() : undefined;
     const doc = new WishlistModel({
       title: req.body.title,
       eventDate: req.body.eventDate,
       visibility: req.body.visibility,
       user: req.userId,
+      linkToken
     });
 
     const wishlist = await doc.save();
@@ -39,72 +41,122 @@ export const getAll = async (req, res) => {
     });
   }
 };
-export const getOne = async (req, res) => {
+export const getMyWishlists = async (req, res) => {
   try {
-    const doc = await Wishlist.findOne({ _id: req.params.id });
+    const userId = req.userId;
+    const wishlists = await WishlistModel.find({ user: userId });
 
-    if (!doc) {
-      return res.status(404).json({
-        message: "Вишлист не найден",
-      });
-    }
-
-    res.json(doc);
+    res.json(wishlists);
   } catch (err) {
     console.error(err);
-    res.status(500).json({
-      message: "Не удалось получить вишлист",
+    res.status(500).json({ message: "Не удалось получить ваши вишлисты" });
+  }
+};
+export const getAllWishlists = async (req, res) => {
+  try {
+    const profileId = req.params.userId;          
+    const linkToken = req.query.token || null;    
+    const profileUser = await UserModel.findById(profileId);
+    if (!profileUser) return res.status(404).json({ message: "Пользователь не найден" });
+
+    const currentUser = await UserModel.findById(req.userId);
+    const isFriend = currentUser.friends.includes(profileId);
+    const isOwner = req.userId === profileId;
+
+    // Получаем все вишлисты пользователя
+    const allWishlists = await WishlistModel.find({ user: profileId });
+
+    // Фильтруем видимые вишлисты
+    const visibleWishlists = allWishlists.filter(w => {
+      if (w.visibility === "public") return true;             
+      if (w.visibility === "friends" && isFriend) return true; 
+      if (w.visibility === "private" && isOwner) return true;  
+      if (w.visibility === "link" && linkToken === w.linkToken) return true; 
+      return false; // все остальные скрыты
     });
+
+    res.json({
+      profile: {
+        _id: profileUser._id,
+        username: profileUser.username,
+        fullName: profileUser.fullName,
+        avatarUrl: profileUser.avatarUrl
+      },
+      wishlists: visibleWishlists
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Не удалось получить вишлисты профиля" });
+  }
+};
+export const getOne = async (req, res) => {
+  try {
+    const wishlist = await WishlistModel.findById(req.params.id);
+    if (!wishlist) return res.status(404).json({ message: "Вишлист не найден" });
+
+    const currentUser = await UserModel.findById(req.userId);
+    const isFriend = currentUser.friends.includes(wishlist.user.toString());
+    const isOwner = req.userId === wishlist.user.toString();
+
+    if (
+      wishlist.visibility === "private" && !isOwner ||
+      wishlist.visibility === "friends" && !(isOwner || isFriend)
+    ) {
+      return res.status(403).json({ message: "Нет доступа" });
+    }
+
+    res.json(wishlist);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Не удалось получить вишлист" });
+  }
+};
+
+// Просмотр вишлиста по ссылке
+export const getWishlistByLink = async (req, res) => {
+  try {
+    const token = req.params.token;
+    const wishlist = await WishlistModel.findOne({ linkToken: token });
+    if (!wishlist) return res.status(404).json({ message: "Вишлист не найден" });
+
+    res.json(wishlist);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Не удалось получить вишлист по ссылке" });
   }
 };
 
 export const remove = async (req, res) => {
   try {
-    const wishlistId = req.params.id;
+    const wishlist = await WishlistModel.findById(req.params.id);
+    if (!wishlist) return res.status(404).json({ message: "Вишлист не найден" });
 
-    const doc = await WishlistModel.findOneAndDelete({
-      _id: wishlistId,
-    });
+    if (wishlist.user.toString() !== req.userId) return res.status(403).json({ message: "Нет доступа" });
 
-    if (!doc) {
-      return res.status(404).json({
-        message: "Вишлист не найден",
-      });
-    }
-
-    res.json({
-      success: true,
-    });
+    await wishlist.deleteOne();
+    res.json({ success: true });
   } catch (err) {
     console.error(err);
-    res.status(500).json({
-      message: "Не удалось удалить вишлист",
-    });
+    res.status(500).json({ message: "Не удалось удалить вишлист" });
   }
 };
 
 export const update = async (req, res) => {
   try {
-    const wishlistId = req.params.id;
-    await WishlistModel.updateOne(
-      {
-        _id: wishlistId,
-      },
-      {
-        title: req.body.title,
-        eventDate: req.body.eventDate,
-        visibility: req.body.visibility,
-        user: req.userId,
-      }
-    );
+    const wishlist = await WishlistModel.findById(req.params.id);
+    if (!wishlist) return res.status(404).json({ message: "Вишлист не найден" });
 
-    res.json({
-      success: true,
-    });
+    if (wishlist.user.toString() !== req.userId) return res.status(403).json({ message: "Нет доступа" });
+
+    wishlist.title = req.body.title || wishlist.title;
+    wishlist.eventDate = req.body.eventDate || wishlist.eventDate;
+    wishlist.visibility = req.body.visibility || wishlist.visibility;
+    if (wishlist.visibility === "link" && !wishlist.linkToken) wishlist.linkToken = uuidv4();
+
+    await wishlist.save();
+    res.json({ success: true });
   } catch (err) {
-    console.log(err);
-    res.status(500).json({
-      message: "Не удалось изменить вишлист",
-    });
+    console.error(err);
+    res.status(500).json({ message: "Не удалось обновить вишлист" });
   }
 };

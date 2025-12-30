@@ -10,7 +10,7 @@ import {
 import * as UserController from "./controllers/UserController.js";
 import * as WishlistController from "./controllers/WishlistController.js";
 import * as WishController from "./controllers/WishController.js";
-
+import * as FriendController from "./controllers/FriendController.js";
 import Wishlist from "./models/Wishlist.js";
 import checkAuth from "./utils/checkAuth.js";
 import cors from "cors";
@@ -40,6 +40,17 @@ app.patch("/auth/me", checkAuth, UserController.update);
 // Удаление аккаунта
 app.delete("/auth/me", checkAuth, UserController.removeAccount);
 
+// Поиск друзей
+app.get("/friends/search", checkAuth, FriendController.searchFriends);
+// Получение списка друзей
+app.get("/friends", checkAuth, FriendController.getFriendsList);
+// Добавление в друзья
+app.post("/friends/:friendId", checkAuth, FriendController.addFriend);
+// Удаление из друзей
+app.delete("/friends/:friendId", checkAuth, FriendController.removeFriend);
+// Просмотр профиля друга и его вишлистов
+app.get("/friends/:friendId", checkAuth, FriendController.getFriendProfile);
+
 //Создание вишлиста
 app.post(
   "/wishlists",
@@ -47,10 +58,13 @@ app.post(
   wishlistCreateValidation,
   WishlistController.create
 );
+// Просмотр всех своих вишлистов
+app.get("/wishlists/me", checkAuth, WishlistController.getMyWishlists);
 //Получение списка всех вишлистов
 app.get("/wishlists", WishlistController.getAll);
+app.get("/profiles/:userId/wishlists", checkAuth, WishlistController.getAllWishlists);
 // Получение одного вишлиста
-app.get("/wishlists/:id", WishlistController.getOne);
+app.get("/wishlists/:id", checkAuth, WishlistController.getOne);
 // Удаление вишлиста
 app.delete("/wishlists/:id", checkAuth, WishlistController.remove);
 // Обновление вишлиста
@@ -77,6 +91,8 @@ app.post("/wishes/:id/reserve", checkAuth, WishController.reserve);
 app.delete("/wishes/:id/reserve", checkAuth, WishController.unreserve);
 // Получить мои брони
 app.get("/me/reservations", checkAuth, WishController.getMyReservations);
+
+
 
 app.listen(7777, (err) => {
   if (err) {

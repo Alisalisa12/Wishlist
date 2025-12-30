@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
-import WishlistModel from './Wishlist.js';
-import WishModel from './Wish.js';
+import mongoose from "mongoose";
+import WishlistModel from "./Wishlist.js";
+import WishModel from "./Wish.js";
 
 const UserSchema = new mongoose.Schema(
   {
@@ -25,25 +25,41 @@ const UserSchema = new mongoose.Schema(
     },
     avatarUrl: {
       type: String,
-      default: 'https://ru.pinterest.com/pin/500462577364400915/'
-    }
+      default: "https://ru.pinterest.com/pin/500462577364400915/",
+    },
+    friends: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+  //   friendRequests: [
+  //     {
+  //       type: mongoose.Schema.Types.ObjectId,
+  //       ref: "User",
+  //     },
+  //   ],
   },
   {
     timestamps: true,
-  },
+  }
 );
 
-UserSchema.pre('deleteOne', { document: true, query: false }, async function (next) {
-  const userId = this._id;
+UserSchema.pre(
+  "deleteOne",
+  { document: true, query: false },
+  async function (next) {
+    const userId = this._id;
 
-  const wishlists = await WishlistModel.find({ user: userId });
-  for (const wishlist of wishlists) {
-    await WishModel.deleteMany({ wishlist: wishlist._id });
+    const wishlists = await WishlistModel.find({ user: userId });
+    for (const wishlist of wishlists) {
+      await WishModel.deleteMany({ wishlist: wishlist._id });
+    }
+
+    await WishlistModel.deleteMany({ user: userId });
+
+    next();
   }
+);
 
-  await WishlistModel.deleteMany({ user: userId });
-
-  next();
-});
-
-export default mongoose.model('User', UserSchema);
+export default mongoose.model("User", UserSchema);

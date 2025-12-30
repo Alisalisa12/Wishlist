@@ -14,8 +14,9 @@ const WishlistSchema = new mongoose.Schema(
     visibility: {
       type: String,
       enum: ["public", "friends", "private", "link"],
-      default: "private",
+      default: "public",
     },
+    linkToken: { type: String },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
