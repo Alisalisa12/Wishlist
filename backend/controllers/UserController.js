@@ -10,9 +10,13 @@ export const register = async (req, res) => {
       return res.status(400).json(errors.array());
     }
 
-    const password = req.body.password;
+    const { password, passwordConfirm } = req.body;
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
+
+    if (password !== passwordConfirm) {
+      return res.status(400).json({ message: "Пароли не совпадают" });
+    }
 
     const doc = new UserModel({
       email: req.body.email,
