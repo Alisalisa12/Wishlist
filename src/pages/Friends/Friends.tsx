@@ -1,6 +1,7 @@
 import style from "./Friends.module.scss";
 import { Header } from "../../components/Header/Header";
 import { Footer } from "../../components/Footer/Footer";
+import { useFriends } from '../../hooks/useFriends';
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
@@ -14,72 +15,49 @@ interface FriendProps {
     profileLink: string; // Ссылка на профиль (например, "/profile/123")
 }
 
+// const ALL_USERS: FriendProps[] = [
+//     { id: 1, avatar: "images/friendAvatar.jpg", name: "Вероника", nickname: "@teriasha", profileLink: "/profile/teriasha" },
+//     { id: 2, avatar: "images/friendAvatar.jpg", name: "Карина", nickname: "@tralalero", profileLink: "/profile/tralalero" },
+//     { id: 3, avatar: "images/friendAvatar.jpg", name: "Ира", nickname: "@tralala", profileLink: "/profile/tralala" },
+//     { id: 4, avatar: "images/friendAvatar.jpg", name: "Анна", nickname: "@anna9", profileLink: "/profile/anna9" },
+//     { id: 5, avatar: "images/friendAvatar.jpg", name: "Слава", nickname: "@slaava", profileLink: "/profile/slaava" },
+// ];
+
+// const INITIAL_FRIEND_IDS = new Set([1, 2, 3]);
+
 export default function Friends() {
     type ViewMode = "friends" | "add" | "delete";
     const [viewMode, setViewMode] = useState<ViewMode>("friends");
+    
+    const [searchTerm, setSearchTerm] = useState("");
 
     // const navigate = useNavigate();
     // const handleNavigation = (path: string) => {
     //     navigate(path);
     // };
 
-    const [friends, setFriends] = useState<FriendProps[]>([
-        {
-        id: 1,
-        avatar: "images/friendAvatar.jpg",
-        name: "Вероника",
-        nickname: "@teriasha",
-        profileLink: "/profile/teriasha",
-        },
-        {
-        id: 2,
-        avatar: "images/friendAvatar.jpg",
-        name: "Карина",
-        nickname: "@tralalero",
-        profileLink: "/profile/tralalero",
-        },
-        {
-        id: 3,
-        avatar: "images/friendAvatar.jpg",
-        name: "Ира",
-        nickname: "@tralala",
-        profileLink: "/profile/tralala",
-        },
-    ]);
+    const { friends, usersToAdd, addFriend, removeFriend } = useFriends();
 
-    const allUsers: FriendProps[] = [
-        ...friends,
-        {
-        id: 4,
-        avatar: "images/friendAvatar.jpg",
-        name: "Анна",
-        nickname: "@anna9",
-        profileLink: "/profile/anna9",
-        },
-        {
-        id: 5,
-        avatar: "images/friendAvatar.jpg",
-        name: "Слава",
-        nickname: "@slaava",
-        profileLink: "/profile/slaava",
-        },
-    ];
+    // const [friends, setFriends] = useState<FriendProps[]>(
+    //     ALL_USERS.filter(user => INITIAL_FRIEND_IDS.has(user.id))
+    // );
 
     const handleAddMode = () => setViewMode("add");
     const handleDeleteMode = () => setViewMode("delete");
     const handleReturn = () => setViewMode("friends");
 
-    const handleAddFriend = (user: FriendProps) => {
-        if (!friends.some((f) => f.id === user.id)) {
-        setFriends((prev) => [...prev, user]);
-        }
-    };
+    // const handleRemoveFriend = (id: number) => {
+    //     setFriends((prev) => prev.filter((f) => f.id !== id));
+    // };
 
-    const handleRemoveFriend = (id: number) => {
-        setFriends((prev) => prev.filter((f) => f.id !== id));
-    };
-
-    const [searchTerm, setSearchTerm] = useState("");
+    // const handleAddFriend = (user: FriendProps) => {
+    //     if (!friends.some((f) => f.id === user.id)) {
+    //     setFriends((prev) => [...prev, user]);
+    //     }
+    // };
+    // const usersToAdd = ALL_USERS.filter(
+    //     (user) => !friends.some((friend) => friend.id === user.id)
+    // );
 
     const filteredFriends = friends.filter(
         (friend) =>
@@ -87,16 +65,12 @@ export default function Friends() {
         friend.nickname.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    // Пользователи для добавления (исключаем уже друзей)
-    const usersToAdd = allUsers.filter(
-        (user) => !friends.some((friend) => friend.id === user.id)
-    );
-
     const filteredUsersToAdd = usersToAdd.filter(
         (user) =>
         user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         user.nickname.toLowerCase().includes(searchTerm.toLowerCase())
     );
+      
 
     return (
     <div className={style.Friends}>
@@ -177,7 +151,7 @@ export default function Friends() {
                             </div>
                             <button
                             className={style.addIcon}
-                            onClick={() => handleAddFriend(user)}
+                            onClick={() => addFriend(user)}
                             >
                             Добавить
                             </button>
@@ -213,7 +187,7 @@ export default function Friends() {
                             </div>
                             <button
                             className={style.deleteIcon}
-                            onClick={() => handleRemoveFriend(friend.id)}
+                            onClick={() => removeFriend(friend.id)}
                             aria-label={`Удалить ${friend.name}`}
                             >
                                 <AiFillDelete />

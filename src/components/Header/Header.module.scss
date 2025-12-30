@@ -36,7 +36,7 @@
         margin: 5px 20px;
     }
     @media screen and (min-width: 768px) {
-        margin: 0px;
+        margin-left: -10px;
     }
 }
 
@@ -45,7 +45,7 @@
 .userBlock {
     display: flex;
     flex-direction: row;
-    gap: 5px;
+    gap: 10px;
     cursor: pointer;
 }
 

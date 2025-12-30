@@ -9,6 +9,7 @@ import Friends from './pages/Friends/Friends';
 import EmptyWishlist  from "./pages/EmptyWishlist/EmptyWishlist";
 import CreateWishlist from "./pages/CreateWishlists/CreateWishlists";
 import WishlistView from "./pages/WishlistView/WishlistView";
+import Profile from "./pages/Profile/Profile";
 
 
 const App: React.FC = () => {
@@ -25,6 +26,7 @@ const App: React.FC = () => {
                 <Route path="/emptywishlist" element={<EmptyWishlist />} />
                 <Route path="/create" element={<CreateWishlist />} />
                 <Route path="/wishlist" element={<WishlistView />} />
+                <Route path="/profile" element={<Profile />} />
             </Routes>
         </Router>
     );
