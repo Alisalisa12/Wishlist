@@ -5,11 +5,13 @@ import {
   loginValidation,
   wishlistCreateValidation,
   wishCreateValidation,
+  userUpdateValidation
 } from "./validations.js";
 
 import * as UserController from "./controllers/UserController.js";
 import * as WishlistController from "./controllers/WishlistController.js";
 import * as WishController from "./controllers/WishController.js";
+import * as ArticleController from "./controllers/ArticleController.js";
 import * as FriendController from "./controllers/FriendController.js";
 import Wishlist from "./models/Wishlist.js";
 import checkAuth from "./utils/checkAuth.js";
@@ -30,13 +32,13 @@ app.use(cors({ origin: "http://localhost:3000" }));
 app.use(express.json());
 
 //Авторизация
-app.post("/auth/login", UserController.login);
+app.post("/auth/login", loginValidation, UserController.login);
 //Регистрация
 app.post("/auth/register", registerValidation, UserController.register);
 //Получение данных о текущем пользователе
 app.get("/auth/me", checkAuth, UserController.getMe);
 // Обновление профиля
-app.patch("/auth/me", checkAuth, UserController.update);
+app.patch("/auth/me", checkAuth, userUpdateValidation, UserController.update);
 // Удаление аккаунта
 app.delete("/auth/me", checkAuth, UserController.removeAccount);
 
@@ -68,7 +70,7 @@ app.get("/wishlists/:id", checkAuth, WishlistController.getOne);
 // Удаление вишлиста
 app.delete("/wishlists/:id", checkAuth, WishlistController.remove);
 // Обновление вишлиста
-app.patch("/wishlists/:id", checkAuth, WishlistController.update);
+app.patch("/wishlists/:id", checkAuth, wishlistCreateValidation, WishlistController.update);
 
 // Создание желания в конкретном вишлисте
 app.post(
@@ -84,7 +86,7 @@ app.get("/wishes/:id", WishController.getOne);
 // Удаление желания
 app.delete("/wishes/:id", checkAuth, WishController.remove);
 // Обновление желания
-app.patch("/wishes/:id", checkAuth, WishController.update);
+app.patch("/wishes/:id", checkAuth, wishCreateValidation, WishController.update);
 // Забронировать желание
 app.post("/wishes/:id/reserve", checkAuth, WishController.reserve);
 // Снять бронь
@@ -92,6 +94,10 @@ app.delete("/wishes/:id/reserve", checkAuth, WishController.unreserve);
 // Получить мои брони
 app.get("/me/reservations", checkAuth, WishController.getMyReservations);
 
+// Получение всех статей
+app.get("/articles", ArticleController.getAllArticles);
+// Получение одной статьи
+app.get("/articles/:id", ArticleController.getArticleById);
 
 
 app.listen(7777, (err) => {
