@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.Profile {
+    min-height: 100vh;
+    width: 100%;
+    font-family: 'Ubuntu', sans-serif;
+    color: #ffffff;
+    background-image: url("../../assets/bg.jpg");
+    background-size: cover;
+    background-position: top;
+}
+
+.container {
+    // max-width: 700px;
+    // margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.profileHeader {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 30px 60px;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.avatar {
+    // width: 80px;
+    // height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+// .userInfo {
+//     flex: 1;
+// }
+
+.name {
+    font-size: 24px;
+    margin: 0;
+}
+
+.nickname {
+    color: #aaa;
+    font-size: 16px;
+}
+
+.editButton {
+    padding: 8px 16px;
+    background: #110E3C;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 100px;
+}
+
+.information {
+    display: flex;
+    flex-direction: row;
+    gap: 110px;
+    margin: 30px 60px 100px;
+}
+
+.section {
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.sectionTitle {
+    margin-top: 0;
+    font-size: 20px;
+    color: #ffffff;
+    text-align: center;
+}
+
+.friendsList,
+.wishlistsList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 12px;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.friendsList {
+    background-color: #9891DF;
+    padding: 20px;
+    gap: 20px;
+}
+
+.friendItem,
+.wishlistItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.wishlistItem {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: #9891DF;
+    padding: 10px 20px;
+}
+
+.friendAvatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.friendInfo { flex: 1; }
+
+.addFriendButton,
+.newWishlistButton {
+    // width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    background-color: #110E3C;
+}

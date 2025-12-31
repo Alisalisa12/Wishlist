@@ -1,7 +1,6 @@
 import React, { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import style from "./Header.module.scss";
-import { CiSearch } from "react-icons/ci";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { TbMenuDeep } from "react-icons/tb";
 

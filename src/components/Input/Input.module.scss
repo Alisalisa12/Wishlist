@@ -20,6 +20,12 @@
     color: #757575;
     padding: 10px 0px 10px 15px;
     width: 100%;
+    text-align: left;
+
+    &::placeholder {
+        color: #ffffff;
+        text-align: left;
+    }
 
     &:-webkit-autofill {
         -webkit-box-shadow: 0 0 0 1000px #313131 inset !important;

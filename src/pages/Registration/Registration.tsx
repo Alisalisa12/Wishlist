@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import style from './Registration.module.scss';
 import { Input } from '../../components/Input/Input';
@@ -6,7 +6,8 @@ import { Input } from '../../components/Input/Input';
 
 const NAME_REGEX = /^[a-zA-ZА-яёЁ\s\-']{1,64}$/;
 const EMAIL_REGEX = /^[^\s@]{1,64}@[^\s@]{1,64}\.[^\s@]{2,10}$/;
-const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,64}$/;
+const LOGIN_REGEX = /^[a-zA-Z0-9_-]{3,20}$/;
+const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,64}$/;
 
 export default function Registration() {
 
@@ -21,6 +22,14 @@ export default function Registration() {
     const handleChangeEmail = (value: string) => {
         setEmail(value);
     }
+
+    const [ login, setLogin ] = useState('');
+    const [ isErrorLogin, setErrorLogin ] = useState(false);
+    const handleChangeLogin = (value: string) => {
+        setLogin(value);
+    }
+
+    const [isLoginUnique, setIsLoginUnique] = useState(true);
 
     const [ password, setPassword ] = useState('');
     const [ isErrorPassword, setErrorPassword ] = useState(false);
@@ -39,9 +48,25 @@ export default function Registration() {
         navigate(path);
     }
 
+    useEffect(() => {
+        if (login.trim() && LOGIN_REGEX.test(login.trim())) {
+            const check = async () => {
+            // Имитация API
+            const response = await fetch(`/api/check-login?login=${encodeURIComponent(login.trim())}`);
+            const data = await response.json();
+            setIsLoginUnique(data.isUnique);
+            };
+            const timer = setTimeout(check, 500);
+            return () => clearTimeout(timer);
+        } else {
+            setIsLoginUnique(true); // сброс при некорректном вводе
+        }
+    }, [login]);
+
     const handleSubmit = () => {
         setErrorName(false);
         setErrorEmail(false);
+        setErrorLogin(false);
         setErrorPassword(false);
         setErrorRepeatPassword(false);
 
@@ -57,6 +82,11 @@ export default function Registration() {
             hasError = true;
         }
 
+        if (!login || !LOGIN_REGEX.test(login)) {
+            setErrorLogin(true);
+            hasError = true;
+        }
+
         if (!password || !PASSWORD_REGEX.test(password)) {
             setErrorPassword(true);
             hasError = true;
@@ -68,7 +98,7 @@ export default function Registration() {
         }
 
         if (!hasError) {
-            console.log('Форма валидна:', { name, email, password });
+            console.log('Форма валидна:', { name, email, login, password });
             // await api.register({ name, email, password });
         }
     };
@@ -102,6 +132,23 @@ export default function Registration() {
                     {isErrorEmail && (
                         <div className={style.errorMessage}>
                             Неккоректный ввод email
+                        </div>
+                    )}
+                    <Input 
+                        type="text"
+                        name="login"
+                        placeholder="Логин"
+                        value={login}
+                        handleChange={handleChangeLogin}
+                    />
+                    {isErrorLogin && (
+                        <div className={style.errorMessage}>
+                            Логин: 3–20 символов, латиница, цифры, _ или -
+                        </div>
+                    )}
+                    {login && !isLoginUnique && (
+                        <div className={style.errorMessage}>
+                            Логин уже занят
                         </div>
                     )}
                     <Input 
