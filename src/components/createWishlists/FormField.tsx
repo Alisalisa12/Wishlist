@@ -8,7 +8,7 @@ interface FormFieldProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const FormField: React.FC<FormFieldProps> = ({
+const FormField: React.FC<FormFieldProps> = React.memo(({
   placeholder,
   type,
   value,
@@ -17,6 +17,8 @@ const FormField: React.FC<FormFieldProps> = ({
   <div>
     <input type={type} value={value} onChange={onChange} placeholder={placeholder}/>
   </div>
-);
+));
+
+FormField.displayName = 'FormField';
 
 export default FormField;

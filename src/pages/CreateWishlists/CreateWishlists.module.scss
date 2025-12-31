@@ -4,8 +4,7 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: radial-gradient(circle at top left, #4b2bc1, #2a1973);
-  background-image: url("../../images/background.png");
+  background-image: url("../../assets/bg.jpg");
   background-size: cover;
 }
 
@@ -22,14 +21,14 @@ form {
   flex-direction: column;
   gap: 1rem;
   width: 40%;
-  height: 50%;
+  //height: 55%;
   background-color: #C6C2F3;
   border-radius: 20px;
   padding: 3rem 5rem;
 }
 
-.form input,
-.form select,
+input,
+select,
 form input,
 form select {
   display: block;
@@ -47,6 +46,15 @@ form select {
     text-align-last: center; /* для IE/Edge/Chrome */
     -moz-text-align-last: center; /* для Firefox */
   }
+
+input:focus,
+select:focus,
+form input:focus,
+form select:focus{
+  outline: none;
+  box-shadow: none;
+}
+
 input::placeholder {
   text-align: center;
   color: #fff;
@@ -118,12 +126,28 @@ option{
 }
 
 @media (max-width: 680px) {
-  form{
+  .form, form{
     width: 75%;
     height: 50%;
   }
   .title{
     font-size: 30px;
     text-align: center;
+  }
+    .button{
+      margin-top: 1rem;
+
+  }
+}
+
+@media (max-height: 630px) {
+  .button{
+    margin-top: 3rem;
+  }
+}
+
+@media (max-height: 590px) {
+  .button{
+    margin-top: 0;
   }
 }

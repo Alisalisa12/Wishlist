@@ -35,11 +35,10 @@
         margin-top: 10px;
     }
     @media screen and (min-width: 768px) { 
-        margin: 20px 0px 20px 90px;
-        min-width: 0px;
+        margin: 20px 0 20px 90px;
+        min-width: 0;
         max-width: 150px;
     }
-    margin: 20px 0 20px 85px;
     min-width: 0;
     max-width: 150px;
 }

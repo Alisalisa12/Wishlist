@@ -22,7 +22,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-
 # Ignore generated CSS and source maps from SCSS
 *.module.css
 *.module.css.map

@@ -1,0 +1,80 @@
+.pageWrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero {
+  flex: 1;
+  background: url("../../assets/bg.jpg");
+  background-size: cover;
+  padding: 4rem 0;
+  display: flex;
+  justify-content: center;
+  font-family: "Ubuntu", sans-serif;
+}
+
+.card {
+  padding: 2rem;
+  width: 85%;
+  max-width: 1200px;
+  color: #fff;
+}
+
+.title {
+  font-size: 40px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 5rem;
+
+}
+
+.grid {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.ideaCard {
+  background: #9891DF;
+  border-radius: 16px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  gap: 0.75rem;
+  width: 70%;
+}
+.ideaButton{
+  padding: 0.5rem 1rem;
+}
+.ideaTitle {
+  font-size: 28px;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+}
+
+@media (max-width: 1000px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: 28px;
+  }
+  .ideaTitle{
+    font-size: 20px ;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .ideaCard{
+    width: 100%;
+  }
+}
