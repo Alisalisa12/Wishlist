@@ -10,7 +10,7 @@ export const getAllArticles = async (req, res) => {
   }
 };
 
-export const getArticleById = async (req, res) => {
+export const getOneArticle = async (req, res) => {
   try {
     const article = await ArticleModel.findById(req.params.id);
     if (!article) return res.status(404).json({ message: "Статья не найдена" });

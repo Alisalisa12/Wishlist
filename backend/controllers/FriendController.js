@@ -4,13 +4,10 @@ import WishlistModel from "../models/Wishlist.js";
 // Поиск среди друзей
 export const searchFriends = async (req, res) => {
   try {
-    const query = req.query.q;
-
+    const query = req.query.q || "";
     const user = await UserModel.findById(req.userId).populate({
       path: "friends",
-      match: {
-        username: { $regex: query, $options: "i" },
-      },
+      match: { username: { $regex: query, $options: "i" } },
       select: "_id username fullName avatarUrl",
     });
 
@@ -21,57 +18,128 @@ export const searchFriends = async (req, res) => {
   }
 };
 
-// Поиск среди всех пользователей 
-export const searchAllUsers = async (req, res) => {
+// Поиск среди всех пользователей
+export const searchUsers = async (req, res) => {
   try {
-    const query = req.query.q;
+    const query = req.query.q || "";
     const currentUser = await UserModel.findById(req.userId);
 
     const users = await UserModel.find({
       username: { $regex: query, $options: "i" },
-      _id: {
-        $ne: req.userId,
-        $nin: currentUser.friends,
-      },
-    }).select("_id username fullName avatarUrl");
+      _id: { $ne: req.userId, $nin: currentUser.friends },
+    }).select("_id username fullName avatarUrl friendRequests");
 
-    res.json(users);
+    const results = users.map(u => ({
+      _id: u._id,
+      username: u.username,
+      fullName: u.fullName,
+      avatarUrl: u.avatarUrl,
+      hasSentRequest: u.friendRequests.includes(req.userId),
+      incomingRequest: currentUser.friendRequests.includes(u._id),
+    }));
+
+    res.json(results);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Не удалось выполнить поиск" });
   }
 };
 
-// Добавление друга
-export const addFriend = async (req, res) => {
+export const getIncomingFriendRequests = async (req, res) => {
   try {
-    const userId = req.userId;
-    const friendId = req.params.friendId;
+    const user = await UserModel.findById(req.userId)
+      .populate({
+        path: "friendRequests",
+        select: "_id username fullName avatarUrl",
+      });
 
-    if (userId === friendId) {
-      return res.status(400).json({ message: "Нельзя добавить себя" });
-    }
+    if (!user) return res.status(404).json({ message: "Пользователь не найден" });
 
-    const user = await UserModel.findById(userId);
-    const friend = await UserModel.findById(friendId);
-
-    if (!friend)
-      return res.status(404).json({ message: "Пользователь не найден" });
-
-    if (user.friends.includes(friendId)) {
-      return res.status(400).json({ message: "Пользователь уже в друзьях" });
-    }
-
-    user.friends.push(friendId);
-    await user.save();
-
-    res.json({ success: true, message: "Друг добавлен" });
+    res.json({ incomingRequests: user.friendRequests });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "Не удалось добавить друга" });
+    res.status(500).json({ message: "Не удалось получить входящие заявки" });
   }
 };
-// Получение списка друзей текущего пользователя
+
+// Отправка запроса в друзья
+export const sendFriendRequest = async (req, res) => {
+  try {
+    const friendId = req.params.friendId;
+    const userId = req.userId;
+
+    if (userId === friendId) return res.status(400).json({ message: "Нельзя добавить себя" });
+
+    const friend = await UserModel.findById(friendId);
+    if (!friend) return res.status(404).json({ message: "Пользователь не найден" });
+
+    if (friend.friends.includes(userId)) return res.status(400).json({ message: "Пользователь уже в друзьях" });
+    if (friend.friendRequests.includes(userId)) return res.status(400).json({ message: "Запрос уже отправлен" });
+
+    friend.friendRequests.push(userId);
+    await friend.save();
+
+    res.json({ success: true, message: "Запрос отправлен" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Ошибка при отправке запроса" });
+  }
+};
+
+// Принятие запроса
+export const acceptFriendRequest = async (req, res) => {
+  try {
+    const requesterId = req.params.friendId;
+    const user = await UserModel.findById(req.userId);
+    const requester = await UserModel.findById(requesterId);
+
+    if (!user || !requester) return res.status(404).json({ message: "Пользователь не найден" });
+
+    const hasRequest = user.friendRequests.includes(requesterId);
+
+    if (!hasRequest) {
+      return res.json({ success: false, message: "Запрос уже обработан" });
+    }
+
+    user.friendRequests = user.friendRequests.filter(id => id.toString() !== requesterId);
+    user.friends.push(requesterId);
+    requester.friends.push(req.userId);
+
+    await user.save();
+    await requester.save();
+
+    res.json({ success: true, message: "Запрос принят" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Ошибка при принятии запроса" });
+  }
+};
+
+// Отклонение запроса
+export const declineFriendRequest = async (req, res) => {
+  try {
+    const requesterId = req.params.friendId;
+    const user = await UserModel.findById(req.userId);
+
+    if (!user) return res.status(404).json({ message: "Пользователь не найден" });
+
+    const hadRequest = user.friendRequests.includes(requesterId);
+
+    user.friendRequests = user.friendRequests.filter(id => id.toString() !== requesterId);
+    await user.save();
+
+    if (!hadRequest) {
+      return res.json({ success: false, message: "Запрос уже обработан" });
+    }
+
+    res.json({ success: true, message: "Запрос отклонен" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Ошибка при отклонении запроса" });
+  }
+};
+
+// Получение списка друзей
 export const getFriendsList = async (req, res) => {
   try {
     const user = await UserModel.findById(req.userId).populate({
@@ -79,8 +147,7 @@ export const getFriendsList = async (req, res) => {
       select: "_id username fullName avatarUrl",
     });
 
-    if (!user)
-      return res.status(404).json({ message: "Пользователь не найден" });
+    if (!user) return res.status(404).json({ message: "Пользователь не найден" });
 
     res.json({ friends: user.friends });
   } catch (err) {
@@ -89,20 +156,22 @@ export const getFriendsList = async (req, res) => {
   }
 };
 
-// Удаление друга
+// Удаление друга (обоюдно)
 export const removeFriend = async (req, res) => {
   try {
-    const user = await UserModel.findById(req.userId);
+    const userId = req.userId;
     const friendId = req.params.friendId;
 
-    if (!user.friends.includes(friendId)) {
-      return res
-        .status(404)
-        .json({ message: "Пользователь не найден в друзьях" });
-    }
+    const user = await UserModel.findById(userId);
+    const friend = await UserModel.findById(friendId);
 
-    user.friends = user.friends.filter((id) => id.toString() !== friendId);
+    if (!user.friends.includes(friendId)) return res.status(404).json({ message: "Пользователь не найден в друзьях" });
+
+    user.friends = user.friends.filter(id => id.toString() !== friendId);
+    friend.friends = friend.friends.filter(id => id.toString() !== userId);
+
     await user.save();
+    await friend.save();
 
     res.json({ success: true, message: "Друг удалён" });
   } catch (err) {
@@ -115,7 +184,7 @@ export const removeFriend = async (req, res) => {
 export const getFriendProfile = async (req, res) => {
   try {
     const friendId = req.params.friendId;
-    const linkToken = req.query.token; // для ссылочных вишлистов
+    const linkToken = req.query.token;
 
     const friend = await UserModel.findById(friendId).select("_id username fullName avatarUrl friends");
     if (!friend) return res.status(404).json({ message: "Пользователь не найден" });

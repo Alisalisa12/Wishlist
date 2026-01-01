@@ -1,5 +1,6 @@
 import WishlistModel from "../models/Wishlist.js";
 import UserModel from "../models/User.js";
+import WishModel from "../models/Wish.js"
 import { v4 as uuidv4 } from "uuid";
 
 export const create = async (req, res) => {
@@ -62,7 +63,6 @@ export const getAllWishlists = async (req, res) => {
     const isFriend = currentUser.friends.includes(profileId);
     const isOwner = req.userId === profileId;
 
-    // Получаем все вишлисты пользователя
     const allWishlists = await WishlistModel.find({ user: profileId });
 
     // Фильтруем видимые вишлисты
@@ -94,17 +94,26 @@ export const getOne = async (req, res) => {
     if (!wishlist) return res.status(404).json({ message: "Вишлист не найден" });
 
     const currentUser = await UserModel.findById(req.userId);
-    const isFriend = currentUser.friends.includes(wishlist.user.toString());
-    const isOwner = req.userId === wishlist.user.toString();
+    const isOwner = wishlist.user.toString() === req.userId;
+    const isFriend = currentUser?.friends.includes(wishlist.user.toString());
+    const linkToken = req.query.token || null;
 
-    if (
-      wishlist.visibility === "private" && !isOwner ||
-      wishlist.visibility === "friends" && !(isOwner || isFriend)
-    ) {
-      return res.status(403).json({ message: "Нет доступа" });
-    }
+    // Проверка доступа к вишлисту
+    const hasAccess =
+      isOwner ||
+      wishlist.visibility === "public" ||
+      (wishlist.visibility === "friends" && isFriend) ||
+      (wishlist.visibility === "link" && linkToken === wishlist.linkToken);
 
-    res.json(wishlist);
+    if (!hasAccess) return res.status(403).json({ message: "Нет доступа к вишлисту" });
+
+    // Получаем желания
+    const wishes = await WishModel.find({ wishlist: wishlist._id });
+
+    res.json({
+      wishlist,
+      wishes,
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Не удалось получить вишлист" });

@@ -1,5 +1,6 @@
 import WishModel from "../models/Wish.js";
 import WishlistModel from "../models/Wishlist.js";
+import UserModel from "../models/User.js";
 
 export const create = async (req, res) => {
   try {
@@ -9,12 +10,17 @@ export const create = async (req, res) => {
     if (!wishlist) {
       return res.status(404).json({ message: "Вишлист не найден" });
     }
+
+    if (wishlist.user.toString() !== req.userId) {
+      return res.status(403).json({ message: "Нет доступа для добавления желания" });
+    }
+
     const doc = new WishModel({
       title: req.body.title,
       link: req.body.link || null,
       image: req.body.image,
       priceCategory: req.body.priceCategory,
-      wishlist: req.params.wishlistId,
+      wishlist: wishlistId,
     });
 
     const wish = await doc.save();
@@ -25,94 +31,152 @@ export const create = async (req, res) => {
   }
 };
 
-export const getAll = async (req, res) => {
-  try {
-    const { wishlistId } = req.params;
-    const wishes = await WishModel.find({ wishlist: wishlistId })
-      .populate("wishlist")
-      .exec();
+// export const getAll = async (req, res) => {
+//   try {
+//     const { wishlistId } = req.params;
+//     const linkToken = req.query.token || null;
 
-    res.json(wishes);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Не удалось получить желания" });
-  }
-};
+//     const wishlist = await WishlistModel.findById(wishlistId);
+//     if (!wishlist) {
+//       return res.status(404).json({ message: "Вишлист не найден" });
+//     }
+
+//     const currentUser = await UserModel.findById(req.userId);
+
+//     const isOwner = wishlist.user.toString() === req.userId;
+//     const isFriend = currentUser?.friends.includes(wishlist.user.toString());
+
+//     const hasAccess =
+//       isOwner || // владелец всегда видит свои желания
+//       wishlist.visibility === "public" ||
+//       (wishlist.visibility === "friends" && isFriend) ||
+//       (wishlist.visibility === "link" && linkToken === wishlist.linkToken);
+
+//     if (!hasAccess) {
+//       return res.status(403).json({ message: "Нет доступа к желаниям этого вишлиста" });
+//     }
+
+//     const wishes = await WishModel.find({ wishlist: wishlistId });
+//     res.json(wishes);
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ message: "Не удалось получить желания" });
+//   }
+// };
 
 export const getOne = async (req, res) => {
   try {
-    const wish = await WishModel.findById(req.params.id).exec();
+    const linkToken = req.query.token || null;
 
+    const wish = await WishModel.findById(req.params.id).populate("wishlist");
     if (!wish) {
-      return res.status(404).json({
-        message: "Желание не найдено",
-      });
+      return res.status(404).json({ message: "Желание не найдено" });
+    }
+
+    const wishlist = wish.wishlist;
+    const currentUser = await UserModel.findById(req.userId);
+    const isOwner = wishlist.user.toString() === req.userId;
+    const isFriend = currentUser?.friends.includes(wishlist.user.toString());
+
+    const hasAccess =
+      isOwner || 
+      wishlist.visibility === "public" ||
+      (wishlist.visibility === "friends" && isFriend) ||
+      (wishlist.visibility === "link" && linkToken === wishlist.linkToken);
+
+
+    if (!hasAccess) {
+      return res.status(403).json({ message: "Нет доступа к желанию" });
     }
 
     res.json(wish);
   } catch (err) {
     console.error(err);
-    res.status(500).json({
-      message: "Не удалось получить желание",
-    });
+    res.status(500).json({ message: "Не удалось получить желание" });
   }
 };
 
 export const remove = async (req, res) => {
   try {
-    const wish = await WishModel.findByIdAndDelete(req.params.id);
 
+    const wish = await WishModel.findById(req.params.id);
     if (!wish) {
-      return res.status(404).json({
-        message: "Желание не найдено",
-      });
+      return res.status(404).json({ message: "Желание не найдено" });
     }
 
+    const wishlist = await WishlistModel.findById(wish.wishlist);
+    if (!wishlist) {
+      return res.status(404).json({ message: "Вишлист не найден" });
+    }
+
+    if (wishlist.user.toString() !== req.userId) {
+      return res.status(403).json({ message: "Нет доступа для удаления желания" });
+    }
+
+    await wish.deleteOne();
     res.json({ success: true });
   } catch (err) {
     console.error(err);
-    res.status(500).json({
-      message: "Не удалось удалить желание",
-    });
+    res.status(500).json({ message: "Не удалось удалить желание" });
   }
 };
 
 export const update = async (req, res) => {
   try {
-    const updated = await WishModel.updateOne(
-      { _id: req.params.id },
-      {
-        title: req.body.title,
-        link: req.body.link,
-        image: req.body.image,
-        priceCategory: req.body.priceCategory,
-      }
-    );
 
-    if (updated.matchedCount === 0) {
-      return res.status(404).json({
-        message: "Желание не найдено",
-      });
+    const wish = await WishModel.findById(req.params.id);
+    if (!wish) {
+      return res.status(404).json({ message: "Желание не найдено" });
     }
+
+    const wishlist = await WishlistModel.findById(wish.wishlist);
+    if (!wishlist) {
+      return res.status(404).json({ message: "Вишлист не найден" });
+    }
+
+    if (wishlist.user.toString() !== req.userId) {
+      return res.status(403).json({ message: "Нет доступа для редактирования желания" });
+    }
+
+    wish.title = req.body.title || wish.title;
+    wish.link = req.body.link ?? wish.link; // позволяет установить null
+    wish.image = req.body.image || wish.image;
+    wish.priceCategory = req.body.priceCategory || wish.priceCategory;
+
+    await wish.save();
 
     res.json({ success: true });
   } catch (err) {
     console.error(err);
-    res.status(500).json({
-      message: "Не удалось обновить желание",
-    });
+    res.status(500).json({ message: "Не удалось обновить желание" });
   }
 };
 
 export const reserve = async (req, res) => {
   try {
     const wish = await WishModel.findById(req.params.id).populate("wishlist");
-
     if (!wish) {
       return res.status(404).json({ message: "Желание не найдено" });
     }
 
-    if (wish.wishlist.user.toString() === req.userId) {
+    const wishlist = wish.wishlist;
+    const currentUser = await UserModel.findById(req.userId);
+
+    const isOwner = wishlist.user.toString() === req.userId;
+    const isFriend = currentUser?.friends.includes(wishlist.user.toString());
+    const linkToken = req.query.token || null;
+
+    const hasAccess =
+      isOwner || // владелец всегда имеет доступ
+      wishlist.visibility === "public" ||
+      (wishlist.visibility === "friends" && isFriend) ||
+      (wishlist.visibility === "link" && linkToken === wishlist.linkToken);
+
+    if (!hasAccess) {
+      return res.status(403).json({ message: "Нет доступа к вишлисту" });
+    }
+
+    if (isOwner) {
       return res
         .status(403)
         .json({ message: "Нельзя бронировать своё желание" });
@@ -125,6 +189,7 @@ export const reserve = async (req, res) => {
     wish.reserved = true;
     wish.reservedBy = req.userId;
     await wish.save();
+
     res.json({ success: true });
   } catch (err) {
     console.error(err);
@@ -134,10 +199,26 @@ export const reserve = async (req, res) => {
 
 export const unreserve = async (req, res) => {
   try {
-    const wish = await WishModel.findById(req.params.id);
-
+    const wish = await WishModel.findById(req.params.id).populate("wishlist");
     if (!wish) {
       return res.status(404).json({ message: "Желание не найдено" });
+    }
+
+    const wishlist = wish.wishlist;
+    const currentUser = await UserModel.findById(req.userId);
+
+    const isOwner = wishlist.user.toString() === req.userId;
+    const isFriend = currentUser?.friends.includes(wishlist.user.toString());
+    const linkToken = req.query.token || null;
+
+    const hasAccess =
+      isOwner ||
+      wishlist.visibility === "public" ||
+      (wishlist.visibility === "friends" && isFriend) ||
+      (wishlist.visibility === "link" && linkToken === wishlist.linkToken);
+
+    if (!hasAccess) {
+      return res.status(403).json({ message: "Нет доступа к вишлисту" });
     }
 
     if (!wish.reserved || wish.reservedBy.toString() !== req.userId) {

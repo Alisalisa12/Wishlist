@@ -43,13 +43,19 @@ app.patch("/auth/me", checkAuth, userUpdateValidation, UserController.update);
 app.delete("/auth/me", checkAuth, UserController.removeAccount);
 
 // Поиск среди пользователей
-app.get("/users/search", checkAuth, FriendController.searchAllUsers);
+app.get("/users/search", checkAuth, FriendController.searchUsers);
 // Поиск среди друзей
 app.get("/friends/search", checkAuth, FriendController.searchFriends);
 // Получение списка друзей
 app.get("/friends", checkAuth, FriendController.getFriendsList);
-// Добавление в друзья
-app.post("/friends/:friendId", checkAuth, FriendController.addFriend);
+// Получение входящих заявок
+app.get("/friends/requests", checkAuth, FriendController.getIncomingFriendRequests);
+// Отправка запроса в друзья
+app.post("/friends/request/:friendId", checkAuth, FriendController.sendFriendRequest);
+// Принятие запроса
+app.post("/friends/accept/:friendId", checkAuth, FriendController.acceptFriendRequest);
+// Отклонение запроса
+app.post("/friends/decline/:friendId", checkAuth, FriendController.declineFriendRequest);
 // Удаление из друзей
 app.delete("/friends/:friendId", checkAuth, FriendController.removeFriend);
 // Просмотр профиля друга и его вишлистов
@@ -81,10 +87,10 @@ app.post(
   wishCreateValidation,
   WishController.create
 );
-// Получение всех желаний конкретного вишлиста
-app.get("/wishlists/:wishlistId/wishes", WishController.getAll);
+// // Получение всех желаний конкретного вишлиста
+// app.get("/wishlists/:wishlistId/wishes",checkAuth, WishController.getAll);
 // Получение информации об одном желании
-app.get("/wishes/:id", WishController.getOne);
+app.get("/wishes/:id",checkAuth, WishController.getOne);
 // Удаление желания
 app.delete("/wishes/:id", checkAuth, WishController.remove);
 // Обновление желания
@@ -99,7 +105,7 @@ app.get("/me/reservations", checkAuth, WishController.getMyReservations);
 // Получение всех статей
 app.get("/articles", ArticleController.getAllArticles);
 // Получение одной статьи
-app.get("/articles/:id", ArticleController.getArticleById);
+app.get("/articles/:id", ArticleController.getOneArticle);
 
 
 app.listen(7777, (err) => {

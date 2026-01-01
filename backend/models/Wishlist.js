@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import WishModel from "./Wish.js";
 
 const WishlistSchema = new mongoose.Schema(
   {
@@ -27,5 +28,15 @@ const WishlistSchema = new mongoose.Schema(
     timestamps: true,
   },
 );
+
+WishlistSchema.pre('deleteOne', { document: true, query: false }, async function(next) {
+  try {
+    await WishModel.deleteMany({ wishlist: this._id });
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
 
 export default mongoose.model('Wishlist', WishlistSchema);
