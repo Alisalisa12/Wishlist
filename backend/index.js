@@ -42,7 +42,9 @@ app.patch("/auth/me", checkAuth, userUpdateValidation, UserController.update);
 // Удаление аккаунта
 app.delete("/auth/me", checkAuth, UserController.removeAccount);
 
-// Поиск друзей
+// Поиск среди пользователей
+app.get("/users/search", checkAuth, FriendController.searchAllUsers);
+// Поиск среди друзей
 app.get("/friends/search", checkAuth, FriendController.searchFriends);
 // Получение списка друзей
 app.get("/friends", checkAuth, FriendController.getFriendsList);
@@ -62,7 +64,7 @@ app.post(
 );
 // Просмотр всех своих вишлистов
 app.get("/wishlists/me", checkAuth, WishlistController.getMyWishlists);
-//Получение списка всех вишлистов
+//Получение списка всех вишлистов пользователя
 app.get("/wishlists", WishlistController.getAll);
 app.get("/profiles/:userId/wishlists", checkAuth, WishlistController.getAllWishlists);
 // Получение одного вишлиста

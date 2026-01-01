@@ -1,5 +1,4 @@
 import WishlistModel from "../models/Wishlist.js";
-import Wishlist from "../models/Wishlist.js";
 import UserModel from "../models/User.js";
 import { v4 as uuidv4 } from "uuid";
 

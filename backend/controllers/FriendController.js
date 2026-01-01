@@ -1,12 +1,38 @@
 import UserModel from "../models/User.js";
 import WishlistModel from "../models/Wishlist.js";
 
-// Поиск пользователя по логину
+// Поиск среди друзей
 export const searchFriends = async (req, res) => {
   try {
     const query = req.query.q;
+
+    const user = await UserModel.findById(req.userId).populate({
+      path: "friends",
+      match: {
+        username: { $regex: query, $options: "i" },
+      },
+      select: "_id username fullName avatarUrl",
+    });
+
+    res.json(user.friends);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Не удалось выполнить поиск среди друзей" });
+  }
+};
+
+// Поиск среди всех пользователей 
+export const searchAllUsers = async (req, res) => {
+  try {
+    const query = req.query.q;
+    const currentUser = await UserModel.findById(req.userId);
+
     const users = await UserModel.find({
       username: { $regex: query, $options: "i" },
+      _id: {
+        $ne: req.userId,
+        $nin: currentUser.friends,
+      },
     }).select("_id username fullName avatarUrl");
 
     res.json(users);

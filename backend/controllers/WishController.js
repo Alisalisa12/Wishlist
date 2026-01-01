@@ -1,6 +1,5 @@
 import WishModel from "../models/Wish.js";
 import WishlistModel from "../models/Wishlist.js";
-import UserModel from "../models/User.js";
 
 export const create = async (req, res) => {
   try {
