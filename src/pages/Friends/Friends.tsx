@@ -12,7 +12,7 @@ interface FriendProps {
     avatar: string;
     name: string;
     nickname: string;
-    profileLink: string; // Ссылка на профиль (например, "/profile/123")
+    profileLink: string;
 }
 
 // const ALL_USERS: FriendProps[] = [

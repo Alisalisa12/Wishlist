@@ -16,6 +16,7 @@ export const Header: FC = React.memo(() => {
     }
 
     const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+    const isAuthenticated = !!localStorage.getItem('currentUserId');
 
     return (
         <div className={style.Header}>
@@ -25,14 +26,18 @@ export const Header: FC = React.memo(() => {
                 <div className={style.linkHeader} onClick={() => handleNavigation('/emptywishlist')}>Мои вишлисты</div>
                 <div className={style.linkHeader} onClick={() => handleNavigation('/')}>Мои брони</div>
                 <div className={style.linkHeader} onClick={() => handleNavigation('/ideas')}>Идеи подарков</div>
-                <div className={style.searchBlock}>
-                    <CiSearch className={style.searchLogo} />
-                    <p className={style.searchText}>Поиск</p>
+                
+                {isAuthenticated ? (
+                <div className={style.profileBlock} onClick={() => handleNavigation('/profile')}>
+                    <FaRegCircleUser className={style.userLogo} />
+                    <div className={style.linkHeader}>Мой профиль</div>
                 </div>
-                <div className={style.userBlock}>
+                ) : ( 
+                    <div className={style.userBlock}>
                     <FaRegCircleUser className={style.userLogo} />
                     <div className={style.logIn} onClick={() => handleNavigation('/login')}>Вход/Регистрация</div>
                 </div>
+                )}
                 <TbMenuDeep
                     className={style.menu}
                     onClick={toggleMenu}
@@ -50,17 +55,6 @@ export const Header: FC = React.memo(() => {
             </div>
             {isMenuOpen && (
                 <div className={style.mobileMenu}>
-                    <div className={style.mobileSearch} aria-label="Поиск">
-                        <div className={style.searchBlock}>
-                            <CiSearch className={style.searchLogo} />
-                            <input
-                                className={style.searchInput}
-                                type="text"
-                                placeholder="Поиск"
-                                aria-label="Поле поиска"
-                            />
-                        </div>
-                    </div>
                     <div className={style.mobileMenuItem} onClick={() => handleNavigation('/friends')}>Друзья</div>
                     <div className={style.mobileMenuItem} onClick={() => handleNavigation('/emptywishlist')}>Мои вишлисты</div>
                     <div className={style.mobileMenuItem} onClick={() => handleNavigation('/')}>Мои брони</div>

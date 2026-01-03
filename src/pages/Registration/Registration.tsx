@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import style from './Registration.module.scss';
 import { Input } from '../../components/Input/Input';
+import { ALL_USERS, getNextId } from '../../data/users';
 
 
 const NAME_REGEX = /^[a-zA-ZА-яёЁ\s\-']{1,64}$/;
@@ -98,8 +99,34 @@ export default function Registration() {
         }
 
         if (!hasError) {
-            console.log('Форма валидна:', { name, email, login, password });
             // await api.register({ name, email, password });
+
+            // Проверяем, занят ли логин
+            const loginExists = ALL_USERS.some(user => 
+                user.nickname === `@${login.trim()}` || user.name === login.trim()
+            );
+
+            if (loginExists) {
+                setErrorLogin(true);
+                return;
+            }
+
+            // Создаём нового пользователя
+            const newId = getNextId();
+            const newUser = {
+                id: newId,
+                avatar: 'images/friendAvatar.jpg',
+                name: name.trim(),
+                nickname: `@${login.trim()}`,
+                profileLink: `/profile/${newId}`,
+            };
+
+            // Добавляем в список (временно, только для фронта)
+            console.log('Новый пользователь:', newUser);
+
+            // Сохраняем
+            localStorage.setItem('currentUserId', String(newId));
+            navigate('/profile');
         }
     };
     

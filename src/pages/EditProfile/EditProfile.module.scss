@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.EditProfile {
+    min-height: 100vh;
+    width: 100%;
+    font-family: 'Ubuntu', sans-serif;
+    color: #ffffff;
+    background-image: url("../../assets/bg.jpg");
+    background-size: cover;
+    background-position: top;
+}
+
+.container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.text {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.profileHeader {
+    display: flex;
+    margin: 30px 80px;
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+}
+
+.avatar {
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.userInfo {
+    margin-right: 120px;
+}
+
+.name {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.nickname {
+    color: #110E3C;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.saveButton, .cancelButton {
+    color: #110E3C;
+    background-color: #ffffff;
+    border-radius: 30px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.editInformation {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    max-width: 400px;
+    width: 100%;
+    margin: 10px 80px 100px 80px; 
+    text-align: left;
+}
+
+.input {
+    padding: 10px;
+    background-color: #2B2758;
+    color: #ffffff;
+    opacity: 90%;
+    border: none;
+
+    &::placeholder {
+        color: #8C8C8C;
+        text-align: left;
+    }
+}
+
+.input:focus {
+    outline: none;
+}
+
+.deleteAccount {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.handleDeleteAccount {
+    cursor: pointer;
+    color: #655CB3;
+}
+
+.confirmModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modalContent {
+    background: #1a172e;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 24px;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+
+    p {
+        margin: 0 0 20px 0;
+        font-size: 16px;
+        line-height: 1.4;
+        color: #ffffff;
+    }
+
+    .modalButtons {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+
+        button {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: 500;
+        cursor: pointer;
+
+        &:first-child {
+            background: #f44336;
+            color: white;
+        }
+
+        &:last-child {
+            background: #3a365a;
+            color: #ffffff;
+        }
+        }
+    }
+}

@@ -43,6 +43,7 @@
 
 .linkHeader,
 .searchBlock,
+.profileBlock,
 .userBlock {
     display: flex;
     flex-direction: row;
@@ -56,6 +57,7 @@
 
         .linkHeader,
         .searchBlock,
+        .profileBlock,
         .userBlock {
             display: none;
         }

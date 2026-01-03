@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import style from './Login.module.scss';
 import { Input } from '../../components/Input/Input';
+import { findUserByLogin } from '../../data/users';
+
 import { loginUser } from '../../api';
 
 export default function Login() {

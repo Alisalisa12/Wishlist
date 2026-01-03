@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Profile from "./pages/Profile/Profile";
+import EditProfile from './pages/EditProfile/EditProfile';
 const Home = React.lazy(() => import('./pages/Home/Home'));
 const Registration = React.lazy(() => import('./pages/Registration/Registration'));
 const Login = React.lazy(() => import('./pages/Login/Login'));
@@ -46,7 +47,10 @@ const App: React.FC = () => {
                     <Route path="/friend-wishlist" element={<FriendWishlistView />} />
                     <Route path="/ideas" element={<GiftIdeas />} />
                     <Route path="/ideas/:id" element={<GiftIdeaDetail />} />
-                   <Route path="/profile" element={<Profile />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/profile/:id" element={<Profile />} />
+                    <Route path="/editprofile/" element={<EditProfile />} />
+                    <Route path="/editprofile/:id" element={<EditProfile />} />
                 </Routes>
             </Suspense>
         </Router>
