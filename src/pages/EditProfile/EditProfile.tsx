@@ -97,19 +97,57 @@ export default function EditProfile() {
         setShowConfirmDelete(false);
     };
 
+    // Загрузка фото из файла: читаем как Data URL и сохраняем в форму
+    const handleAvatarFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+            const result = typeof reader.result === 'string' ? reader.result : '';
+            if (result) {
+                setFormData(prev => ({ ...prev, avatar: result }));
+            }
+        };
+        reader.readAsDataURL(file);
+    };
+
+    // Вставка изображения из буфера обмена (Ctrl+V) — если в буфере есть картинка
+    const handlePasteImage = (e: React.ClipboardEvent<HTMLDivElement>) => {
+        const items = e.clipboardData?.items;
+        if (!items) return;
+        for (let i = 0; i < items.length; i++) {
+            const item = items[i];
+            if (item.type.indexOf('image') !== -1) {
+                const file = item.getAsFile();
+                if (!file) continue;
+                const reader = new FileReader();
+                reader.onload = () => {
+                    const result = typeof reader.result === 'string' ? reader.result : '';
+                    if (result) setFormData(prev => ({ ...prev, avatar: result }));
+                };
+                reader.readAsDataURL(file);
+                e.preventDefault();
+                break;
+            }
+        }
+    };
+
     return (
         <div className={style.EditProfile}>
             <Header />
-            <div className={style.container}>
+            <div className={style.container} onPaste={handlePasteImage}>
                 <div className={style.profileHeader}>
                     <img 
-                        src={profileUser.avatar} 
+                        src={formData.avatar || profileUser.avatar} 
                         alt='аватар' 
                         className={style.avatar}
+                        onError={(e) => {
+                            (e.currentTarget as HTMLImageElement).src = '/images/friendAvatar.jpg';
+                        }}
                     />
                     <div className={style.userInfo}>
-                        <h1 className={style.name}>{profileUser.name}</h1>
-                        <p className={style.nickname}>{profileUser.nickname}</p>
+                        <h1 className={style.name}>{formData.name || profileUser.name}</h1>
+                        <p className={style.nickname}>{`@${formData.nickname || profileUser.nickname.replace('@','')}`}</p>
                     </div>
                     <button className={style.saveButton} onClick={handleSave}>Сохранить</button>
                     <button className={style.cancelButton} onClick={handleCancel}>Отмена</button>
@@ -117,9 +155,16 @@ export default function EditProfile() {
                 <div className={style.editInformation}>
                     <input
                         className={style.input}
+                        type="file"
+                        accept="image/*"
+                        name="avatarFile"
+                        onChange={handleAvatarFile}
+                    />
+                    <input
+                        className={style.input}
                         type="text"
                         name="avatar"
-                        placeholder="Изменить фото"
+                        placeholder="Ссылка на фото или вставьте изображение"
                         value={formData.avatar}
                         onChange={handleChange}
                     />
