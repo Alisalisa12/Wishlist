@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import style from './Login.module.scss';
 import { Input } from '../../components/Input/Input';
+import { findUserByLogin } from '../../data/users';
 
 
 export default function Login() {
@@ -19,6 +20,18 @@ export default function Login() {
     const handleNavigation = (path: string) => {
         navigate(path);
     }
+
+    const handleLogin = () => {
+        // Ищем пользователя по имени (или логину, если без @)
+        const user = findUserByLogin(name.trim());
+
+        if (user && password) { // пароль пока не проверяем
+            localStorage.setItem('currentUserId', String(user.id));
+            navigate('/profile');
+        } else {
+            alert('Пользователь не найден');
+        }
+    };
 
     return (
         <div className={style.Login}>
@@ -41,7 +54,7 @@ export default function Login() {
                         handleChange={handleChangePassword}
                     />
                     {/* <Link to="/" className={style.forgotPassword}>Забыли пароль?</Link> */}
-                    <button className={style.buttonLogin}>Войти</button>
+                    <button className={style.buttonLogin} onClick={handleLogin}>Войти</button>
                 </div>
                 <p className={style.text} onClick={() => handleNavigation('/registration')}>Зарегистрироваться</p>
                 <p className={style.text} onClick={() => handleNavigation('/home')}>Вернуться на главную</p>

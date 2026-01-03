@@ -8,9 +8,12 @@ import { TbMenuDeep } from "react-icons/tb";
 export const Header: FC = () => {
 
     const navigate = useNavigate();
-        const handleNavigation = (path: string) => {
-            navigate(path);
-        }
+    const handleNavigation = (path: string) => {
+        navigate(path);
+    }
+
+    const isAuthenticated = !!localStorage.getItem('currentUserId');
+
 
     return (
         <div className={style.Header}>
@@ -20,10 +23,19 @@ export const Header: FC = () => {
                 <div className={style.linkHeader} onClick={() => handleNavigation('/emptywishlist')}>Мои вишлисты</div>
                 <div className={style.linkHeader} onClick={() => handleNavigation('/')}>Мои брони</div>
                 <div className={style.linkHeader} onClick={() => handleNavigation('/')}>Идеи подарков</div>
-                <div className={style.userBlock}>
+
+                {isAuthenticated ? (
+                <div className={style.profileBlock} onClick={() => handleNavigation('/profile')}>
+                    <FaRegCircleUser className={style.userLogo} />
+                    <div className={style.linkHeader}>Мой профиль</div>
+                </div>
+                ) : ( 
+                    <div className={style.userBlock}>
                     <FaRegCircleUser className={style.userLogo} />
                     <div className={style.logIn} onClick={() => handleNavigation('/login')}>Вход/Регистрация</div>
                 </div>
+                )}
+
                 <TbMenuDeep className={style.menu}/>
             </div>
         </div>

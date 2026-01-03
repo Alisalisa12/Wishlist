@@ -10,6 +10,7 @@ import EmptyWishlist  from "./pages/EmptyWishlist/EmptyWishlist";
 import CreateWishlist from "./pages/CreateWishlists/CreateWishlists";
 import WishlistView from "./pages/WishlistView/WishlistView";
 import Profile from "./pages/Profile/Profile";
+import EditProfile from './pages/EditProfile/EditProfile';
 
 
 const App: React.FC = () => {
@@ -27,6 +28,9 @@ const App: React.FC = () => {
                 <Route path="/create" element={<CreateWishlist />} />
                 <Route path="/wishlist" element={<WishlistView />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/profile/:id" element={<Profile />} />
+                <Route path="/editprofile/" element={<EditProfile />} />
+                <Route path="/editprofile/:id" element={<EditProfile />} />
             </Routes>
         </Router>
     );
