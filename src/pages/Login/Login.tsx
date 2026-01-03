@@ -1,37 +1,38 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import style from './Login.module.scss';
 import { Input } from '../../components/Input/Input';
 import { findUserByLogin } from '../../data/users';
 
+import { loginUser } from '../../api';
 
 export default function Login() {
-    const [ name, setName ] = useState('');
-    const handleChangeName = (value: string) => {
-        setName(value);
-    };
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    // const [ name, setName ] = useState('');
 
-    const [ password, setPassword] = useState('');
+    const navigate = useNavigate();
+    const handleLogin = async () => {
+        try {
+            const data = await loginUser(email, password);
+            localStorage.setItem('token', data.token); // сохраняем токен
+            navigate('/home'); // переходим на главную
+        } catch (err: any) {
+            setError(err.message || 'Неверный логин или пароль');
+        }
+    };
+    // const handleChangeName = (value: string) => {
+    //     setName(value);
+    // };
+
     const handleChangePassword = (value: string) => {
         setPassword(value);
     };
 
-    const navigate = useNavigate();
     const handleNavigation = (path: string) => {
         navigate(path);
     }
-
-    const handleLogin = () => {
-        // Ищем пользователя по имени (или логину, если без @)
-        const user = findUserByLogin(name.trim());
-
-        if (user && password) { // пароль пока не проверяем
-            localStorage.setItem('currentUserId', String(user.id));
-            navigate('/profile');
-        } else {
-            alert('Пользователь не найден');
-        }
-    };
 
     return (
         <div className={style.Login}>
@@ -41,10 +42,10 @@ export default function Login() {
                     <p className={style.title}>Войдите, чтобы начать</p>
                     <Input 
                         type="text"
-                        name="username"
-                        placeholder="Имя"
-                        value={name}
-                        handleChange={handleChangeName}
+                        name="email"
+                        placeholder="Email"
+                        value={email}
+                        handleChange={setEmail}
                     />
                     <Input 
                         type="password"
@@ -58,6 +59,7 @@ export default function Login() {
                 </div>
                 <p className={style.text} onClick={() => handleNavigation('/registration')}>Зарегистрироваться</p>
                 <p className={style.text} onClick={() => handleNavigation('/home')}>Вернуться на главную</p>
+                {error && <p style={{ color: 'red' }}>{error}</p>}
             </div>
         </div>
     )

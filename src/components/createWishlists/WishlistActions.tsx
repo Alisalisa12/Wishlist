@@ -1,4 +1,4 @@
-import styles from "../../pages/WishlistView/WishlistView.module.scss";
+import styles from "../WishlistContent/WishlistContent.module.scss";
 import Button from "../UI/buttons/Button";
 import { Share2, Plus, Trash2 } from "lucide-react";
 import React from "react";
@@ -9,7 +9,7 @@ interface WishlistActionsProps {
   onDeleteMode: () => void;
 }
 
-const WishlistActions: React.FC<WishlistActionsProps> = ({
+const WishlistActions: React.FC<WishlistActionsProps> = React.memo(({
   onAddWish,
   onDeleteMode,
 }) => {
@@ -26,6 +26,8 @@ const WishlistActions: React.FC<WishlistActionsProps> = ({
       <Button icon={<Share2 size={18} />}>{!isMobile && "Поделиться"}</Button>
     </div>
   );
-};
+});
+
+WishlistActions.displayName = 'WishlistActions';
 
 export default WishlistActions;

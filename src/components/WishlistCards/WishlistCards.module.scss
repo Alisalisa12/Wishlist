@@ -1,0 +1,92 @@
+.listContainer {
+  margin-left: 8%;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.listItem {
+  background-color: rgb(152, 145, 223);
+  color: #ffffff;
+  border-radius: 16px;
+  padding: 1rem 5.5rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  font-family: "Ubuntu", sans-serif;
+  text-align: center;
+}
+
+.listItem:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.listItemHeader {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.listItemMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 16px;
+}
+
+.date {
+  opacity: 0.9;
+  text-align: center;
+}
+
+
+.openButton {
+  margin-top: 0.1rem;
+  padding: 0.5rem 2rem;
+  border-radius: 999px;
+  border: none;
+  background-color: #1f103a;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.openButton:hover {
+  background-color: #4b2bc1;
+  transform: translateY(-1px);
+}
+
+.openButton:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 1024px) {
+  .listContainer {
+    margin-left: 5%;
+  }
+  .listItemHeader {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .listItem {
+    padding: 0.75rem 4rem;
+  }
+  .listItemHeader {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 450px) {
+  .listContainer {
+    margin-left: 0;
+    width: 90%;
+  }
+}

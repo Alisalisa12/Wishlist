@@ -1,4 +1,4 @@
-import styles from "../../pages/WishlistView/WishlistView.module.scss";
+import styles from "./WishlistHeader.module.scss";
 import React from "react";
 
 interface WishlistHeaderProps {

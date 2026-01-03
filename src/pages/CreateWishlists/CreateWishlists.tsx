@@ -40,7 +40,7 @@ const CreateWishlist = () => {
       access,
       items: [],
     };
-    // сохраняем вишлист через слой абстракции над хранилищем
+
     createWishlist(newWishlist);
     navigate("/wishlist");
   };
