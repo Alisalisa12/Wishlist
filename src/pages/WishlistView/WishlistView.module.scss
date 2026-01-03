@@ -18,6 +18,14 @@
   margin: 5rem 0;
 }
 
+.deleteButton{
+  margin-left: 10%;
+}
 
-
+@media (max-width: 365px) {
+  .deleteButton{
+    margin-top: 10%;
+    margin-left: 5%;
+  }
+}
 
