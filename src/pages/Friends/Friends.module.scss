@@ -163,3 +163,93 @@ html, body, #root {
     border: none;
     border-radius: 5px;
 }
+
+
+/* Крупные планшеты / небольшие ноутбуки */
+@media (max-width: 1200px) {
+    .container {
+        margin: 32px 0 72px 48px;
+    }
+    .friendsList {
+        padding: 32px;
+        gap: 14px;
+    }
+}
+
+/* Планшеты */
+@media (max-width: 992px) {
+    .container {
+        margin: 24px auto 56px 32px;
+        max-width: 640px;
+    }
+    .friendAvatar {
+        width: 88px;
+        height: 88px;
+    }
+    .friendName { font-size: 15px; }
+    .friendNickname { font-size: 13px; }
+    .friendsList { padding: 24px; gap: 14px; }
+}
+
+/* Малые планшеты и большие телефоны */
+@media (max-width: 768px) {
+    .container {
+        margin: 16px auto 40px;
+        padding: 16px;
+        max-width: 560px;
+    }
+    .search { margin-bottom: 16px; }
+    .searchInput {
+        padding: 10px 14px;
+        font-size: 15px;
+        max-width: 95% ;
+    }
+    .friendsList {
+        padding: 20px;
+        gap: 12px;
+    }
+    .friendItem {
+        gap: 12px;
+        align-items: flex-start;
+    }
+    .friendAvatar {
+        width: 72px;
+        height: 72px;
+    }
+    .buttons {
+        width: 100%;
+        align-items: stretch;
+    }
+    .addButton,
+    .deleteButton,
+    .returnButton {
+        width: 100%;
+        font-size: 15px;
+    }
+}
+
+/* Телефоны */
+@media (max-width: 600px) {
+    .container {
+        margin: 12px auto 28px;
+        padding: 12px;
+      max-width: 460px;
+    }
+    .friendsList { padding: 16px; gap: 10px; }
+    .friendItem { padding: 10px; }
+    .friendAvatar {
+        width: 56px;
+        height: 56px;
+    }
+    .friendName { font-size: 14px; }
+    .friendNickname { font-size: 12px; }
+    .profileLink {
+        font-size: 13px;
+        padding: 8px 12px;
+    }
+}
+@media (max-width: 490px) {
+  .container {
+    max-width: 290px;
+  }
+}

@@ -7,7 +7,7 @@
   align-items: flex-start;
   color: #fff;
   padding: 10% 0 10% 8%;
-  background: radial-gradient(circle at top left, #4b2bc1, #2a1973);
+  //background: radial-gradient(circle at top left, #4b2bc1, #2a1973);
   background-image: url("../../assets/bg.jpg");
   background-size: cover;
 
@@ -46,7 +46,9 @@ h1 {
   transition: background 0.3s ease;
   margin-left: 11%;
 }
-
+//.wishlistCardsContainer{
+//  display: flex;
+//}
 .addButton:hover {
   background-color: #4b2bc1;
 }
@@ -60,7 +62,7 @@ h1 {
     margin-left: 8rem;
   }
   .addButton{
-    margin-left: 9%;
+    margin-left: 13px;
   }
 }
 
@@ -82,7 +84,5 @@ h1 {
     width: 80px;
     margin-left: 35%;
   }
-  .addButton{
-    margin-left: 25%;
-  }
+
 }

@@ -51,12 +51,12 @@
   .info {
     flex-direction: column;
     gap: 4px;
-    font-size: 20px;
+    font-size: 22px;
 
   }
 
   .link{
-    font-size: 16px
+    font-size: 18px
   }
 }
 
@@ -89,22 +89,32 @@
     font-size: 14px;
   }
   .item {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 2fr;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
   }
 
   .imagePlaceholder {
     margin-top: 10px;
     width: 200px;
-    max-height: 150px;
+    max-height: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
-  .info {
-    margin-left: 0;
-    grid-column: span 2;
+  .info, .link {
+    padding-right: 0;
+    text-align: center;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
   }
 
   .deleteBtn, .reserveBtn {
-    padding: 5px;
+    padding: 0 100px;
     margin-left: 0;
     width: 100%;
     text-align: center;

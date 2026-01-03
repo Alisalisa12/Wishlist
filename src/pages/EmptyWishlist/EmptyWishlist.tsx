@@ -36,6 +36,7 @@ const EmptyWishlist: React.FC = () => {
     <div>
       <Header />
       <section className={styles.wrapper}>
+          <div className={styles.wishlistCardsContainer}>
         {isEmpty ? (
           <>
             <h1>Здесь пока пусто(</h1>
@@ -43,6 +44,7 @@ const EmptyWishlist: React.FC = () => {
             <img src={arrowImg} alt="arrow" className={styles.arrow} />
           </>
         ) : (
+
           <WishlistCards wishlists={wishlists} onOpen={handleOpenWishlist} />
         )}
 
@@ -53,6 +55,7 @@ const EmptyWishlist: React.FC = () => {
         >
           Новый вишлист +
         </Button>
+            </div>
       </section>
       <Footer />
     </div>
