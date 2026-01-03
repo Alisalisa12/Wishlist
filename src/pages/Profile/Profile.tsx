@@ -116,6 +116,10 @@ export default function Profile() {
                                 }
                                 // В профиле друга — открываем публичный просмотр по id
                                 const idPart = (w as StorageWishlist).id != null ? `/${(w as StorageWishlist).id}` : '';
+                                // Сохраним информацию о друге для дальнейшего использования на странице бронирования
+                                try {
+                                    localStorage.setItem('currentFriend', JSON.stringify(profileUser));
+                                } catch { /* ignore */ }
                                 navigate(`/friend-wishlist${idPart}`);
                             }}
                         />

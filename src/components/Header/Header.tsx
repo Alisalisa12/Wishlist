@@ -24,7 +24,7 @@ export const Header: FC = React.memo(() => {
                 <img src="/images/logo.png" className={style.logo} alt='logo'/>
                 <div className={style.linkHeader} onClick={() => handleNavigation('/friends')}>Друзья</div>
                 <div className={style.linkHeader} onClick={() => handleNavigation('/emptywishlist')}>Мои вишлисты</div>
-                <div className={style.linkHeader} onClick={() => handleNavigation('/')}>Мои брони</div>
+                <div className={style.linkHeader} onClick={() => handleNavigation('/reservations')}>Мои брони</div>
                 <div className={style.linkHeader} onClick={() => handleNavigation('/ideas')}>Идеи подарков</div>
                 
                 {isAuthenticated ? (
@@ -57,12 +57,19 @@ export const Header: FC = React.memo(() => {
                 <div className={style.mobileMenu}>
                     <div className={style.mobileMenuItem} onClick={() => handleNavigation('/friends')}>Друзья</div>
                     <div className={style.mobileMenuItem} onClick={() => handleNavigation('/emptywishlist')}>Мои вишлисты</div>
-                    <div className={style.mobileMenuItem} onClick={() => handleNavigation('/')}>Мои брони</div>
+                    <div className={style.mobileMenuItem} onClick={() => handleNavigation('/reservations')}>Мои брони</div>
                     <div className={style.mobileMenuItem} onClick={() => handleNavigation('/ideas')}>Идеи подарков</div>
-                    <div className={style.mobileMenuItem} onClick={() => handleNavigation('/login')}>
-                        <FaRegCircleUser className={style.mobileUserIcon} />
-                        Вход/Регистрация
-                    </div>
+                    {isAuthenticated ? (
+                        <div className={style.profileBlock} onClick={() => handleNavigation('/profile')}>
+                            <FaRegCircleUser className={style.userLogo} />
+                            <div className={style.linkHeader}>Мой профиль</div>
+                        </div>
+                    ) : (
+                        <div className={style.userBlock}>
+                            <FaRegCircleUser className={style.userLogo} />
+                            <div className={style.logIn} onClick={() => handleNavigation('/login')}>Вход/Регистрация</div>
+                        </div>
+                    )}
                 </div>
             )}
         </div>

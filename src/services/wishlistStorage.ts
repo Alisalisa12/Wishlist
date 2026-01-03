@@ -81,3 +81,40 @@ export function updateWishlist(updatedWishlist: Wishlist): void {
     console.error("Failed to update wishlists in storage", e);
   }
 }
+
+// Удалить вишлист из общего списка; если он является текущим — сбросить currentWishlist
+export function deleteWishlist(target: Wishlist | { id?: number; title?: string; date?: string } | number): void {
+  if (typeof window === "undefined") return;
+
+  const all = getAllWishlists();
+
+  // Определяем условие удаления
+  let predicate: (w: Wishlist) => boolean;
+  if (typeof target === 'number') {
+    const id = target;
+    predicate = (w) => (w.id != null ? w.id === id : false);
+  } else if (typeof target === 'object') {
+    const t = target as Partial<Wishlist>;
+    if (t.id != null) {
+      predicate = (w) => w.id === t.id;
+    } else {
+      // Фолбэк на совпадение по названию и дате, если нет id (для очень старых данных)
+      const title = t.title;
+      const date = t.date;
+      predicate = (w) => (title ? w.title === title : true) && (date ? w.date === date : true);
+    }
+  } else {
+    return;
+  }
+
+  const filtered = all.filter((w) => !predicate(w));
+  saveAllWishlists(filtered);
+
+  // Если текущий соответствует удалённому — очистим
+  try {
+    const current = getCurrentWishlist();
+    if (current && predicate(current)) {
+      localStorage.removeItem(CURRENT_WISHLIST_KEY);
+    }
+  } catch { /* ignore */ }
+}

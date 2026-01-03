@@ -7,7 +7,6 @@
   align-items: flex-start;
   color: #fff;
   padding: 10% 0 10% 8%;
-  //background: radial-gradient(circle at top left, #4b2bc1, #2a1973);
   background-image: url("../../assets/bg.jpg");
   background-size: cover;
 
@@ -24,7 +23,7 @@ h1 {
 .arrow {
   width: 150px;
   height: auto;
-  margin: 1rem 0 2rem 12rem;
+  margin: 1rem 0 2rem 0;
   animation: bounce 1.5s infinite;
 }
 
@@ -40,15 +39,18 @@ h1 {
   color: white;
   font-size: 20px;
   padding: 1rem 2.2rem;
-  margin-top: 3rem;
+  margin-top: 1rem;
   border-radius: 30px;
   cursor: pointer;
   transition: background 0.3s ease;
-  margin-left: 11%;
+  width: 80%;
 }
-//.wishlistCardsContainer{
-//  display: flex;
-//}
+.wishlistCardsContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .addButton:hover {
   background-color: #4b2bc1;
 }
@@ -59,10 +61,9 @@ h1 {
   }
   .arrow {
     width: 120px;
-    margin-left: 8rem;
   }
   .addButton{
-    margin-left: 13px;
+    margin-top: 0.75rem;
   }
 }
 
@@ -72,7 +73,9 @@ h1 {
   }
   .arrow {
     width:100px;
-    margin-left: 6rem;
+  }
+  .addButton{
+    margin-top: 0.75rem;
   }
 }
 
@@ -82,7 +85,9 @@ h1 {
   }
   .arrow {
     width: 80px;
-    margin-left: 35%;
+  }
+  .addButton{
+    margin-top: 0.5rem;
   }
 
 }
