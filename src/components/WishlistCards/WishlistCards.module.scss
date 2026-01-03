@@ -1,6 +1,6 @@
-.listContainer {
-  margin-left: 8%;
-}
+//.listContainer {
+//  margin-left: 8%;
+//}
 
 .list {
   list-style: none;
@@ -67,9 +67,9 @@
 }
 
 @media (max-width: 1024px) {
-  .listContainer {
-    margin-left: 5%;
-  }
+  //.listContainer {
+  //  margin-left: 5%;
+  //}
   .listItemHeader {
     font-size: 20px;
   }
@@ -87,6 +87,6 @@
 @media (max-width: 450px) {
   .listContainer {
     margin-left: 0;
-    width: 90%;
+    width: 100%;
   }
 }

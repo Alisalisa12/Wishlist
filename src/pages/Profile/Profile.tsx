@@ -4,6 +4,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import style from './Profile.module.scss';
 import { Header } from '../../components/Header/Header';
 import { Footer } from '../../components/Footer/Footer';
+import WishlistCards from '../../components/WishlistCards/WishlistCards';
+import { saveCurrentWishlist, Wishlist as StorageWishlist } from '../../services/wishlistStorage';
+import Button from "../../components/UI/buttons/Button";
 
 export default function Profile() {
     const { wishlists } = useWishlists();
@@ -23,7 +26,7 @@ export default function Profile() {
         ? allUsers.find(user => user.id === profileId) 
         : null;
 
-    const isMyProfile = currentUserId && profileId === parseInt(currentUserId, 10);
+    const isMyProfile = currentUserId ? profileId === parseInt(currentUserId, 10) : false;
 
     if (!profileUser) {
         return (
@@ -52,60 +55,78 @@ export default function Profile() {
                         <h1 className={style.name}>{profileUser.name}</h1>
                         <p className={style.nickname}>{profileUser.nickname}</p>
                     </div>
-                    {/* {isMyProfile &&  */}
+                    {isMyProfile && (
                         <button 
                             className={style.editButton} 
                             onClick={() => navigate('/editprofile')}
                         >
                             Редактировать профиль
                         </button>
-                    {/* } */}
+                    )}
                 </div>
 
-                {/* Мои друзья */}
+                {/* Информация: секции ниже */}
                 <div className={style.information}>
-                    <div className={style.section}>
-                        <h2 className={style.sectionTitle}>Друзья</h2>
-                        <div className={style.friendsList}>
-                            {friends.map(friend => (
-                            <div key={friend.id} className={style.friendItem}>
-                                <img 
-                                src={friend.avatar} 
-                                alt={friend.name} 
-                                className={style.friendAvatar}
-                                />
-                                <div className={style.friendInfo}>
-                                <div className={style.friendName}>{friend.name}</div>
-                                <div className={style.friendNickname}>{friend.nickname}</div>
+                    {isMyProfile && (
+                        <div className={style.section}>
+                            <h2 className={style.sectionTitle}>Друзья</h2>
+                            <div className={style.friendsList}>
+                                {friends.map(friend => (
+                                <div
+                                    key={friend.id}
+                                    className={style.friendItem}
+                                    onClick={() => navigate(friend.profileLink)}
+                                    title="Перейти в профиль"
+                                >
+                                    <img 
+                                    src={friend.avatar} 
+                                    alt={friend.name} 
+                                    className={style.friendAvatar}
+                                    />
+                                    <div className={style.friendInfo}>
+                                    <div className={style.friendName}>{friend.name}</div>
+                                    <div className={style.friendNickname}>{friend.nickname}</div>
+                                    </div>
                                 </div>
+                                ))}
+                                <button 
+                                className={style.addFriendButton}
+                                onClick={() => navigate('/friends')}
+                                >
+                                + Добавить друзей
+                                </button>
                             </div>
-                            ))}
-                            <button 
-                            className={style.addFriendButton}
-                            onClick={() => navigate('/friends')}
-                            >
-                            + Добавить друзей
-                            </button>
                         </div>
-                    </div>
+                    )}
 
-                    {/* Мои вишлисты */}
+                        {/* Вишлисты пользователя */}
                     <div className={style.section}>
-                        <h2 className={style.sectionTitle}>Мои вишлисты</h2>
-                        <div className={style.wishlistsList}>
-                            {wishlists.map(wl => (
-                            <div key={wl.id} className={style.wishlistItem}>
-                                <div className={style.title}>{wl.title}</div>
-                                <div className={style.date}>{wl.date}</div>
-                            </div>
-                            ))}
-                            <button 
-                            className={style.newWishlistButton}
-                            onClick={() => navigate('/create-wishlist')}
+                        <h2 className={style.sectionTitle}>
+                            {isMyProfile ? 'Мои вишлисты' : ''}
+                        </h2>
+                        <WishlistCards
+                            wishlists={wishlists as unknown as StorageWishlist[]}
+                            onOpen={(w) => {
+                                // Сохраняем выбранный вишлист как текущий
+                                saveCurrentWishlist(w as StorageWishlist);
+                                // В своём профиле открываем владелецкий вид с полным функционалом
+                                if (isMyProfile) {
+                                    navigate('/wishlist');
+                                    return;
+                                }
+                                // В профиле друга — открываем публичный просмотр по id
+                                const idPart = (w as StorageWishlist).id != null ? `/${(w as StorageWishlist).id}` : '';
+                                navigate(`/friend-wishlist${idPart}`);
+                            }}
+                        />
+                        {isMyProfile && (
+                            <Button
+                                className={style.newWishlistButton}
+                                onClick={() => navigate('/create')}
                             >
-                            + Новый вишлист
-                            </button>
-                        </div>
+                                + Новый вишлист
+                            </Button>
+                        )}
                     </div>
                 </div>
             </div>

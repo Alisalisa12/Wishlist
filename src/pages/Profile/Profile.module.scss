@@ -36,6 +36,8 @@
 .avatar {
     border-radius: 50%;
     object-fit: cover;
+    width: 100px;
+    height: 100px;
 }
 
 // .userInfo {
@@ -88,6 +90,7 @@
     font-size: 20px;
     color: #ffffff;
     text-align: center;
+    margin-bottom: 15px
 }
 
 .friendsList,
@@ -113,6 +116,7 @@
     gap: 12px;
     padding: 10px;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 .wishlistItem {
@@ -143,4 +147,108 @@
     cursor: pointer;
     text-align: center;
     background-color: #110E3C;
+}
+.newWishlistButton{
+    display: block !important;
+    margin: 10px auto 0;
+    align-self: center;
+}
+
+
+/* Крупные планшеты / небольшие ноутбуки */
+@media (max-width: 1200px) {
+    .profileHeader {
+        margin: 24px 40px;
+        gap: 16px;
+    }
+    .information {
+        gap: 60px;
+        margin: 24px 40px 60px;
+    }
+    .editButton {
+        margin-left: auto;
+    }
+}
+
+/* Планшеты */
+@media (max-width: 992px) {
+    .profileHeader {
+        margin: 20px 24px;
+    }
+    .information {
+        gap: 40px;
+        margin: 20px 24px 40px;
+    }
+    .section:first-child,
+    .section:last-child {
+        min-width: auto;
+    }
+}
+
+/* Малые планшеты и большие телефоны */
+@media (max-width: 768px) {
+    .profileHeader {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 12px;
+    }
+    .avatar {
+        width: 80px;
+        height: 80px;
+    }
+    .name { font-size: 20px; }
+    .nickname { font-size: 14px; }
+    .editButton {
+        margin-left: 0;
+        width: 100%;
+        max-width: 340px;
+    }
+
+    .information {
+        flex-direction: column;
+        gap: 20px;
+        margin: 16px 16px 32px;
+    }
+    .section {
+        padding: 16px;
+        width: 100%;
+    }
+    .friendsList,
+    .wishlistsList {
+        padding: 16px;
+        gap: 12px;
+    }
+    .sectionTitle { font-size: 18px; }
+}
+
+/* Телефоны */
+@media (max-width: 480px) {
+    .profileHeader {
+        margin: 16px 12px;
+    }
+    .avatar {
+        width: 64px;
+        height: 64px;
+    }
+    .name { font-size: 18px; }
+    .nickname { font-size: 13px; }
+
+    .information {
+        margin: 12px;
+        gap: 16px;
+    }
+    .section { padding: 12px; }
+    .friendsList,
+    .wishlistsList {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .addFriendButton,
+    .newWishlistButton {
+        //width: 100%;
+        max-width: none;
+    }
+    .sectionTitle { font-size: 16px; }
 }

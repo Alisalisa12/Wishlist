@@ -45,6 +45,7 @@ const App: React.FC = () => {
                     <Route path="/create" element={<CreateWishlist />} />
                     <Route path="/wishlist" element={<WishlistView />} />
                     <Route path="/friend-wishlist" element={<FriendWishlistView />} />
+                    <Route path="/friend-wishlist/:id" element={<FriendWishlistView />} />
                     <Route path="/ideas" element={<GiftIdeas />} />
                     <Route path="/ideas/:id" element={<GiftIdeaDetail />} />
                     <Route path="/profile" element={<Profile />} />

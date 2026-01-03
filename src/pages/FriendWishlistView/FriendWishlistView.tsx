@@ -3,7 +3,8 @@ import styles from "./FriendWishlistView.module.scss";
 import { Header } from "../../components/Header/Header";
 import { Footer } from "../../components/Footer/Footer";
 import WishlistContent from "../../components/WishlistContent/WishlistContent";
-import { getCurrentWishlist, Wishlist } from "../../services/wishlistStorage";
+import { getCurrentWishlist, getAllWishlists, Wishlist } from "../../services/wishlistStorage";
+import { useParams } from "react-router-dom";
 
 const reservationsKey = (wishlistId?: number | undefined) =>
   `reservations:${wishlistId ?? "current"}`;
@@ -11,19 +12,28 @@ const reservationsKey = (wishlistId?: number | undefined) =>
 const FriendWishlistView: React.FC = () => {
   const [wishlist, setWishlist] = useState<Wishlist | null>(null);
   const [reservedIds, setReservedIds] = useState<number[]>([]);
+  const { id } = useParams<{ id?: string }>();
 
   useEffect(() => {
-    const stored = getCurrentWishlist();
-    if (stored) {
-      setWishlist(stored);
+    let selected: Wishlist | null = null;
+    if (id) {
+      const all = getAllWishlists();
+      const numericId = parseInt(id, 10);
+      selected = all.find(w => w.id === numericId) ?? null;
+    }
+    if (!selected) {
+      selected = getCurrentWishlist();
+    }
+    if (selected) {
+      setWishlist(selected);
       try {
-        const saved = localStorage.getItem(reservationsKey(stored.id));
+        const saved = localStorage.getItem(reservationsKey(selected.id));
         if (saved) setReservedIds(JSON.parse(saved));
       } catch (e) {
         // ignore parse errors
       }
     }
-  }, []);
+  }, [id]);
 
   const handleReserve = useCallback(
     (id: number) => {
