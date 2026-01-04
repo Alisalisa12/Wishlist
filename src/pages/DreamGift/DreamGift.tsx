@@ -1,9 +1,21 @@
 import style from "./DreamGift.module.scss"
+import { useNavigate } from 'react-router-dom';
 
 
 export default function DreamGift() {
+    const navigate = useNavigate();
+    const isAuthenticated = !!localStorage.getItem('currentUserId');
 
     const text = "«DreamGift» - сервис, где ты\nможешь создать вишлисты\nдля любых событий — день\nрождения, свадьба, юбилей";
+
+
+    const handleCreateClick = () => {
+        if (isAuthenticated) {
+            navigate('/create-wishlist');
+        } else {
+            navigate('/login');
+        }
+    };
 
     return(
         <div className={style.DreamGift}>
@@ -13,7 +25,7 @@ export default function DreamGift() {
                         <p className={style.text}>{text}</p>
                     </div>
                     <div className={style.createBlock}>
-                        <button className={style.createButton}>Создать</button>
+                        <button className={style.createButton} onClick={handleCreateClick}>Создать</button>
                     </div>
                 </div>
                 <div className={style.giftBlock}>

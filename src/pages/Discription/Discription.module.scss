@@ -69,7 +69,7 @@
     line-height: 110%;
     
     @media screen and (max-width: 319px) {
-        
+        font-size: 16px;
     }
     @media screen and (min-width: 320px) {
         font-size: 18px;
@@ -88,6 +88,7 @@
     background-color: #6961BE;
     color: #ffffff;
     border: none;
+    cursor: pointer;
     
     @media screen and (max-width: 319px) {
         width: 150px;

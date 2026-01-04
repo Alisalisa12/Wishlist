@@ -48,14 +48,23 @@
     width: 120px;
 }
 
-.text {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 140%;
+
+.inlineLink {
     color: #8D8D8D;
-    white-space: normal;
-    word-wrap: break-word;
-    overflow-wrap: anywhere;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:link,
+    &:visited,
+    &:hover,
+    &:active {
+        color: #8D8D8D;
+        text-decoration: none;
+    }
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 .navigate {
@@ -73,6 +82,12 @@
     line-height: 100%;
     letter-spacing: 0%;
     cursor: pointer;
+}
+
+.userBlock {
+    display: flex;
+    flex-direction: row;
+    gap: 7px;
 }
 
 

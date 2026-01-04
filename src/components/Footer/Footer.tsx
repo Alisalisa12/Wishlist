@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import style from "./Footer.module.scss";
 import {FaRegCircleUser} from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 
 
 export const Footer: FC = () => {
@@ -16,8 +17,12 @@ export const Footer: FC = () => {
             <div className={style.container}>
                 <div className={style.describe}>
                     <img src="/images/logo.png" className={style.logo} alt='logo'/>
-                    <p className={style.text}>Политика конфиденциальности</p>
-                    <p className={style.text}>Условия пользования</p>
+                    <Link to="/privacy" className={style.inlineLink}>
+                        Политика конфиденциальности
+                    </Link>
+                    <Link to="/terms" className={style.inlineLink}>
+                        Условия пользования
+                    </Link>
                 </div>
                 <div className={style.navigate}>
                     {isAuthenticated ? (
@@ -28,7 +33,7 @@ export const Footer: FC = () => {
                     ) : (
                         <div className={style.userBlock}>
                             <FaRegCircleUser className={style.userLogo} />
-                            <div className={style.logIn} onClick={() => handleNavigation('/login')}>Вход/Регистрация</div>
+                            <div className={style.linkHeader} onClick={() => handleNavigation('/login')}>Вход/Регистрация</div>
                         </div>
                     )}
                     <div className={style.linkHeader} onClick={() => handleNavigation('/friends')}>Друзья</div>
