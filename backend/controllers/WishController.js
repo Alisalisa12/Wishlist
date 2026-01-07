@@ -12,13 +12,15 @@ export const create = async (req, res) => {
     }
 
     if (wishlist.user.toString() !== req.userId) {
-      return res.status(403).json({ message: "Нет доступа для добавления желания" });
+      return res
+        .status(403)
+        .json({ message: "Нет доступа для добавления желания" });
     }
 
     const doc = new WishModel({
       title: req.body.title,
       link: req.body.link || null,
-      image: req.body.image,
+      image: req.body.image?.trim() || "",
       priceCategory: req.body.priceCategory,
       wishlist: wishlistId,
     });
@@ -30,39 +32,6 @@ export const create = async (req, res) => {
     res.status(500).json({ message: "Не удалось создать желание" });
   }
 };
-
-// export const getAll = async (req, res) => {
-//   try {
-//     const { wishlistId } = req.params;
-//     const linkToken = req.query.token || null;
-
-//     const wishlist = await WishlistModel.findById(wishlistId);
-//     if (!wishlist) {
-//       return res.status(404).json({ message: "Вишлист не найден" });
-//     }
-
-//     const currentUser = await UserModel.findById(req.userId);
-
-//     const isOwner = wishlist.user.toString() === req.userId;
-//     const isFriend = currentUser?.friends.includes(wishlist.user.toString());
-
-//     const hasAccess =
-//       isOwner || // владелец всегда видит свои желания
-//       wishlist.visibility === "public" ||
-//       (wishlist.visibility === "friends" && isFriend) ||
-//       (wishlist.visibility === "link" && linkToken === wishlist.linkToken);
-
-//     if (!hasAccess) {
-//       return res.status(403).json({ message: "Нет доступа к желаниям этого вишлиста" });
-//     }
-
-//     const wishes = await WishModel.find({ wishlist: wishlistId });
-//     res.json(wishes);
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ message: "Не удалось получить желания" });
-//   }
-// };
 
 export const getOne = async (req, res) => {
   try {
@@ -79,11 +48,11 @@ export const getOne = async (req, res) => {
     const isFriend = currentUser?.friends.includes(wishlist.user.toString());
 
     const hasAccess =
-      isOwner || 
+      // isOwner ||
+      wishlist.user.toString() === req.userId ||
       wishlist.visibility === "public" ||
       (wishlist.visibility === "friends" && isFriend) ||
       (wishlist.visibility === "link" && linkToken === wishlist.linkToken);
-
 
     if (!hasAccess) {
       return res.status(403).json({ message: "Нет доступа к желанию" });
@@ -98,7 +67,6 @@ export const getOne = async (req, res) => {
 
 export const remove = async (req, res) => {
   try {
-
     const wish = await WishModel.findById(req.params.id);
     if (!wish) {
       return res.status(404).json({ message: "Желание не найдено" });
@@ -110,7 +78,9 @@ export const remove = async (req, res) => {
     }
 
     if (wishlist.user.toString() !== req.userId) {
-      return res.status(403).json({ message: "Нет доступа для удаления желания" });
+      return res
+        .status(403)
+        .json({ message: "Нет доступа для удаления желания" });
     }
 
     await wish.deleteOne();
@@ -123,7 +93,6 @@ export const remove = async (req, res) => {
 
 export const update = async (req, res) => {
   try {
-
     const wish = await WishModel.findById(req.params.id);
     if (!wish) {
       return res.status(404).json({ message: "Желание не найдено" });
@@ -135,7 +104,9 @@ export const update = async (req, res) => {
     }
 
     if (wishlist.user.toString() !== req.userId) {
-      return res.status(403).json({ message: "Нет доступа для редактирования желания" });
+      return res
+        .status(403)
+        .json({ message: "Нет доступа для редактирования желания" });
     }
 
     wish.title = req.body.title || wish.title;
@@ -239,15 +210,16 @@ export const unreserve = async (req, res) => {
 
 export const getMyReservations = async (req, res) => {
   try {
-    const wishes = await WishModel.find({
-      reservedBy: req.userId,
-    })
-      .populate("wishlist")
-      .populate("reservedBy");
-
+    const wishes = await WishModel.find({ reservedBy: req.userId });
     res.json(wishes);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "Не удалось получить брони" });
+    res
+      .status(500)
+      .json({
+        message: "Не удалось получить брони",
+        error: err?.message,
+        stack: err?.stack,
+      });
   }
 };

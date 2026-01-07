@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema(
     },
     avatarUrl: {
       type: String,
-      default: "https://ru.pinterest.com/pin/500462577364400915/",
+      default: "http://localhost:3000/images/friendAvatar.jpg",
     },
     friends: [
       {

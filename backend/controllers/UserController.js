@@ -119,7 +119,7 @@ export const getMe = async (req, res) => {
 export const update = async (req, res) => {
   try {
     const result = await UserModel.updateOne(
-      { _id: req.userId }, 
+      { _id: req.userId },
       {
         fullName: req.body.fullName,
         username: req.body.username,
@@ -127,7 +127,6 @@ export const update = async (req, res) => {
       }
     );
 
-    // если пользователь не найден
     if (result.matchedCount === 0) {
       return res.status(404).json({
         message: "Пользователь не найден",
@@ -170,5 +169,3 @@ export const removeAccount = async (req, res) => {
     });
   }
 };
-
-

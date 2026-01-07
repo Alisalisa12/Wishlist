@@ -85,7 +85,7 @@ export const wishCreateValidation = [
 
   body("image")
     .optional()
-    .isURL()
+    .isString()
     .withMessage("Неверная ссылка на изображение"),
 ];
 

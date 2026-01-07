@@ -13,7 +13,7 @@ const WishSchema = new mongoose.Schema(
     },
     image: {
       type: String,
-      default: "https://ru.pinterest.com/pin/214624738487695561",
+      image: { type: String, default: "" },
     },
     priceCategory: {
       type: String,
