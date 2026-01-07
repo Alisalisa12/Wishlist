@@ -35,7 +35,7 @@ describe("Wish Model Tests", () => {
     await expect(wish.save()).rejects.toThrow();
   });
 
-  test("Ошибка при отсутствии wishlist", async () => {
+  test("Ошибка при отсутствии вишлиста", async () => {
     const wish = new WishModel({
       title: "No Wishlist",
       priceCategory: "до 1000",
