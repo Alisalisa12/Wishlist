@@ -25,3 +25,5 @@ yarn-error.log*
 # Ignore generated CSS and source maps from SCSS
 *.module.css
 *.module.css.map
+node_modules
+uploads/*
