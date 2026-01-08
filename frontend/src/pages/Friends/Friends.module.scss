@@ -1,0 +1,260 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body, #root {
+    height: 100%;
+}
+
+
+.Friends {
+    width: 100%;
+    font-family: 'Ubuntu', sans-serif;
+    color: #ffffff;
+    background-image: url("../../assets/bg.jpg");
+    // background: radial-gradient(
+    //     circle at 90% 80%,
+    //         #9B8FFF 0%,
+    //         #4C42C7 50%,
+    //         #110E3C 80%,
+    //         #0D0A2A 100%
+    // );
+    background-size: cover;
+    background-position: top;
+}
+
+.container {
+    padding: 20px;
+    max-width: 700px;
+    margin: 40px 0 90px 70px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.search {
+    margin-bottom: 20px;
+}
+
+.searchInput {
+    background-color: #665CB3;
+    text-align: left;
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    color: #ffffff;
+    outline: none;
+
+    &::placeholder {
+        color: #ffffff;
+        text-align: left;
+    }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+        -webkit-text-fill-color: #ffffff !important; 
+        -webkit-box-shadow: 0 0 0 1000px #665CB3 inset !important; 
+        transition: background-color 5000s ease-in-out 0s; 
+    }
+
+    &::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+    }
+}
+
+.friendsList {
+    background-color: #9891DF;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 40px;
+}
+
+.friendItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.friendAvatar {
+    // width: 50px;
+    // height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+}
+
+.friendInfo {
+    flex: 1;
+    margin-left: 12px;
+}
+
+.friendName {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.friendNickname {
+    color: #110E3C;
+    font-size: 14px;
+}
+
+.profileLink {
+    color: #110E3C;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-weight: 600;
+    
+}
+
+.buttons {
+    display: flex;
+    gap: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.addButton,
+.deleteButton, 
+.returnButton {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 60px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    color: #ffffff;
+    background-color: #110E3C;
+    width: 50%;
+}
+
+.addIcon {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 60px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    color: #ffffff;
+    background-color: #110E3C;
+}
+
+.deleteIcon {
+    padding: 10px;
+    font-size: 30px;
+    color: #ffffff;
+    background-color: #BA5A5A;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+
+/* Крупные планшеты / небольшие ноутбуки */
+@media (max-width: 1200px) {
+    .container {
+        margin: 32px 0 72px 48px;
+    }
+    .friendsList {
+        padding: 32px;
+        gap: 14px;
+    }
+}
+
+/* Планшеты */
+@media (max-width: 992px) {
+    .container {
+        margin: 24px auto 56px 32px;
+        max-width: 640px;
+    }
+    .friendAvatar {
+        width: 88px;
+        height: 88px;
+    }
+    .friendName { font-size: 15px; }
+    .friendNickname { font-size: 13px; }
+    .friendsList { padding: 24px; gap: 14px; }
+}
+
+/* Малые планшеты и большие телефоны */
+@media (max-width: 768px) {
+    .container {
+        margin: 16px auto 40px;
+        padding: 16px;
+        max-width: 560px;
+    }
+    .search { margin-bottom: 16px; }
+    .searchInput {
+        padding: 10px 14px;
+        font-size: 15px;
+        max-width: 95% ;
+    }
+    .friendsList {
+        padding: 20px;
+        gap: 12px;
+    }
+    .friendItem {
+        gap: 12px;
+        align-items: flex-start;
+    }
+    .friendAvatar {
+        width: 72px;
+        height: 72px;
+    }
+    .buttons {
+        width: 100%;
+        align-items: stretch;
+    }
+    .addButton,
+    .deleteButton,
+    .returnButton {
+        width: 100%;
+        font-size: 15px;
+    }
+}
+
+/* Телефоны */
+@media (max-width: 600px) {
+    .container {
+        margin: 12px auto 28px;
+        padding: 12px;
+      max-width: 460px;
+    }
+    .friendsList { padding: 16px; gap: 10px; }
+    .friendItem { padding: 10px; }
+    .friendAvatar {
+        width: 56px;
+        height: 56px;
+    }
+    .friendName { font-size: 14px; }
+    .friendNickname { font-size: 12px; }
+    .profileLink {
+        font-size: 13px;
+        padding: 8px 12px;
+    }
+}
+@media (max-width: 490px) {
+  .container {
+    max-width: 290px;
+  }
+}
+
+.incomingButtons {
+  display: flex;
+  gap: 8px; // небольшое расстояние между кнопками
+}

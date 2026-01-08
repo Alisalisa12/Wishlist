@@ -1,0 +1,254 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.Profile {
+    width: 100%;
+    font-family: 'Ubuntu', sans-serif;
+    color: #ffffff;
+    background-image: url("../../assets/bg.jpg");
+    background-size: cover;
+    background-position: top;
+    min-height: 100vh;
+}
+
+.container {
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.text {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.profileHeader {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 30px 60px;
+    padding: 20px;
+}
+
+.avatar {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+}
+
+// .userInfo {
+//     flex: 1;
+// }
+
+.name {
+    font-size: 24px;
+    margin: 0;
+}
+
+.nickname {
+    color: #aaa;
+    font-size: 16px;
+}
+
+.editButton {
+    padding: 8px 16px;
+    background: #110E3C;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 160px;
+}
+
+.information {
+    display: flex;
+    flex-direction: row;
+    gap: 110px;
+    margin: 30px 60px 100px;
+}
+
+.section {
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.section:first-child {
+    min-width: 300px;
+}
+
+.section:last-child {
+    min-width: 200px;
+}
+
+.sectionTitle {
+    margin-top: 0;
+    font-size: 20px;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 15px
+}
+
+.friendsList,
+.wishlistsList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 12px;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.friendsList {
+    background-color: #9891DF;
+    padding: 20px;
+    gap: 20px;
+}
+
+.friendItem,
+.wishlistItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.wishlistItem {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: #9891DF;
+    padding: 10px 20px;
+}
+
+.friendAvatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.friendInfo { flex: 1; }
+
+.addFriendButton,
+.newWishlistButton {
+    padding: 10px;
+    margin-top: 10px;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    background-color: #110E3C;
+}
+.newWishlistButton{
+    display: block !important;
+    margin: 10px auto 0;
+    align-self: center;
+}
+
+
+/* Крупные планшеты / небольшие ноутбуки */
+@media (max-width: 1200px) {
+    .profileHeader {
+        margin: 24px 40px;
+        gap: 16px;
+    }
+    .information {
+        gap: 60px;
+        margin: 24px 40px 60px;
+    }
+    .editButton {
+        margin-left: auto;
+    }
+}
+
+/* Планшеты */
+@media (max-width: 992px) {
+    .profileHeader {
+        margin: 20px 24px;
+    }
+    .information {
+        gap: 40px;
+        margin: 20px 24px 40px;
+    }
+    .section:first-child,
+    .section:last-child {
+        min-width: auto;
+    }
+}
+
+/* Малые планшеты и большие телефоны */
+@media (max-width: 768px) {
+    .profileHeader {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 12px;
+    }
+    .avatar {
+        width: 80px;
+        height: 80px;
+    }
+    .name { font-size: 20px; }
+    .nickname { font-size: 14px; }
+    .editButton {
+        margin-left: 0;
+        width: 100%;
+        max-width: 340px;
+    }
+
+    .information {
+        flex-direction: column;
+        gap: 20px;
+        margin: 16px 16px 32px;
+    }
+    .section {
+        padding: 16px;
+        width: 100%;
+    }
+    .friendsList,
+    .wishlistsList {
+        padding: 16px;
+        gap: 12px;
+    }
+    .sectionTitle { font-size: 18px; }
+}
+
+/* Телефоны */
+@media (max-width: 480px) {
+    .profileHeader {
+        margin: 16px 12px;
+    }
+    .avatar {
+        width: 64px;
+        height: 64px;
+    }
+    .name { font-size: 18px; }
+    .nickname { font-size: 13px; }
+
+    .information {
+        margin: 12px;
+        gap: 16px;
+    }
+    .section { padding: 12px; }
+    .friendsList,
+    .wishlistsList {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .addFriendButton,
+    .newWishlistButton {
+        //width: 100%;
+        max-width: none;
+    }
+    .sectionTitle { font-size: 16px; }
+}

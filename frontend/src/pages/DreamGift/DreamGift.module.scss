@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+.DreamGift {
+    @media screen and (max-width: 767px) {
+        min-height: 70vh;;
+    }
+    @media screen and (min-width: 768px) {
+        min-height: 100vh; 
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 120px;
+    position: relative;
+    
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    
+    @media screen and (min-width: 320px) {
+        margin-top: -10px;
+    }
+    @media screen and (min-width: 768px) {
+        gap: 60px;
+        margin-left: -100px;
+    }
+}
+
+.text {
+    white-space: pre-line;
+    font-weight: 500;
+    line-height: 100%;
+    @media screen and (max-width: 319px) {
+        font-size: 18px;
+        margin: 0 15px 30px 15px;
+    }
+    @media screen and (min-width: 320px) {
+        font-size: 22px;
+        margin: 0 15px 30px 15px;
+    }
+    @media screen and (min-width: 450px) {
+        font-size: 26px;
+    }
+    @media screen and (min-width: 768px) {
+        font-size: 32px;
+        margin: 0;
+    }
+    @media screen and (min-width: 1024px) {
+        font-size: 36px;
+    }
+    @media screen and (min-width: 1440px) {
+        font-size: 40px;
+    }
+}
+
+.createBlock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.createButton {
+    border-radius: 60px;
+    background-color: #6961BE;
+    color: #ffffff;
+    border: none;
+    justify-content: center;
+    width: auto;
+    
+    @media screen and (max-width: 767px) {
+        padding: 10px 30px;
+        font-size: 20px;
+    }
+    @media screen and (min-width: 768px) {
+        padding: 15px 50px; 
+        font-size: 28px;
+    }
+}
+
+.giftLogo {
+    position: absolute;
+    transform: scaleX(-1) rotate(-15deg);
+    
+    @media screen and (max-width: 570px) {
+        height: 200px;
+        right: -80px;
+        bottom: -140px;
+    }
+    @media screen and (min-width: 570px) {
+        height: 250px;
+        right: -90px;
+        bottom: -30px;
+    }
+    @media screen and (min-width: 768px) {
+        height: 300px;
+    }
+    @media screen and (min-width: 1440px) {
+        height: 350px;
+    }
+}
