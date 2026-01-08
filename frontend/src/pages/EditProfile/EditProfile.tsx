@@ -1,7 +1,8 @@
 import style from './EditProfile.module.scss';
 import { Header } from '../../components/Header/Header';
 import { Footer } from '../../components/Footer/Footer';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getCurrentUser, updateProfile, removeAccount } from '../../api';
 
 export default function EditProfile() {
