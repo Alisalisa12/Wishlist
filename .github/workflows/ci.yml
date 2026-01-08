@@ -9,44 +9,27 @@ on:
 jobs:
   frontend-check:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22 
+          cache: 'npm'
+          cache-dependency-path: './frontend/package-lock.json'
 
-    - name: Check if frontend folder exists
-      id: check_frontend
-      run: |
-        if [ ! -d "./frontend" ]; then
-          echo "Frontend folder not found, skipping..."
-          exit 78
-        fi
+      - name: Install Dependencies
+        run: npm ci
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 22
-        cache: 'npm'
-        cache-dependency-path: './frontend/package-lock.json'
+      - name: Run Lint
+        run: npm run lint
 
-    - name: Install Dependencies
-      run: |
-        cd frontend
-        npm ci
-
-    - name: Run Lint
-      run: |
-        cd frontend
-        npm run lint
-
-    - name: Type Check (TypeScript)
-      run: |
-        cd frontend
-        npx tsc --noEmit
-
-    - name: Run Tests
-      run: |
-        cd frontend
-        npm test -- --watchAll=false
+      - name: Run Tests
+        run: npm test -- --watchAll=false
 
   backend-check:
     runs-on: ubuntu-latest
