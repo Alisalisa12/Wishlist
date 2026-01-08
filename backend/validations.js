@@ -21,8 +21,8 @@ export const registerValidation = [
     .toLowerCase(),
 
   body("password")
-    .isLength({ min: 5 })
-    .withMessage("Пароль должен быть минимум 5 символов")
+    .isLength({ min: 8 })
+    .withMessage("Пароль должен быть минимум 8 символов")
     .not().contains(" ")
     .withMessage("Пароль не должен содержать пробелы"),
 
