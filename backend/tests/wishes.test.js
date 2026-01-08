@@ -9,8 +9,8 @@ const user = {
   email: "user@mail.com",
   fullName: "User One",
   username: "user1",
-  password: "123456",
-  passwordConfirm: "123456",
+  password: "12345678",
+  passwordConfirm: "12345678",
 };
 
 describe("Wishes", () => {

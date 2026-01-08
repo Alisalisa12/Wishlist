@@ -7,8 +7,8 @@ const user = {
   email: "testuser@mail.com",
   fullName: "Test User",
   username: "testuser",
-  password: "123456",
-  passwordConfirm: "123456",
+  password: "12345678",
+  passwordConfirm: "12345678",
 };
 
 describe("POST /auth/register", () => {
