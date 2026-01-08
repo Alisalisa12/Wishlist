@@ -2,10 +2,9 @@ name: Wishlist CI
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ backend, main ]
   pull_request:
-    branches: [ main, master ]
-
+    branches: [ main ]
 jobs:
   backend-check:
     runs-on: ubuntu-latest
