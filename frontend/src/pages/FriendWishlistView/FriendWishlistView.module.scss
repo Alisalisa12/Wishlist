@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url("../../assets/bg.jpg");
+  background-size: cover;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.card {
+  background: #9891DF;
+  border-radius: 20px;
+  padding: 2rem;
+  width: 80%;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  margin: 5rem 0;
+}
+.empty{
+  color: #fff;
+  font-size: 36px;
+}

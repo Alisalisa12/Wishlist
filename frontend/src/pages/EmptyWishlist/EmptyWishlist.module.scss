@@ -1,0 +1,93 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  color: #fff;
+  padding: 10% 0 10% 8%;
+  background-image: url("../../assets/bg.jpg");
+  background-size: cover;
+
+}
+
+h1 {
+  font-size: 80px;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  line-height: 1.1;
+}
+
+
+.arrow {
+  width: 150px;
+  height: auto;
+  margin: 1rem 0 2rem 0;
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(12px); }
+}
+
+
+.addButton {
+  background-color: #1f103a;
+  border: none;
+  color: white;
+  font-size: 20px;
+  padding: 1rem 2.2rem;
+  margin-top: 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: 80%;
+}
+.wishlistCardsContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.addButton:hover {
+  background-color: #4b2bc1;
+}
+
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 60px;
+  }
+  .arrow {
+    width: 120px;
+  }
+  .addButton{
+    margin-top: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 48px;
+  }
+  .arrow {
+    width:100px;
+  }
+  .addButton{
+    margin-top: 0.75rem;
+  }
+}
+
+@media (max-width: 450px) {
+  h1 {
+    font-size: 40px;
+  }
+  .arrow {
+    width: 80px;
+  }
+  .addButton{
+    margin-top: 0.5rem;
+  }
+
+}

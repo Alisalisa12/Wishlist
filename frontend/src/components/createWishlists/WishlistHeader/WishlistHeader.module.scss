@@ -1,0 +1,32 @@
+.header {
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.title {
+  font-size: 45px;
+  font-weight: 700;
+}
+
+.date {
+  font-size: 30px;
+}
+@media (max-width:800px) {
+  .title {
+    font-size: 30px;
+  }
+
+  .date {
+    font-size: 20px;
+  }
+}
+
+@media (max-width:600px) {
+  .title {
+    font-size: 30px;
+  }
+
+  .date {
+    font-size: 20px;
+  }
+}

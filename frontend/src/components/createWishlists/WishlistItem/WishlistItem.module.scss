@@ -1,0 +1,128 @@
+
+.item {
+  display:grid;
+  grid-template-columns: 2fr 1fr 1fr 0.9fr;
+  align-items: center;
+  overflow-wrap: anywhere;
+  margin: 1rem 0;
+}
+
+.info {
+  margin-left: 20%;
+  padding-right: 10%;
+  color: #110e3c;
+  font-size: 24px;
+  text-wrap: balance;
+}
+
+.link {
+  color: #110e3c;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.imagePlaceholder {
+  width: 100%;
+  max-height: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+
+.deleteBtn{
+  background-color: #BA5A5A;
+  border-radius: 20px;
+  padding: 10%;
+  margin-left: 20%;
+}
+
+.reserveBtn{
+  background-color: #ffffff;
+  color: #000;
+  font-size: 16px;
+  margin-left: 10%;
+
+}
+.deleteBtn:hover{
+  background-color: #b52e2e;
+}
+
+@media (max-width:1050px) {
+  .info {
+    flex-direction: column;
+    gap: 4px;
+    font-size: 22px;
+
+  }
+
+  .link{
+    font-size: 18px
+  }
+}
+
+@media (max-width:800px) {
+  .title {
+    font-size: 30px;
+  }
+
+  .date {
+    font-size: 20px;
+  }
+  .title_price {
+    font-size: 20px;
+  }
+  .reserveBtn{
+    margin-left: 5%;
+    font-size: 12px;
+  }
+}
+
+@media (max-width:600px) {
+  .title {
+    font-size: 30px;
+  }
+
+  .date {
+    font-size: 20px;
+  }
+  .title_price {
+    font-size: 14px;
+  }
+  .item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
+  }
+
+  .imagePlaceholder {
+    margin-top: 10px;
+    width: 200px;
+    max-height: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .info, .link {
+    padding-right: 0;
+    text-align: center;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .deleteBtn, .reserveBtn {
+    padding: 0 100px;
+    margin-left: 0;
+    width: 100%;
+    text-align: center;
+    display: flex;
+
+  }
+  .deleteBtnDiv{
+    grid-column: span 2;
+
+  }
+}
